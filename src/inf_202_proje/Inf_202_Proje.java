@@ -4,18 +4,34 @@
  * and open the template in the editor.
  */
 package inf_202_proje;
-
 /**
  *
  * @author sait_
  */
+import com.excel.Excel;
+import java.io.IOException;
+        
 public class Inf_202_Proje {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+      
+        Excel e = new Excel();
+        
+        e.main(1, 1, null);
+        //119 doldurulması gereken alan ve 2 tik atılalık alan var.
+        
+        
+        
+        
+        
+        
     }
+
+   
+ 
+        
     
 }

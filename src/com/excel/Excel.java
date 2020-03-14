@@ -15,33 +15,30 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
         
 public class Excel {
     
-    private static final String FILE_NAME = "FR_02_MT.xlsx";
-    private static final String newFileName = "C://Users/sait_/Desktop/yeni4.xlsx";
+    private static final String FILE_NAME = "FR_02_MT.xlsx";  //kullandığı dosya, bu dosya üzerinde değişiklik yapmıyor, değişiklik yapınca alttaki konuma kaydediyor.
+    private static final String newFileName = "C://Users/sait_/Desktop/yeni4.xlsx"; //yeni oluşturup kaydettiği dosya
     
-    public static void main(String[] args) throws IOException {
+    public static void main(int satir, int sutun, String y) throws IOException {  // satir hangi satıra, sütün hangi sütuna ve y de ne yazacağını belirliyor.
         FileInputStream inputStream = new FileInputStream(new File(FILE_NAME));
         Workbook workbook = WorkbookFactory.create(inputStream);
-        //XSSFWorkbook workbook = new XSSFWorkbook(); 
-        // XSSFSheet sheet = workbook.createSheet("Deneme Sayfası"); 
         Sheet sheet = workbook.getSheetAt(0);
-        int rowNum=10;
-        int colNum=10;
-        Row row = sheet.createRow(rowNum);
-        Cell cell = row.createCell(colNum++);
-        cell.setCellValue((String) "deneme10");
+        int rowNum=satir;
+        int colNum=sutun;
+        Row row = sheet.getRow(rowNum);
+        Cell cell = row.createCell(colNum);
+        cell.setCellValue((String) y);
         
         try {
             FileOutputStream outputStream = new FileOutputStream(newFileName);
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
+            System.out.println("Yeni Excel Dosyası Oluşturuldu");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
