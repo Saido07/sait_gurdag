@@ -22,7 +22,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
         
 public class Excel {
     
-    private static final String FILE_NAME = "C://Users/sait_/Desktop/MyFirstExcel.xlsx";
+    private static final String FILE_NAME = "FR_02_MT.xlsx";
+    private static final String newFileName = "C://Users/sait_/Desktop/yeni4.xlsx";
     
     public static void main(String[] args) throws IOException {
         FileInputStream inputStream = new FileInputStream(new File(FILE_NAME));
@@ -30,14 +31,14 @@ public class Excel {
         //XSSFWorkbook workbook = new XSSFWorkbook(); 
         // XSSFSheet sheet = workbook.createSheet("Deneme Sayfası"); 
         Sheet sheet = workbook.getSheetAt(0);
-        int rowNum=1;
-        int colNum=2;
+        int rowNum=10;
+        int colNum=10;
         Row row = sheet.createRow(rowNum);
         Cell cell = row.createCell(colNum++);
-        cell.setCellValue((String) "deneme47");
+        cell.setCellValue((String) "deneme10");
         
         try {
-            FileOutputStream outputStream = new FileOutputStream(FILE_NAME);
+            FileOutputStream outputStream = new FileOutputStream(newFileName);
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
