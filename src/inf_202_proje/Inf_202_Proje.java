@@ -10,6 +10,7 @@ package inf_202_proje;
  */
 import com.excel.Excel;
 import java.io.IOException;
+import com.fxml.*;
         
 public class Inf_202_Proje {
 
@@ -20,8 +21,12 @@ public class Inf_202_Proje {
       
         Excel e = new Excel();
         
-        e.main(1, 1, null);
+        e.main(0, 0,"deneme");
         //119 doldurulması gereken alan ve 2 tik atılalık alan var.
+        
+        FXMain fxml = new FXMain();
+        
+        fxml.main(args);  //fxml tarafı çalışma kontrolü
         
         
         
