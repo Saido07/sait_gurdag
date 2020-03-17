@@ -20,8 +20,10 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
         
 public class Excel {
     
+    private static final String dosyaAdi =(String) "ad";
+    String a=(String) System.getProperty("user.name");
     private static final String FILE_NAME = "FR_02_MT.xlsx";  //kullandığı dosya, bu dosya üzerinde değişiklik yapmıyor, değişiklik yapınca alttaki konuma kaydediyor.
-    private static final String newFileName = "C://Users/sait_/Desktop/yeni4.xlsx"; //yeni oluşturup kaydettiği dosya
+    private static final String newFileName = System.getProperty("user.home") + "/Desktop/" + dosyaAdi + ".xlsx"; //yeni oluşturup kaydettiği dosya
     
     public static void main(int satir, int sutun, String y) throws IOException {  // satir hangi satıra, sütün hangi sütuna ve y de ne yazacağını belirliyor.
         FileInputStream inputStream = new FileInputStream(new File(FILE_NAME));
@@ -32,6 +34,7 @@ public class Excel {
         Row row = sheet.getRow(rowNum);
         Cell cell = row.createCell(colNum);
         cell.setCellValue((String) y);
+        
         
         try {
             FileOutputStream outputStream = new FileOutputStream(newFileName);
@@ -44,7 +47,7 @@ public class Excel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         
+        
         
     }
     
