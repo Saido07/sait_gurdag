@@ -3,29 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inf_202_proje;
+package inf_202_proje.fxmlControllerFiles;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author sait_
  */
-public class kullaniciGirisController implements Initializable {
-
-    @FXML
-    private TextField kullanici_adi;
-    @FXML
-    private PasswordField sifre;
-    @FXML
-    private Button giris_buton;
+public class SolEkranAdminGirisController implements Initializable {
 
     /**
      * Initializes the controller class.
