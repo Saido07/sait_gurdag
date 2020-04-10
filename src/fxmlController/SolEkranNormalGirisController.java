@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inf_202_proje.fxmlControllerFiles;
+package fxmlController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author sait_
  */
-public class KullaniciBaslangiciController implements Initializable {
+public class SolEkranNormalGirisController implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -9,6 +9,9 @@ package inf_202_proje;
  * @author sait_
  */
 import com.excel.Excel;
+import com.database.*;
+import fxmlController.*;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,23 +25,24 @@ public class Inf_202_Proje extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("kullaniciGiris.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/kullaniciGiris.fxml"));
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
+
         stage.show();
     }
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) throws IOException {
         
         launch(args);
-        
+
         Excel e = new Excel();
         
         e.main(0, 0,"deneme");
+        
+        
         //119 doldurulması gereken alan ve 2 tik atılalık alan var.
         
         

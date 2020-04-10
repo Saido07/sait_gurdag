@@ -3,18 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inf_202_proje.fxmlControllerFiles;
+package fxmlController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author sait_
  */
-public class BaslangicSeceneklerController implements Initializable {
+public class kullaniciGirisController implements Initializable {
+
+    @FXML
+    private TextField kullanici_adi;
+    @FXML
+    private PasswordField sifre;
+    @FXML
+    private Button giris_buton;
 
     /**
      * Initializes the controller class.

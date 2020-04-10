@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inf_202_proje.fxmlControllerFiles;
+package fxmlController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,38 +18,44 @@ import javafx.scene.control.TextField;
  *
  * @author sait_
  */
-public class ManyetikParcacikRaporuEkraniController implements Initializable {
+public class ManyetikParcacikRaporuEkrani2Controller implements Initializable {
 
     @FXML
-    private TextField testYeri;
+    private TextField kutupMesafe;
     @FXML
-    private ComboBox<?> musteriler;
+    private TextField cihaz;
     @FXML
-    private ComboBox<?> projeler;
+    private TextField mpTasiOrt;
     @FXML
-    private TextField degerStand;
+    private TextField miklatisTek;
     @FXML
-    private TextField muaPro;
+    private TextField uvIsikSid;
     @FXML
-    private TextField resimNo;
+    private TextField IsikMesa;
     @FXML
-    private TextField muaKap;
+    private TextField muaBol;
     @FXML
-    private TextField sayfaNo;
+    private ComboBox<?> akimTip;
     @FXML
-    private Button next;
+    private TextField luxIsikSid;
     @FXML
-    private ComboBox<?> yüzeyDurum;
+    private TextField muaOrt;
     @FXML
-    private ComboBox<?> MuaAsa;
+    private TextField mikGider;
     @FXML
-    private TextField raporNo;
+    private TextField isilIslem;
     @FXML
-    private TextField raporTarih;
+    private TextField YuzeySicak;
     @FXML
-    private ComboBox<?> isEmriNo;
+    private TextField MuaBolAlanSid;
     @FXML
-    private ComboBox<?> teklifNo;
+    private TextField yuzey;
+    @FXML
+    private TextField isikCihazTanim;
+    @FXML
+    private TextField KaldirmaTestTarihNo;
+    @FXML
+    private Button next2;
 
     /**
      * Initializes the controller class.
