@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author sait_
  */
-public class ManyetikParcacikRaporuListeController implements Initializable {
+public class leftSceneAdminLoginController implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
  *
  * @author sait_
  */
-public class ManyetikParcacikRaporuEkraniController implements Initializable {
+public class magneticParticleReportSceneController implements Initializable {
 
     @FXML
     private TextField testYeri;

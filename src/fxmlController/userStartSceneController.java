@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author sait_
  */
-public class SolEkranNormalGirisController implements Initializable {
+public class userStartSceneController implements Initializable {
 
     /**
      * Initializes the controller class.

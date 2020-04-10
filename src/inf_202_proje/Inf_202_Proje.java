@@ -11,7 +11,6 @@ package inf_202_proje;
 import com.excel.Excel;
 import com.database.*;
 import fxmlController.*;
-
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,7 @@ public class Inf_202_Proje extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/kullaniciGiris.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/userLogin.fxml"));
 
         Scene scene = new Scene(root);
 

@@ -7,6 +7,7 @@ package com.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,7 +15,7 @@ import java.sql.Statement;
 
 public class database {
 
-    protected void doInBackground(String... params) throws SQLException, ClassNotFoundException {
+    public boolean doInBackground(String... params) throws SQLException, ClassNotFoundException {
         String type = params[0];
         
         
@@ -35,6 +36,7 @@ public class database {
             result = stmt.executeUpdate("CREATE TABLE IF NOT EXISTS "
                     + "users( id INT NOT NULL IDENTITY, name VARCHAR(20) NOT NULL , surname VARCHAR(25) NOT NULL ,"
                     + " level INT NOT NULL , signature_expiry_date DATE NOT NULL , addition_date DATE NOT NULL ,"
+                    + "username VARCHAR(15) NOT NULL , pass VARCHAR(256) NOT NULL ,"
                     + " PRIMARY KEY (id));");
             
             result = stmt.executeUpdate("CREATE TABLE IF NOT EXISTS "
@@ -65,17 +67,41 @@ public class database {
             System.out.println(result);
             
             
-            
-            
+            if(type=="login"){
+                
+                String username = params[1];
+                String pass = params[2];
+                String db_pass = null;
+                
+                ResultSet resultSet = null;
+                resultSet = stmt.executeQuery("SELECT pass FROM users WHERE username = '" + username + "' ");
+                while(resultSet.next()){
+                    db_pass =(String) resultSet.getString("pass");
+                }
+              
+                return controller(pass, db_pass );
+                
+            }
+                
+        
             con.close();
+            
+            
             
         } catch (ClassNotFoundException e) {
             System.out.println("Database connection error:" + e);
         } catch (SQLException e) {
             System.out.println("Database connection error:" + e);
         }
-   
+            return false;
         }
+
+    private boolean controller(String pass, String db_pass) {        
+        if(pass.equals(db_pass))
+            return true;
+        else
+            return false;
+    }
         
     
 }

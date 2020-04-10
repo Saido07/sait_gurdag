@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author sait_
  */
-public class KullaniciBaslangiciController implements Initializable {
+public class startOptionsController implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author sait_
  */
-public class BaslangicSeceneklerController implements Initializable {
+public class leftSceneUserLoginController implements Initializable {
 
     /**
      * Initializes the controller class.

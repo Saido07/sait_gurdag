@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController.kullaniciGirisController">
+<AnchorPane maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController.userLoginController">
        <children>
         <VBox layoutX="130.0" layoutY="97.0" prefHeight="168.0" prefWidth="125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -18,7 +18,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="60.0" prefWidth="200.0">
                     <children>
-                        <TextField fx:id="kullanici_adi" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Kullanıcı Adınızı Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="user_name" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Kullanıcı Adınızı Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane prefHeight="40.0">
@@ -28,12 +28,12 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="80.0" prefWidth="200.0">
                     <children>
-                        <PasswordField fx:id="sifre" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Şifrenizi Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
+                        <PasswordField fx:id="password" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Şifrenizi Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
             <AnchorPane prefHeight="115.0" prefWidth="200.0">
                <children>
-                        <Button fx:id="giris_buton" mnemonicParsing="false" text="Giriş Yap" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="login_btn" mnemonicParsing="false" text="Giriş Yap" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
             </children>
