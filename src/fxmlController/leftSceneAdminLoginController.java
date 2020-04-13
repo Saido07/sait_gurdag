@@ -5,23 +5,39 @@
  */
 package fxmlController;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import com.BIN.Config;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author sait_
  */
-public class leftSceneAdminLoginController implements Initializable {
+public class leftSceneAdminLoginController extends AnchorPane{
+    
+    public leftSceneAdminLoginController(){  
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/leftSceneAdminLogin.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            fxmlLoader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(leftSceneAdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+      
+    }
+
+    @FXML
+    private void initialize() {
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+        
     }    
     
 }

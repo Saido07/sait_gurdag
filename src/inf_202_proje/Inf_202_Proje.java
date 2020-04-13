@@ -12,6 +12,7 @@ import com.excel.Excel;
 import com.database.*;
 import fxmlController.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,30 +30,24 @@ public class Inf_202_Proje extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-
+        stage.setResizable(false);
         stage.show();
     }
    
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        
+        database db = new database();
+        String type = "firstTimeConnection";
+        db.doInBackground(type);
         
         launch(args);
 
-        Excel e = new Excel();
-        
-        e.main(0, 0,"deneme");
-        
-        
-        //119 doldurulması gereken alan ve 2 tik atılalık alan var.
-        
-        
-        
-        
-        
-        
-        
+      
     }
 
    
+    
+    
  
         
     

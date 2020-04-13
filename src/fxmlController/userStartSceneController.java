@@ -7,21 +7,36 @@ package fxmlController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import com.BIN.Strings;
 
-/**
- * FXML Controller class
- *
- * @author sait_
- */
+
 public class userStartSceneController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private AnchorPane left;
+    @FXML
+    private AnchorPane right;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
+      if(Strings.getUsername().equals("admin")){
+        leftSceneAdminLoginController la = new leftSceneAdminLoginController();
+        left.getChildren().add(la);
+      }else{
+        leftSceneUserLoginController lu = new leftSceneUserLoginController();
+        left.getChildren().add(lu);
+      }
+      
+     
+      startOptionsController sa = new startOptionsController();
+      right.getChildren().add(sa);
+      
+      
+        
     }    
     
 }

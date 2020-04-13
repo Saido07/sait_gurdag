@@ -5,6 +5,7 @@
  */
 package fxmlController;
 
+import com.BIN.Strings;
 import com.database.database;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,8 +15,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import com.security.*;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,7 +29,7 @@ import java.util.logging.Logger;
  * @author sait_
  */
 public class userLoginController implements Initializable {
-
+    
     @FXML
     private TextField user_name;
     @FXML
@@ -42,17 +48,26 @@ public class userLoginController implements Initializable {
         
         login_btn.setOnMouseClicked(a ->{
             boolean isTrue = false;
-            String user_name = (String) this.user_name.getText().toString();
-            String hash = "";
+            Strings.setUsername((String) this.user_name.getText().toString());
             try {
-                hash = p.password_hash((String) this.password.getText().toString());
-                isTrue = db.doInBackground("login", user_name, hash);
+                isTrue = db.doInBackground("login", Strings.getUsername(), p.password_hash((String) this.password.getText().toString()));
             } catch (Exception ex) {
                 Logger.getLogger(userLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             if(isTrue==true){
-                System.out.println("doğru");
+                System.out.println("Login successful");
+                Stage stage = (Stage) login_btn.getScene().getWindow();;
+                stage.close();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/fxmlFiles/userStartScene.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(userLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
             }
 
             });

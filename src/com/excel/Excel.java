@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-
+//119 doldurulması gereken alan ve 2 tik atılalık alan var.
         
 public class Excel {
     
