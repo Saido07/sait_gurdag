@@ -5,23 +5,26 @@
  */
 package fxmlController;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import com.BIN.Config;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author sait_
  */
-public class magneticParticleReportListController implements Initializable {
+public class magneticParticleReportListController extends AnchorPane {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public magneticParticleReportListController(){
+        Config.Loader(this, "/fxmlFiles/magneticParticleReportList.fxml");
+        
+    }
+    
+    
+    @FXML
+    public void initialize() {
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
     }    
     
 }

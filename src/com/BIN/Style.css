@@ -1,0 +1,17 @@
+
+.fonRight{
+   -fx-background-color: #fdfdfd;   
+}
+.fonLeft{
+    -fx-background-color: #f1f3f4;   
+} 
+
+.userStartLeft{
+    -fx-border-color: #a4b0be;
+    -fx-border-width: 0px 2px 0px 0px;
+}
+
+.fon{
+    -fx-border-color: #a4b0be;
+    -fx-border-width: 1px 0px 0px 0px; 
+}

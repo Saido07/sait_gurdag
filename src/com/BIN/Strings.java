@@ -5,19 +5,23 @@
  */
 package com.BIN;
 
-import sun.tools.tree.ThisExpression;
 
-/**
- *
- * @author sait_
- */
 public class Strings {
     private static String username;
     private static String option; //userOptions ekranında hangi tuşa tıklandığı için
-    
+    private static String leftType;
+    private static int delete=0;
+
+    public static int getDelete() {
+        return delete;
+    }
+
+    public static void setDelete(int delete) {
+        Strings.delete = delete;
+    }
     
     public static void setUsername(String username){
-    Strings.username=username;
+        Strings.username=username;
     }
     
     public static String getUsername(){
@@ -31,4 +35,5 @@ public class Strings {
     public static String getOption(){
         return option;
     }
+
 }

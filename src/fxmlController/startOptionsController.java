@@ -5,18 +5,14 @@
  */
 package fxmlController;
 
+import com.BIN.Config;
 import com.BIN.Strings;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+
 
 /**
  * FXML Controller class
@@ -32,26 +28,22 @@ public class startOptionsController extends AnchorPane {
 
 
     public startOptionsController(){
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlFiles/startOptions.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(leftSceneAdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        Config.Loader(this, "/fxmlFiles/startOptions.fxml");
     }
     @FXML
     public void initialize() {
-        
-        man.setOnMouseClicked(b ->{
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+
+        man.setOnAction(b ->{
             this.getChildren().clear();
             magneticParticleReportSceneController ma = new magneticParticleReportSceneController();
-            this.getChildren().add(ma);   
+            this.getChildren().add(ma); 
         });
         
-    }    
+        
+        
+    }   
+
+
     
 }

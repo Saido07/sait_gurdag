@@ -46,7 +46,7 @@ public class userLoginController implements Initializable {
         password_hash p = new password_hash();
         database db = new database();
         
-        login_btn.setOnMouseClicked(a ->{
+        login_btn.setOnAction(a ->{
             boolean isTrue = false;
             Strings.setUsername((String) this.user_name.getText().toString());
             try {

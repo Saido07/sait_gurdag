@@ -1,6 +1,9 @@
 
 package com.errors;
 
+import javafx.scene.control.Alert;
+import javafx.stage.Window;
+
 /**
  *
  * @author sait_
@@ -8,14 +11,15 @@ package com.errors;
 public class errors {
 
     
-    public String errors(String type){
-        if(type=="giris"){
-            return "Kullanıcı adı ya da şifrenizi yanlış girdiniz!";
-        }
-        
-        
-        else
-            return null;
+    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
     }
     
 }
+
+

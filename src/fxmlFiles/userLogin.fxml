@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController.userLoginController">
+<AnchorPane maxHeight="360.0" maxWidth="360.0" minHeight="360.0" minWidth="360.0" prefHeight="360.0" prefWidth="360.0" styleClass="fonRight" stylesheets="@../com/BIN/Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController.userLoginController">
        <children>
         <VBox layoutX="130.0" layoutY="97.0" prefHeight="168.0" prefWidth="125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
