@@ -8,11 +8,7 @@ package fxmlController;
 import com.BIN.Config;
 import com.BIN.Strings;
 import com.database.database;
-import java.net.URL;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -49,6 +45,7 @@ public class UserAddController extends AnchorPane {
     private Label resultTxt;
     
     database db = new database();
+    boolean result;
     
     public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
@@ -103,7 +100,7 @@ public class UserAddController extends AnchorPane {
             }else{
                 if(Strings.getDb_id()!=null){
                 try {
-                    db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
+                    result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
                             surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
                     
                     resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
@@ -140,15 +137,17 @@ public class UserAddController extends AnchorPane {
     
     public void addUser(){
         try {
-            db.doInBackground("addNewUser", userName.getText().toString() , name.getText().toString(),
+            result=db.doInBackground("addNewUser", userName.getText().toString() , name.getText().toString(),
                     surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
-
-            resultTxt.setText("Yeni Kullanıcı Başarıyla Eklendi");
         } catch (SQLException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
+        if(result==false)
+            resultTxt.setText("Hatalı ya da Eksik Bilgi");
+        else
+            resultTxt.setText("Kullanıcı Başarıyla Eklendi");
     }
     
 }

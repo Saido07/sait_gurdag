@@ -120,11 +120,11 @@ public class database {
                     System.out.println("kullanıcı eklendi");
                                             
                     //standart 123 şifresi geliyor sonra kullanıcı kendi ayarlayabilecek.
-
-                } catch (Exception ex) {
-                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return true;
+                } catch (Exception ex){
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;
                 }
-        
                 
             }else if(type=="finduser"){
                 String id = params[1];
