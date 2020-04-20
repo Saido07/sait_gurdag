@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,10 +99,11 @@ public class database {
                 resultSet = stmt.executeQuery("SELECT * FROM users");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setUsers((String) resultSet.getString("name") + " " +  resultSet.getString("surname"));
+                    Strings.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                            +  resultSet.getString("surname"));
                     i++;
                 }   
-            }else if(type=="setusers"){
+            }else if(type=="addNewUser"){
                 String username = params[1];
                 String name = params[2];
                 String surname = params[3];
@@ -126,6 +126,49 @@ public class database {
                 }
         
                 
+            }else if(type=="finduser"){
+                String id = params[1];
+                resultSet = stmt.executeQuery("SELECT * FROM users WHERE id = "+ id +"");
+                
+                while(resultSet.next()){
+                    Strings.setDb_username((String) resultSet.getString("username"));
+                    Strings.setDb_name((String) resultSet.getString("name"));
+                    Strings.setDb_surname((String) resultSet.getString("surname"));
+                    Strings.setDb_level((String) resultSet.getString("level"));
+                    Strings.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
+                }
+                
+            }else if(type=="updateUser"){
+                String username = params[1];
+                String name = params[2];
+                String surname = params[3];
+                String level = params[4]; 
+                String sign = params[5];
+                Date today = new Date();
+                today.getTime();
+                String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(today);
+                
+                try {
+                    result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
+                            + " name = '" + name + "' , surname = '"+surname+"' , level = '"+level+"',"
+                            + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"' "
+                            + "WHERE id = '"+Strings.getDb_id()+"'");
+                    System.out.println("kullanıcı bilgileri güncellendi");
+                                            
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if(type=="userDelete"){
+                
+                String deletedId =params[1];
+                try {
+                    result = stmt.executeUpdate("DELETE FROM users "
+                            + "WHERE id = '"+deletedId+"'");
+                    System.out.println("Kullanıcı Silindi");
+                                            
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
               
             

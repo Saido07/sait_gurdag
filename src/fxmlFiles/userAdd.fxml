@@ -23,7 +23,7 @@
         <rowConstraints>
           <RowConstraints minHeight="60.0" percentHeight="0.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="0.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,7 +37,8 @@
             <ComboBox fx:id="SelectUser" prefWidth="150.0" promptText="Kullanıcılar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
-               </GridPane.margin></ComboBox>
+               </GridPane.margin>
+            </ComboBox>
             <Label text="Kullanıcı Adı :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label text="İsim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label text="Soyisim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
@@ -50,6 +51,7 @@
             <TextField fx:id="signature_e_date" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Button fx:id="save" mnemonicParsing="false" prefWidth="140.0" text="Değişiklikleri Kaydet" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Button fx:id="userDelete" mnemonicParsing="false" prefWidth="140.0" text="Kullanıcıyı Sil" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="resultTxt" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
          </children>
       </GridPane>
    </children>

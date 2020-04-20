@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -44,6 +45,8 @@ public class UserAddController extends AnchorPane {
     private Button userDelete;
     @FXML
     private TextField level;
+    @FXML
+    private Label resultTxt;
     
     database db = new database();
     
@@ -63,20 +66,89 @@ public class UserAddController extends AnchorPane {
 
     @FXML
     public void initialize() {
-        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);    
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);   
         
-        save.setOnAction(a -> {
+        SelectUser.setOnAction(a ->{
+            if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){
+                name.clear();
+                surname.clear();
+                userName.clear();
+                level.clear();
+                signature_e_date.clear();
+            }else{
+                Strings.setDb_id(SelectUser.getValue().toString().
+                        substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
+                try {
+                    db.doInBackground("finduser", Strings.getDb_id());
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                name.setText(Strings.getDb_name());
+                surname.setText(Strings.getDb_surname());
+                userName.setText(Strings.getDb_username());
+                level.setText(Strings.getDb_level());
+                signature_e_date.setText(Strings.getDb_signature_expiry_date());
+            }
+        });
+        
+        
+        save.setOnAction(b -> {
+            if(Strings.getDb_id()==null){
+                addUser();
+            }else if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){                
+                addUser();
+            }else{
+                if(Strings.getDb_id()!=null){
+                try {
+                    db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
+                            surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+                    
+                    resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+            }
+            
+            
+        });
+        
+        userDelete.setOnAction(n ->{
+            if(Strings.getDb_id().equals("1")){
+                System.out.println("Bu kullanıcı silinemez");
+                resultTxt.setText("Admin Hesabı Silinemez!");
+            }else{
             try {
-                db.doInBackground("setusers", userName.getText().toString() , name.getText().toString(),
-                        surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+                db.doInBackground("userDelete", Strings.getDb_id());
+                String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
+                users = users.substring(users.indexOf(" "));
+                resultTxt.setText(users + " Adlı Kullanıcı Silindi");
             } catch (SQLException ex) {
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            }
         });
         
-    }    
+    } 
+    
+    public void addUser(){
+        try {
+            db.doInBackground("addNewUser", userName.getText().toString() , name.getText().toString(),
+                    surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+
+            resultTxt.setText("Yeni Kullanıcı Başarıyla Eklendi");
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
     
 }
