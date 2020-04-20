@@ -6,8 +6,15 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
+import com.database.database;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,9 +28,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class UserAddController extends AnchorPane {
 
-    @FXML
-    private Button newUser;
-    @FXML
+    @FXML                                          //combobox program çalışırken her yenilemede yanlış çalışıyor.
     private ComboBox<?> SelectUser;
     @FXML
     private TextField userName;
@@ -37,14 +42,41 @@ public class UserAddController extends AnchorPane {
     private Button save;
     @FXML
     private Button userDelete;
+    @FXML
+    private TextField level;
     
-    public UserAddController(){
+    database db = new database();
+    
+    public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
+
+        try {
+            db.doInBackground("getusers");
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SelectUser.getItems().addAll(Strings.getUsers());   //tüm kullanıcıları combo boxta listeler
+  
     }
 
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
-        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+    public void initialize() {
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);    
+        
+        save.setOnAction(a -> {
+            try {
+                db.doInBackground("setusers", userName.getText().toString() , name.getText().toString(),
+                        surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+        
     }    
     
 }

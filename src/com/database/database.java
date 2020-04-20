@@ -5,16 +5,24 @@
  */
 package com.database;
 
+import com.BIN.Strings;
+import com.security.password_hash;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
 public class database {
 
+    public ResultSet resultSet = null;
 
     public boolean doInBackground(String... params) throws SQLException, ClassNotFoundException {
         String type = params[0];
@@ -78,7 +86,7 @@ public class database {
                 String pass = params[2];
                 String db_pass = null;
                 
-                ResultSet resultSet = null;
+                
                 resultSet = stmt.executeQuery("SELECT pass FROM users WHERE username = '" + username + "' ");
                 while(resultSet.next()){
                     db_pass =(String) resultSet.getString("pass");
@@ -86,7 +94,42 @@ public class database {
               
                 return controller(pass, db_pass );    
             }
+            else if(type=="getusers"){
+                Strings.getUsers().removeAllElements();
+                Strings.setUsers("Yeni Kullanıcı");
+                resultSet = stmt.executeQuery("SELECT * FROM users");
+                while(resultSet.next()){
+                    int i=0;
+                    Strings.setUsers((String) resultSet.getString("name") + " " +  resultSet.getString("surname"));
+                    i++;
+                }   
+            }else if(type=="setusers"){
+                String username = params[1];
+                String name = params[2];
+                String surname = params[3];
+                String level = params[4]; 
+                String sign = params[5];
+                Date today = new Date();
+                today.getTime();
+                String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(today);
+                password_hash p = new password_hash();
+                try {
+                    result = stmt.executeUpdate("INSERT INTO users(username, name, surname,"
+                        + " level, signature_expiry_date, addition_date, pass) VALUES ('" + username + "','"
+                        + ""+ name +"','"+surname+"','"+level+"','"+sign+"','"+modifiedDate+"','"+ p.password_hash("123") +"')");
+                    System.out.println("kullanıcı eklendi");
+                                            
+                    //standart 123 şifresi geliyor sonra kullanıcı kendi ayarlayabilecek.
+
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
                 
+            }
+              
+            
+            
         
             con.close();
             
@@ -106,6 +149,7 @@ public class database {
         else
             return false;
     }
+    
         
     
 }

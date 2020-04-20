@@ -5,20 +5,15 @@
  */
 package com.BIN;
 
+import fxmlController.userLoginController;
+import java.util.Vector;
+
 
 public class Strings {
     private static String username;
     private static String option; //userOptions ekranında hangi tuşa tıklandığı için
-    private static String leftType;
-    private static int delete=0;
+    private static Vector users = new Vector();
 
-    public static int getDelete() {
-        return delete;
-    }
-
-    public static void setDelete(int delete) {
-        Strings.delete = delete;
-    }
     
     public static void setUsername(String username){
         Strings.username=username;
@@ -35,5 +30,17 @@ public class Strings {
     public static String getOption(){
         return option;
     }
+
+    public static void setUsers(String users) {
+        Strings.users.add(users);
+    }
+
+    public static Vector getUsers() {
+        return users;
+    }
+    
+    
+    
+    
 
 }

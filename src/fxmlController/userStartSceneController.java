@@ -51,7 +51,7 @@ public class userStartSceneController implements Initializable{
         
         right.getChildren().add(so);
         
-        //Tuşların Fonksiyonları
+        //userStartScene ekranında değişikliklere neden olan tuşlar
         
         so.getMan().setOnAction(e -> {              //1. raporun butonuna tıklanması
             System.out.println("nura");
