@@ -36,6 +36,19 @@ public class leftSceneAdminLoginController extends AnchorPane{
     @FXML
     private Button equipmentAdd;
     
+    @FXML
+    private Button back;
+    
+    //butonların get fonksiyonları
+
+    public Button getBack() {
+        return back;
+    }
+    
+    public Button getUserAdd() {
+        return userAdd;
+    }
+    
     public leftSceneAdminLoginController(){  
         Config.Loader(this, "/fxmlFiles/leftSceneAdminLogin.fxml");
     }
@@ -50,9 +63,7 @@ public class leftSceneAdminLoginController extends AnchorPane{
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
     }  
 
-    public Button getUserAdd() {
-        return userAdd;
-    }
+    
        
     
 }

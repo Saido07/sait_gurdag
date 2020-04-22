@@ -7,6 +7,7 @@ package fxmlController;
 
 import com.BIN.Config;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -15,6 +16,16 @@ import javafx.scene.layout.AnchorPane;
  * @author sait_
  */
 public class leftSceneUserLoginController extends AnchorPane {
+    
+    @FXML
+    private Button back;
+
+    //butonların get fonksiyonları
+    
+    public Button getBack() {
+        return back;
+    }
+    
 
     public leftSceneUserLoginController(){  
       Config.Loader(this, "/fxmlFiles/leftSceneUserLogin.fxml");

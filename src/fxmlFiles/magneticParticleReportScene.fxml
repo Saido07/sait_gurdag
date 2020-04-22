@@ -38,12 +38,9 @@
             <RowConstraints maxHeight="40.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="testYeri" promptText="denemeYer" text="\@deneme" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <ComboBox fx:id="musteriler" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Müşteri" GridPane.columnIndex="1" GridPane.rowIndex="2">
             </Label>
             <Label text="Proje Adı" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="projeler" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label text="Test Yeri" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Muayene Standardı" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Değerlen. Standardı" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -51,26 +48,29 @@
             <Label text="Muayene Kapsamı(%)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <Label text="Resim No" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label text="Yüzey Durumu" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label text="Muayene Aşaması" GridPane.columnIndex="4" GridPane.rowIndex="3" />
             <Label text="Sayfa No" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Label text="Rapor No" GridPane.columnIndex="4" GridPane.rowIndex="5" />
             <Label text="Rapor Tarihi" GridPane.columnIndex="4" GridPane.rowIndex="6" />
             <Label text="İş Emri No" GridPane.columnIndex="4" GridPane.rowIndex="7" />
             <Label text="Teklif No" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-            <Label text="Muayene Aşaması" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <ComboBox fx:id="musteriler" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ComboBox fx:id="projeler" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="testYeri" promptText="denemeYer" text="\@deneme" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField text="sdad" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <TextField fx:id="degerStand" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <TextField fx:id="muaPro" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <TextField fx:id="resimNo" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <TextField fx:id="muaKap" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <TextField fx:id="sayfaNo" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Button fx:id="next" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Sonraki Sayfa" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
-            </Button>
+            <TextField fx:id="resimNo" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <ComboBox fx:id="yüzeyDurum" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
             <ComboBox fx:id="MuaAsa" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <TextField fx:id="sayfaNo" GridPane.columnIndex="5" GridPane.rowIndex="4" />
             <TextField fx:id="raporNo" GridPane.columnIndex="5" GridPane.rowIndex="5" />
             <TextField fx:id="raporTarih" GridPane.columnIndex="5" GridPane.rowIndex="6" />
             <ComboBox fx:id="isEmriNo" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
             <ComboBox fx:id="teklifNo" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <Button fx:id="next" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Sonraki Sayfa" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
+            </Button>
          </children>
       </GridPane>
    </children>

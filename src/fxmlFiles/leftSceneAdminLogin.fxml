@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="600.0" styleClass="fonLeft" stylesheets="@../com/BIN/Style.css" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<fx:root prefHeight="600.0" styleClass="fonLeft" stylesheets="@../com/BIN/Style.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -85,5 +85,6 @@
             <Insets bottom="150.0" />
          </padding>
       </AnchorPane>
+      <Button fx:id="back" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Geri Dön" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" />
    </children>
 </fx:root>

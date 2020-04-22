@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root styleClass="fonLeft" stylesheets="@../com/BIN/Style.css" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root styleClass="fonLeft" stylesheets="@../com/BIN/Style.css" type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
    <children>
       <Accordion layoutX="14.0" layoutY="127.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <panes>
@@ -61,5 +62,6 @@
             </TitledPane>
          </panes>
       </Accordion>
+      <Button fx:id="back" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Geri Dön" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" />
    </children>
 </fx:root>

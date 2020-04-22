@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import com.BIN.Config;
@@ -21,11 +16,11 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author sait_
+ * @author stgrdg
  */
 public class UserAddController extends AnchorPane {
 
-    @FXML                                          //combobox program çalışırken her yenilemede yanlış çalışıyor.
+    @FXML                               
     private ComboBox<?> SelectUser;
     @FXML
     private TextField userName;
@@ -46,6 +41,7 @@ public class UserAddController extends AnchorPane {
     
     database db = new database();
     boolean result;
+    boolean crt=false;    //refresh fonksiyonu yeni kullanıcı seçiliyken programı bozuyor onu önlemek için
     
     public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
@@ -57,24 +53,29 @@ public class UserAddController extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectUser.getItems().addAll(Strings.getUsers());   //tüm kullanıcıları combo boxta listeler
-  
+        SelectUser.getItems().setAll(Strings.getUsers());    //tüm kullanıcıları combo boxta listeler
+
+                
     }
 
     @FXML
     public void initialize() {
-        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);   
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
+        
         
         SelectUser.setOnAction(a ->{
-            if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){
+            if(crt==false){
+            Strings.setDb_id(SelectUser.getValue().toString().
+                    substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
+            } 
+            if(Strings.getDb_id().equals("Yeni")){
                 name.clear();
                 surname.clear();
                 userName.clear();
                 level.clear();
                 signature_e_date.clear();
+                crt=true;
             }else{
-                Strings.setDb_id(SelectUser.getValue().toString().
-                        substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
                 try {
                     db.doInBackground("finduser", Strings.getDb_id());
                 } catch (SQLException ex) {
@@ -104,6 +105,7 @@ public class UserAddController extends AnchorPane {
                             surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
                     
                     resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
+                    refreshSelectUser();
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -125,6 +127,7 @@ public class UserAddController extends AnchorPane {
                 String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
                 users = users.substring(users.indexOf(" "));
                 resultTxt.setText(users + " Adlı Kullanıcı Silindi");
+                refreshSelectUser();
             } catch (SQLException ex) {
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -146,8 +149,24 @@ public class UserAddController extends AnchorPane {
         }
         if(result==false)
             resultTxt.setText("Hatalı ya da Eksik Bilgi");
-        else
+        else{
             resultTxt.setText("Kullanıcı Başarıyla Eklendi");
+            refreshSelectUser();
+            crt=false;
+        }
     }
+
+    private void refreshSelectUser() {    
+        try {
+            db.doInBackground("getusers");
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SelectUser.getItems().setAll(Strings.getUsers());
+        
+    }
+
     
 }
