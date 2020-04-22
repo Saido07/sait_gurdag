@@ -137,6 +137,7 @@ public class database {
                     Strings.setDb_level((String) resultSet.getString("level"));
                     Strings.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
                 }
+                return true;
                 
             }else if(type=="updateUser"){
                 String username = params[1];
@@ -154,9 +155,10 @@ public class database {
                             + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"' "
                             + "WHERE id = '"+Strings.getDb_id()+"'");
                     System.out.println("kullanıcı bilgileri güncellendi");
-                                            
+                    return true;                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
                 }
             }else if(type=="userDelete"){
                 
@@ -165,9 +167,10 @@ public class database {
                     result = stmt.executeUpdate("DELETE FROM users "
                             + "WHERE id = '"+deletedId+"'");
                     System.out.println("Kullanıcı Silindi");
-                                            
+                    return true;                        
                 } catch (Exception ex) {
-                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;
                 }
             }
               
@@ -178,12 +181,12 @@ public class database {
             
             
             
-        } catch (ClassNotFoundException e) {
-            System.out.println("Database connection error:" + e);
-        } catch (SQLException e) {
-            System.out.println("Database connection error:" + e);
-        }
-            return false;
+            } catch (ClassNotFoundException e) {
+                System.out.println("Database connection error:" + e);
+            } catch (SQLException e) {
+                System.out.println("Database connection error:" + e);
+            }
+                return true;
         }
 
     private boolean controller(String pass, String db_pass) {        
