@@ -5,20 +5,21 @@
  */
 package fxmlController;
 
+import com.BIN.Config;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author sait_
  */
-public class magneticParticleReportScene2Controller implements Initializable {
+public class magneticParticleReportScene2Controller extends AnchorPane {
 
     @FXML
     private TextField kutupMesafe;
@@ -60,9 +61,16 @@ public class magneticParticleReportScene2Controller implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
+    
+    public magneticParticleReportScene2Controller(){
+        Config.Loader(this, "/fxmlFiles/magneticParticleReportScene2.fxml");
+    }
+    
+    
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+        
+    } 
     
 }

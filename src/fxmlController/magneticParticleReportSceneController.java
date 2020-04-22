@@ -54,6 +54,11 @@ public class magneticParticleReportSceneController extends AnchorPane {
     @FXML
     private ComboBox<?> teklifNo;
 
+    public Button getNext() {
+        return next;
+    }
+    
+
     public magneticParticleReportSceneController(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene.fxml");
     }

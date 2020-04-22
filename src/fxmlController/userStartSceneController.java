@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import com.BIN.Strings;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
@@ -31,8 +33,9 @@ public class userStartSceneController implements Initializable{
         return right;
     }
     
-    Node nodeLeft=null;
-    Node nodeRight=null;
+    
+    Vector <Node> nodeRight = new Vector<Node>();
+    Vector <Node> nodeLeft = new Vector<Node>();
     boolean controlBack=false;
     
     leftSceneAdminLoginController la = new leftSceneAdminLoginController();
@@ -41,6 +44,12 @@ public class userStartSceneController implements Initializable{
     magneticParticleReportListController list = new magneticParticleReportListController();
     magneticParticleReportSceneController mag = new magneticParticleReportSceneController();
     UserAddController add = new UserAddController();
+    CustomerAddController cus = new CustomerAddController();
+    EquipmentAddController equ = new EquipmentAddController();
+    ProfilController pro = new ProfilController();
+    SurfaceConAddController sur = new SurfaceConAddController();
+    TestAddController test = new TestAddController();
+    magneticParticleReportScene2Controller mag2 = new magneticParticleReportScene2Controller();
         
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,6 +70,14 @@ public class userStartSceneController implements Initializable{
         
         ////////////////////////////////////
         ////////////////////////////////////
+        
+        //sağ taraftaki tuşlar
+        
+        mag.getNext().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(mag2); 
+        });
         
         //startOptions ekranındaki tuşlar
         
@@ -84,6 +101,10 @@ public class userStartSceneController implements Initializable{
         
         //sol taraftaki tuşlar
         
+        
+        ////////////////////////////////////////////////////////////////////////
+        //admin ekranı tuşları
+        
         la.getUserAdd().setOnAction(a -> {          //admin control panelinde kullanıcı ekleye tıklama  
             backSave();
             right.getChildren().clear();
@@ -92,44 +113,131 @@ public class userStartSceneController implements Initializable{
         
                 
         la.getBack().setOnAction(a->{
-            left.getChildren().clear();
+            turnBack();
+        });
+        
+        la.getEquipmentAdd().setOnAction(a->{
+            backSave();
             right.getChildren().clear();
-            left.getChildren().add(nodeLeft);
-            right.getChildren().add(nodeRight);
-            controlBack=false;
+            right.getChildren().add(equ);  
         });
   
+        la.getSurfaceAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(sur);  
+        });
+        
+        la.getTestAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(test);  
+        });  
+        
+        la.getCustomerAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(cus);  
+        });
+        
+        ////////////////////////////////////////////////////////////////////////
+        //user ekranı tuşları
+        
+        lu.getEquipmentAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(equ);  
+        });
+  
+        lu.getSurfaceAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(sur);  
+        });
+        
+        lu.getTestAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(test);  
+        });  
+        
+        lu.getCustomerAdd().setOnAction(a->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(cus);  
+        });
              
         lu.getBack().setOnAction(a->{
-            left.getChildren().clear();
-            right.getChildren().clear();
-            left.getChildren().add(nodeLeft);
-            right.getChildren().add(nodeRight);
-            controlBack=false;
+            turnBack();
         });
   
-             
+        ////////////////////////////////////////////////////////////////////////
+        //list ekranı tuşları
+        
         list.getBack().setOnAction(a->{
-            left.getChildren().clear();
-            right.getChildren().clear();
-            left.getChildren().add(nodeLeft);
-            right.getChildren().add(nodeRight);
-            controlBack=false;
+            turnBack();
         });
   
         
     }
 
+    int i=0;
+    
     public void backSave(){
-        if(controlBack==false){
-        nodeLeft = left.getChildren().get(0);
-        nodeRight = right.getChildren().get(0);
-        la.getBack().setVisible(true);
-        lu.getBack().setVisible(true);
-        list.getBack().setVisible(true);
-        controlBack=true;
+        if(i==0){
+           controlBack=false; 
+        }else{
+            if(right.getChildren().get(0)!=nodeRight.get(i-1)){
+                controlBack=false;
+            }
         }
+        backSaveIn();
     }
     
- 
+    public void backSaveIn(){
+            if(i==0 && controlBack==false){
+                nodeLeft.add(left.getChildren().get(0));
+                nodeRight.add(right.getChildren().get(0));
+                la.getBack().setVisible(true);
+                lu.getBack().setVisible(true);
+                list.getBack().setVisible(true);
+                controlBack=true;
+                i++;
+            }else if(right.getChildren().get(0)!=nodeRight.get(i-1) && controlBack==false){
+                nodeLeft.add(left.getChildren().get(0));
+                nodeRight.add(right.getChildren().get(0));
+                la.getBack().setVisible(true);
+                lu.getBack().setVisible(true);
+                list.getBack().setVisible(true);
+                controlBack=true;
+                i++;
+            }
+
+    }
+    
+    public void turnBack(){
+            if(controlBack==true && i>0){
+                if(left.getChildren().get(0)==nodeLeft.get(i-1) && right.getChildren().get(0)==nodeRight.get(i-1)){
+                    left.getChildren().clear();
+                    right.getChildren().clear();
+                    left.getChildren().add(nodeLeft.get(i-2));
+                    right.getChildren().add(nodeRight.get(i-2));
+                }else{
+                    left.getChildren().clear();
+                    right.getChildren().clear();
+                    left.getChildren().add(nodeLeft.get(i-1));
+                    right.getChildren().add(nodeRight.get(i-1));
+                }
+                i--;
+                if(right.getChildren().get(0).equals(so) && (left.getChildren().get(0).equals(la) || left.getChildren().get(0).equals(lu))){
+                    nodeLeft.clear();
+                    nodeRight.clear();
+                    i=0;
+                }
+
+            
+            }
+        
+        
+    }
 }

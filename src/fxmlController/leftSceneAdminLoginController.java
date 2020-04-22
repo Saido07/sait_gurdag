@@ -9,6 +9,7 @@ import com.BIN.Config;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -17,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
  * @author sait_
  */
 public class leftSceneAdminLoginController extends AnchorPane{
+    
+    @FXML
+    private ImageView image;
    
     @FXML
     private Label text;
@@ -47,6 +51,30 @@ public class leftSceneAdminLoginController extends AnchorPane{
     
     public Button getUserAdd() {
         return userAdd;
+    }
+
+    public Button getCustomerAdd() {
+        return customerAdd;
+    }
+
+    public Button getTestAdd() {
+        return testAdd;
+    }
+
+    public Button getSurfaceAdd() {
+        return surfaceAdd;
+    }
+
+    public Button getEquipmentAdd() {
+        return equipmentAdd;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public Label getText() {
+        return text;
     }
     
     public leftSceneAdminLoginController(){  
