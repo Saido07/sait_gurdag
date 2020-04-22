@@ -66,7 +66,6 @@ public class UserAddController extends AnchorPane {
         
         
         SelectUser.setOnAction(a ->{
-            resultTxt.setStyle("-fx-text-fill: black;");
             if(SelectUser.isShowing()==true){
                 Strings.setDb_id(SelectUser.getValue().toString().
                         substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
@@ -112,6 +111,7 @@ public class UserAddController extends AnchorPane {
                         resultTxt.setStyle("-fx-text-fill: red;");
                         resultTxt.setText("Hatalı ya da Eksik Bilgi");
                     }else{
+                        resultTxt.setStyle("-fx-text-fill: black;");
                         resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
                         refreshSelectUser();
                     }
@@ -139,6 +139,7 @@ public class UserAddController extends AnchorPane {
                 db.doInBackground("userDelete", Strings.getDb_id());
                 String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
                 users = users.substring(users.indexOf(" "));
+                resultTxt.setStyle("-fx-text-fill: black;");
                 resultTxt.setText(users + " Adlı Kullanıcı Silindi");
                 refreshSelectUser();
             } catch (SQLException ex) {
@@ -164,6 +165,7 @@ public class UserAddController extends AnchorPane {
             resultTxt.setStyle("-fx-text-fill: red;");
             resultTxt.setText("Hatalı ya da Eksik Bilgi");
         }else{
+            resultTxt.setStyle("-fx-text-fill: black;");
             resultTxt.setText("Kullanıcı Başarıyla Eklendi");
             refreshSelectUser();
         }
