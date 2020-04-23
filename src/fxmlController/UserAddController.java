@@ -40,7 +40,7 @@ public class UserAddController extends AnchorPane {
     private Label resultTxt;
     
     database db = new database();
-    int i=1;
+
     boolean result;
     
     public UserAddController() {
@@ -57,8 +57,6 @@ public class UserAddController extends AnchorPane {
 
                 
     }
-    
-    /**/
 
     @FXML
     public void initialize() {
@@ -77,8 +75,6 @@ public class UserAddController extends AnchorPane {
                 level.clear();
                 signature_e_date.clear();
             }else{
-                i++;
-                System.out.println("buradaaaaa  " + i);
                 try {
                     db.doInBackground("finduser", Strings.getDb_id());
                 } catch (SQLException ex) {

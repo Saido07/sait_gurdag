@@ -27,6 +27,9 @@ public class leftSceneAdminLoginController extends AnchorPane{
 
     @FXML
     private Button userAdd;
+    
+    @FXML
+    private Button home;
 
     @FXML
     private Button customerAdd;
@@ -44,6 +47,10 @@ public class leftSceneAdminLoginController extends AnchorPane{
     private Button back;
     
     //butonların get fonksiyonları
+    
+    public Button getHome() {
+        return home;
+    }
 
     public Button getBack() {
         return back;

@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import com.BIN.Strings;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import javafx.fxml.Initializable;
@@ -57,6 +56,7 @@ public class userStartSceneController implements Initializable{
         if(Strings.getUsername().equals("admin")){      //kullanıcı girişinde admin giriş yaparsa bu fonksiyon çalışacak
             left.getChildren().clear(); 
             left.getChildren().add(la);
+            
         }else{
             left.getChildren().clear();
             left.getChildren().add(lu);
@@ -140,6 +140,11 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(cus);  
         });
         
+        la.getHome().setOnAction(a ->{
+            home();
+        });
+        
+
         ////////////////////////////////////////////////////////////////////////
         //user ekranı tuşları
         
@@ -170,12 +175,20 @@ public class userStartSceneController implements Initializable{
         lu.getBack().setOnAction(a->{
             turnBack();
         });
+        
+        lu.getHome().setOnAction(a ->{
+            home();
+        });
   
         ////////////////////////////////////////////////////////////////////////
         //list ekranı tuşları
         
         list.getBack().setOnAction(a->{
             turnBack();
+        });
+        
+        list.getHome().setOnAction(a ->{
+            home();
         });
   
         
@@ -193,7 +206,7 @@ public class userStartSceneController implements Initializable{
         }
         backSaveIn();
     }
-    
+
     public void backSaveIn(){
             if(i==0 && controlBack==false){
                 nodeLeft.add(left.getChildren().get(0));
@@ -201,6 +214,9 @@ public class userStartSceneController implements Initializable{
                 la.getBack().setVisible(true);
                 lu.getBack().setVisible(true);
                 list.getBack().setVisible(true);
+                la.getHome().setVisible(true);
+                lu.getHome().setVisible(true);
+                list.getHome().setVisible(true);
                 controlBack=true;
                 i++;
             }else if(right.getChildren().get(0)!=nodeRight.get(i-1) && controlBack==false){
@@ -209,6 +225,9 @@ public class userStartSceneController implements Initializable{
                 la.getBack().setVisible(true);
                 lu.getBack().setVisible(true);
                 list.getBack().setVisible(true);
+                la.getHome().setVisible(true);
+                lu.getHome().setVisible(true);
+                list.getHome().setVisible(true);
                 controlBack=true;
                 i++;
             }
@@ -232,12 +251,24 @@ public class userStartSceneController implements Initializable{
                 if(right.getChildren().get(0).equals(so) && (left.getChildren().get(0).equals(la) || left.getChildren().get(0).equals(lu))){
                     nodeLeft.clear();
                     nodeRight.clear();
+                    la.getBack().setVisible(false);
+                    lu.getBack().setVisible(false);
+                    la.getHome().setVisible(false);
+                    lu.getHome().setVisible(false);
                     i=0;
-                }
-
-            
-            }
-        
-        
+                }         
+            }    
+    }
+    
+    public void home(){
+        backSave();
+        left.getChildren().clear();
+        right.getChildren().clear();
+        right.getChildren().add(nodeRight.get(0));
+        left.getChildren().add(nodeLeft.get(0));
+        la.getBack().setVisible(false);
+        lu.getBack().setVisible(false);
+        la.getHome().setVisible(false);
+        lu.getHome().setVisible(false);
     }
 }
