@@ -6,9 +6,11 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,9 +23,6 @@ public class leftSceneUserLoginController extends AnchorPane {
     
     @FXML
     private ImageView image;
-
-    @FXML
-    private Label text;
     
     @FXML
     private Button home;
@@ -42,6 +41,9 @@ public class leftSceneUserLoginController extends AnchorPane {
 
     @FXML
     private Button back;
+    
+    @FXML
+    private Label username;
 
     //butonların get fonksiyonları
 
@@ -69,8 +71,8 @@ public class leftSceneUserLoginController extends AnchorPane {
         return customerAdd;
     }
 
-    public Label getText() {
-        return text;
+    public Label getUsername() {
+        return username;
     }
 
     public ImageView getImage() {
@@ -84,6 +86,12 @@ public class leftSceneUserLoginController extends AnchorPane {
     @FXML
     public void initialize() {
        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+       
+        Image imageV = new Image("/images/icons/userOptions.png");
+        image.setImage(imageV);
+        image.setCache(true);
+        
+        username.setText(Strings.getUsername());
       
     }   
     

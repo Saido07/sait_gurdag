@@ -9,6 +9,7 @@ import com.BIN.Config;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -96,6 +97,10 @@ public class leftSceneAdminLoginController extends AnchorPane{
     private void initialize() {
         
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
+
+        Image imageV = new Image("/images/icons/userOptions.png");
+        image.setImage(imageV);
+        image.setCache(true);
     }  
 
     

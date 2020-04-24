@@ -85,8 +85,7 @@ public class database {
 
                 System.out.println(result);
     
-            }
-            else if(type=="login"){
+            }else if(type=="login"){
                 
                 String username = params[1];
                 String pass = params[2];
@@ -98,9 +97,8 @@ public class database {
                     db_pass =(String) resultSet.getString("pass");
                 }
               
-                return controller(pass, db_pass );    
-            }
-            else if(type=="getusers"){
+                return controller(pass, db_pass );  
+            }else if(type=="getusers"){
                 Strings.getUsers().removeAllElements();
                 Strings.setUsers("Yeni Kullanıcı");
                 resultSet = stmt.executeQuery("SELECT * FROM users");
@@ -160,7 +158,13 @@ public class database {
                     System.out.println("Kullanıcı başarıyla eklendi");
                                             
                     //standart soyismi şifresi olarak geliyor sonra kullanıcı kendi ayarlayabilecek.
-                    return true;
+                    System.out.println(result);
+                    if(result==1){
+                        System.out.println("burda");
+                        return true;                       
+                    }else{
+                        return false;
+                    }
                 } catch (Exception ex){
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -219,12 +223,21 @@ public class database {
                     Strings.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
                 }
                 return true;
-            
+            }else if(type=="finduser2"){
+                resultSet = stmt.executeQuery("SELECT * FROM users WHERE username ='"+ Strings.getUsername() +"'");
+                
+                while(resultSet.next()){
+                    Strings.setDb_username2((String) resultSet.getString("username"));
+                    Strings.setDb_name((String) resultSet.getString("name"));
+                    Strings.setDb_surname((String) resultSet.getString("surname"));
+                    }
+                return true;
             }else if(type=="findCustomer"){
                 String id = params[1];
                 resultSet = stmt.executeQuery("SELECT * FROM customer WHERE id = "+ id +"");
                 
                 while(resultSet.next()){
+                    
                     Strings.setDb_cus_name((String) resultSet.getString("name"));
                     Strings.setDb_cus_place((String) resultSet.getString("place"));
                     Strings.setDb_cus_job((String) resultSet.getString("job_order_no,"));
@@ -244,21 +257,56 @@ public class database {
             }else if(type=="findTest"){
 /////////////////                               
             }else if(type=="updateUser"){
-                String username = params[1];
-                String name = params[2];
-                String surname = params[3];
-                String level = params[4]; 
-                String sign = params[5];
-                try {
-                    result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
-                            + " name = '" + name + "' , surname = '"+surname+"' , level = '"+level+"',"
-                            + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"' "
-                            + "WHERE id = '"+Strings.getDb_id()+"'");
-                    System.out.println("kullanıcı bilgileri güncellendi");
-                    return true;                         
-                } catch (Exception ex) {
-                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
+                if(params[1]=="pro"){
+                    String username = params[2];
+                    String name = params[3];
+                    String surname = params[4];
+                    String pass = params[5]; 
+                    try {
+                        result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
+                                + " name = '" + name + "' , surname = '"+surname+"' ,"
+                                + " pass = '"+pass+"', addition_date = '"+modifiedDate+"',"
+                                + " added_by = '"+Strings.getDb_id()+"' "
+                                + "WHERE username = '"+Strings.getUsername()+"'");
+                        System.out.println("kullanıcı bilgileri güncellendi");
+                        return true;                         
+                    } catch (Exception ex) {
+                            Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                            return false;
+                    }
+                }else if(params[1]=="pro2"){
+                    String username = params[2];
+                    String name = params[3];
+                    String surname = params[4]; 
+                    try {
+                        result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
+                                + " name = '" + name + "' , surname = '"+surname+"' ,"
+                                + " addition_date = '"+modifiedDate+"',"
+                                + " added_by = '"+Strings.getUsername()+"' "
+                                + "WHERE username = '"+Strings.getUsername()+"'");
+                        System.out.println("kullanıcı bilgileri güncellendi");
+                        return true;                         
+                    } catch (Exception ex) {
+                            Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                            return false;
+                    }
+                }else{
+                    String username = params[1];
+                    String name = params[2];
+                    String surname = params[3];
+                    String level = params[4]; 
+                    String sign = params[5];
+                    try {
+                        result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
+                                + " name = '" + name + "' , surname = '"+surname+"' , level = '"+level+"',"
+                                + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"' "
+                                + "WHERE id = '"+Strings.getDb_id()+"'");
+                        System.out.println("kullanıcı bilgileri güncellendi");
+                        return true;                         
+                    } catch (Exception ex) {
+                            Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                            return false;
+                    }
                 }
             }else if(type=="updateSurface"){
                 String name = params[1];

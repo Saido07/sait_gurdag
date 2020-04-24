@@ -144,6 +144,18 @@ public class userStartSceneController implements Initializable{
             home();
         });
         
+        la.getImage().setOnMouseClicked(a ->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(pro); 
+        });
+        
+        la.getText().setOnMouseClicked(a ->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(pro);
+        });
+        
 
         ////////////////////////////////////////////////////////////////////////
         //user ekranı tuşları
@@ -178,6 +190,18 @@ public class userStartSceneController implements Initializable{
         
         lu.getHome().setOnAction(a ->{
             home();
+        });
+        
+        lu.getImage().setOnMouseClicked(a ->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(pro); 
+        });
+        
+        lu.getUsername().setOnMouseClicked(a ->{
+            backSave();
+            right.getChildren().clear();
+            right.getChildren().add(pro);
         });
   
         ////////////////////////////////////////////////////////////////////////

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="fonRight" stylesheets="@../com/BIN/Style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="fonRight" stylesheets="@../com/BIN/Style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="107.0" layoutY="132.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -22,7 +22,8 @@
          <rowConstraints>
             <RowConstraints minHeight="60.0" percentHeight="0.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="50.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,15 +37,17 @@
             <Label text="Kullanıcı Adı :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label text="İsim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label text="Soyisim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label text="Şifre :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label text="Tekrar Şifre :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label text="**Şifre :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label text="Yeni Şifre :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label text="Tekrar Yeni Şifre :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label fx:id="resultTxt" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <TextField fx:id="username" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="name" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="surname" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <PasswordField fx:id="pass1" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <PasswordField fx:id="pass2" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Button fx:id="save" mnemonicParsing="false" prefWidth="140.0" text="Değişiklikleri Kaydet" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-            <Label fx:id="resultTxt" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <PasswordField fx:id="old_pass" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <PasswordField fx:id="pass1" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <PasswordField fx:id="pass2" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Button fx:id="save" mnemonicParsing="false" prefWidth="140.0" text="Değişiklikleri Kaydet" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
          </children>
       </GridPane>
    </children>

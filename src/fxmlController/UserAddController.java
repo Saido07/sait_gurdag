@@ -100,22 +100,22 @@ public class UserAddController extends AnchorPane {
                 addUser();
             }else{
                 if(Strings.getDb_id()!=null){
-                try {
-                    result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
-                            surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
-                    if(result==false){
-                        resultTxt.setStyle("-fx-text-fill: red;");
-                        resultTxt.setText("Hatalı ya da Eksik Bilgi");
-                    }else{
-                        resultTxt.setStyle("-fx-text-fill: black;");
-                        resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
-                        refreshSelectUser();
+                    try {
+                        result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
+                                surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+                        if(result==false){
+                            resultTxt.setStyle("-fx-text-fill: red;");
+                            resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                        }else{
+                            resultTxt.setStyle("-fx-text-fill: black;");
+                            resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
+                            refreshSelectUser();
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 }
             }
             
@@ -123,7 +123,7 @@ public class UserAddController extends AnchorPane {
         });
         
         userDelete.setOnAction(n ->{
-            if(Strings.getUsername().equals("admin")){
+            if(Strings.getDb_username().equals("admin")){
                 System.out.println("Bu kullanıcı silinemez");
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Admin Hesabı Silinemez!");

@@ -22,6 +22,7 @@ public class Strings {
     private static String db_equiId=null;
     private static String db_testId=null;
     private static String db_username = "";
+    private static String db_username2 = "";                        //profil ekranı için gerekenle kullanıcı ekleme ekranındaki usernameler karıştığı için
     private static String db_signature_expiry_date = "";
     private static String db_name = "";
     private static String db_surname = "";
@@ -31,6 +32,14 @@ public class Strings {
     private static String db_cus_place = "";
     private static String db_cus_job = "";
     private static String db_cus_offer = "";
+
+    public static void setDb_username2(String db_username2) {
+        Strings.db_username2 = db_username2;
+    }
+
+    public static String getDb_username2() {
+        return db_username2;
+    }
 
     public static void setDb_cus_job(String db_cus_job) {
         Strings.db_cus_job = db_cus_job;
