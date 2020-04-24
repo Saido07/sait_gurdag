@@ -91,7 +91,7 @@ public class userStartSceneController implements Initializable{
         });
 
         so.getRad().setOnAction(e -> {
-            backSave();
+           // backSave();
             System.out.println("2. Rapora tıklandı.");
             
         });

@@ -123,7 +123,7 @@ public class UserAddController extends AnchorPane {
         });
         
         userDelete.setOnAction(n ->{
-            if(Strings.getDb_id().equals("1")){
+            if(Strings.getUsername().equals("admin")){
                 System.out.println("Bu kullanıcı silinemez");
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Admin Hesabı Silinemez!");

@@ -5,7 +5,6 @@
  */
 package com.BIN;
 
-import fxmlController.leftSceneAdminLoginController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
