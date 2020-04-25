@@ -87,6 +87,10 @@ public class leftSceneAdminLoginController extends AnchorPane{
     
     public leftSceneAdminLoginController(){  
         Config.Loader(this, "/fxmlFiles/leftSceneAdminLogin.fxml");
+        
+        Image imageV = new Image("/images/icons/userOptions.png");
+        image.setImage(imageV);
+        image.setCache(true);
     }
 
    
@@ -97,10 +101,6 @@ public class leftSceneAdminLoginController extends AnchorPane{
     private void initialize() {
         
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
-
-        Image imageV = new Image("/images/icons/userOptions.png");
-        image.setImage(imageV);
-        image.setCache(true);
     }  
 
     

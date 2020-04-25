@@ -211,7 +211,7 @@ public class database {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
                 } 
-            }else if(type=="finduser"){
+            }else if(type=="finduser"){         //admin'in kullanıcı değişikliği yaparken kullanıdığı
                 String id = params[1];
                 resultSet = stmt.executeQuery("SELECT * FROM users WHERE id = "+ id +"");
                 
@@ -223,14 +223,15 @@ public class database {
                     Strings.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
                 }
                 return true;
-            }else if(type=="finduser2"){
+            }else if(type=="finduser2"){        //profil ekranı için
                 resultSet = stmt.executeQuery("SELECT * FROM users WHERE username ='"+ Strings.getUsername() +"'");
                 
                 while(resultSet.next()){
+                    Strings.setDb_User_id((String) resultSet.getString("id"));
                     Strings.setDb_username2((String) resultSet.getString("username"));
                     Strings.setDb_name((String) resultSet.getString("name"));
                     Strings.setDb_surname((String) resultSet.getString("surname"));
-                    }
+                }
                 return true;
             }else if(type=="findCustomer"){
                 String id = params[1];
@@ -255,7 +256,13 @@ public class database {
             }else if(type=="findEqui"){
 /////////////////                               
             }else if(type=="findTest"){
-/////////////////                               
+                String id = params[1];
+                resultSet = stmt.executeQuery("SELECT * FROM project_names WHERE id = "+ id +"");
+                
+                while(resultSet.next()){
+                    Strings.setDb_test_name((String) resultSet.getString("name"));
+                }
+                return true;                              
             }else if(type=="updateUser"){
                 if(params[1]=="pro"){
                     String username = params[2];
@@ -266,8 +273,8 @@ public class database {
                         result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
                                 + " name = '" + name + "' , surname = '"+surname+"' ,"
                                 + " pass = '"+pass+"', addition_date = '"+modifiedDate+"',"
-                                + " added_by = '"+Strings.getDb_id()+"' "
-                                + "WHERE username = '"+Strings.getUsername()+"'");
+                                + " added_by = '"+Strings.getUsername()+"' "
+                                + "WHERE id = '"+Strings.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
@@ -283,7 +290,7 @@ public class database {
                                 + " name = '" + name + "' , surname = '"+surname+"' ,"
                                 + " addition_date = '"+modifiedDate+"',"
                                 + " added_by = '"+Strings.getUsername()+"' "
-                                + "WHERE username = '"+Strings.getUsername()+"'");
+                                + "WHERE id = '"+Strings.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
@@ -299,9 +306,9 @@ public class database {
                     try {
                         result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
                                 + " name = '" + name + "' , surname = '"+surname+"' , level = '"+level+"',"
-                                + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"' "
-                                + "WHERE id = '"+Strings.getDb_id()+"'");
-                        System.out.println("kullanıcı bilgileri güncellendi");
+                                + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"', "
+                                + " added_by ='"+Strings.getUsername()+"' WHERE id = '"+Strings.getDb_id()+"'");
+                        System.out.println("Kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
                             Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,14 +321,44 @@ public class database {
                     result = stmt.executeUpdate("UPDATE surface_condition SET name = '" + name + "'"
                             + ", addition_date = '"+modifiedDate+"', added_by = '"+Strings.getUsername()+"'"
                             + "WHERE id = '"+Strings.getDb_surId()+"'");
+                    System.out.println("Yüzey durumu bilgileri güncellendi");
+                    return true;                         
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                }
+            }else if(type=="updateTest"){
+                String name = params[1];
+                try {
+                    result = stmt.executeUpdate("UPDATE project_names SET name = '" + name + "'"
+                            + ", addition_date = '"+modifiedDate+"', added_by = '"+Strings.getUsername()+"'"
+                            + "WHERE id = '"+Strings.getDb_testId()+"'");
+                    System.out.println("Test bilgileri güncellendi");
+                    return true;                         
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                }
+            }else if(type=="updateCustomer"){
+                String name = params[2];
+                String place = params[3];
+                String job = params[4];
+                String offer = params[5]; 
+                try {
+                    result = stmt.executeUpdate("UPDATE customer SET name = '" + name + "',"
+                            + " place = '" + place + "' , job_order_no = '"+job+"' ,"
+                            + " offer_no = '"+offer+"', addition_date = '"+modifiedDate+"',"
+                            + " added_by = '"+Strings.getUsername()+"' "
+                            + "WHERE id = '"+Strings.getDb_customerId()+"'");
                     System.out.println("kullanıcı bilgileri güncellendi");
                     return true;                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                 }
+            }else if(type=="updateEqui"){
+/////////////////////               
             }else if(type=="userDelete"){
-                
                 String deletedId =params[1];
                 try {
                     result = stmt.executeUpdate("DELETE FROM users "
@@ -343,9 +380,22 @@ public class database {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
                 }
+            }else if(type=="testDelete"){
+                String deletedId =params[1];
+                try {
+                    result = stmt.executeUpdate("DELETE FROM project_names "
+                            + "WHERE id = '"+deletedId+"'");
+                    System.out.println("Test Türü Silindi");
+                    return true;                        
+                } catch (Exception ex) {
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;
+                }
+            }else if(type=="customerDelete"){
+/////////////////////                
+            }else if(type=="equiDelete"){
+/////////////////////              
             }
-              
-            
             
         
             con.close();

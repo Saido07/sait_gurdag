@@ -32,6 +32,28 @@ public class Strings {
     private static String db_cus_place = "";
     private static String db_cus_job = "";
     private static String db_cus_offer = "";
+    private static String db_test_name = "";
+    private static String db_User_id = "";
+
+    public static String getDb_User_id() {
+        return db_User_id;
+    }
+
+    public static void setDb_User_id(String db_User_id) {
+        Strings.db_User_id = db_User_id;
+    }
+    
+    
+
+    public static String getDb_test_name() {
+        return db_test_name;
+    }
+
+    public static void setDb_test_name(String db_test_name) {
+        Strings.db_test_name = db_test_name;
+    }
+    
+    
 
     public static void setDb_username2(String db_username2) {
         Strings.db_username2 = db_username2;

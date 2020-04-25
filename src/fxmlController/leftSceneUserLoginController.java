@@ -80,19 +80,18 @@ public class leftSceneUserLoginController extends AnchorPane {
     }
 
     public leftSceneUserLoginController(){  
-      Config.Loader(this, "/fxmlFiles/leftSceneUserLogin.fxml");
-    }
-    
-    @FXML
-    public void initialize() {
-       Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
-       
+        Config.Loader(this, "/fxmlFiles/leftSceneUserLogin.fxml");
+      
         Image imageV = new Image("/images/icons/userOptions.png");
         image.setImage(imageV);
         image.setCache(true);
         
         username.setText(Strings.getUsername());
-      
+    }
+    
+    @FXML
+    public void initialize() {
+       Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
     }   
     
 
