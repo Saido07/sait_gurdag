@@ -11,12 +11,12 @@
        <children>
         <VBox layoutX="130.0" layoutY="97.0" prefHeight="168.0" prefWidth="125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <AnchorPane minHeight="120.0" prefHeight="120.0">
+                <AnchorPane minHeight="110.0" prefHeight="110.0">
                     <children>
                         <Label text="Kullanıcı Adı:" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="55.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane prefHeight="60.0" prefWidth="200.0">
+                <AnchorPane prefHeight="50.0" prefWidth="200.0">
                     <children>
                         <TextField fx:id="user_name" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Kullanıcı Adınızı Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
                     </children>
@@ -26,12 +26,17 @@
                         <Label text="Şifre:" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="55.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane prefHeight="80.0" prefWidth="200.0">
+                <AnchorPane prefHeight="40.0" prefWidth="200.0">
                     <children>
                         <PasswordField fx:id="password" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" promptText="Şifrenizi Buraya Giriniz" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
-            <AnchorPane prefHeight="115.0" prefWidth="200.0">
+            <AnchorPane prefHeight="60.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="ResultTxt" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="105.0" prefWidth="200.0">
                <children>
                         <Button fx:id="login_btn" mnemonicParsing="false" text="Giriş Yap" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="0.0" />
                </children>

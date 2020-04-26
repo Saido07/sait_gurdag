@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class userLoginController implements Initializable {
@@ -25,7 +26,9 @@ public class userLoginController implements Initializable {
     @FXML
     private PasswordField password;
     @FXML
-    private Button login_btn;
+    private Button login_btn; 
+    @FXML
+    private Label ResultTxt;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,7 +58,13 @@ public class userLoginController implements Initializable {
                     Logger.getLogger(userLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                     
+            }else{
+                ResultTxt.setVisible(true);
+                ResultTxt.setStyle("-fx-text-fill: red;");
+                ResultTxt.setText("Kullanıcı Adı ya da Şifre Yanlış");
+                password.clear();
             }
+            
 
             });
         

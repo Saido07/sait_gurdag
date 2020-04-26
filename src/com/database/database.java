@@ -38,7 +38,7 @@ public class database {
             
                 System.out.println("Connecting database...");
                 Class.forName("org.hsqldb.jdbcDriver");
-                String url = "jdbc:hsqldb:file:C:\\db_inf202\\; shutdown=true";
+                String url = "jdbc:hsqldb:res:/db_inf202/; shutdown=true";
                 con = DriverManager.getConnection(url, "Sait" , "123");
                 System.out.println("Connection successful");
 
