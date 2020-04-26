@@ -8,28 +8,20 @@ package fxmlController;
 import com.BIN.Config;
 import com.BIN.Strings;
 import com.database.database;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author sait_
- */
 public class SurfaceConAddController extends AnchorPane{
 
     @FXML
-    private ComboBox<?> SelectSurface;
+    private ComboBox<String> SelectSurface;
     @FXML
     private TextField surface;
     @FXML
@@ -46,7 +38,7 @@ public class SurfaceConAddController extends AnchorPane{
     public SurfaceConAddController(){
         Config.Loader(this, "/fxmlFiles/surfaceConAdd.fxml");
         
-        try {
+        try {                                               //database'den yüzey durumu bilg. çekme
             db.doInBackground("getSurface");
         } catch (SQLException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,7 +52,7 @@ public class SurfaceConAddController extends AnchorPane{
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         
-        SelectSurface.setOnAction(a ->{
+        SelectSurface.setOnAction(a ->{                     //combo box a tıklama fonk.               
             if(SelectSurface.isShowing()==true){
                 Strings.setDb_surId(SelectSurface.getValue().toString().
                         substring(0, SelectSurface.getValue().toString().indexOf(" "))); // seçilen yüzeyin id'sini alıyor.
@@ -81,7 +73,7 @@ public class SurfaceConAddController extends AnchorPane{
             }
         });
         
-        save.setOnAction(b -> {
+        save.setOnAction(b -> {                              //kaydetme tuşu fonk.
             if(Strings.getDb_surId()==null){
                 addSurface();
             }else if(SelectSurface.getValue().toString().equals("Yeni Yüzey Durumu")){                
@@ -107,7 +99,7 @@ public class SurfaceConAddController extends AnchorPane{
             }
         });
         
-        surfaceDelete.setOnAction(n ->{
+        surfaceDelete.setOnAction(n ->{                         //silme tuşu fonk.
             if(Strings.getDb_surId().equals("Yeni")){
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Hatalı İşlem");
@@ -129,7 +121,7 @@ public class SurfaceConAddController extends AnchorPane{
         
     }    
     
-    public void addSurface(){
+    public void addSurface(){                                   //yeni ekleme fonk.
         try {
             result=db.doInBackground("addNewSurface", surface.getText().toString());
         } catch (SQLException ex) {
@@ -148,7 +140,7 @@ public class SurfaceConAddController extends AnchorPane{
     }
                 
                 
-    private void refreshSelectSurface() {    
+    private void refreshSelectSurface() {                       //yenileme fonk. combo box için
         try {
             db.doInBackground("getSurface");
         } catch (SQLException ex) {

@@ -228,7 +228,6 @@ public class database {
                 
                 while(resultSet.next()){
                     Strings.setDb_User_id((String) resultSet.getString("id"));
-                    Strings.setDb_username2((String) resultSet.getString("username"));
                     Strings.setDb_name((String) resultSet.getString("name"));
                     Strings.setDb_surname((String) resultSet.getString("surname"));
                 }

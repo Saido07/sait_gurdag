@@ -80,14 +80,36 @@ public class magneticParticleReportListController extends AnchorPane {
     public Button getHome() {
         return home;
     }
-    
-    
+
+    public TitledPane getTitle1() {
+        return title1;
+    }
+
+    public TitledPane getTitle2() {
+        return title2;
+    }
+
+    public TitledPane getTitle3() {
+        return title3;
+    }
+
+    public TitledPane getTitle4() {
+        return title4;
+    }
+
+    public TitledPane getTitle5() {
+        return title5;
+    }
+
+    public Accordion getList() {
+        return list;
+    }
     
     public magneticParticleReportListController(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportList.fxml");
         Image imageV = new Image("/images/icons/gCheck.png");
         
-        imaP1.setImage(imageV);
+        imaP1.setImage(imageV);                 //title'lardeki görseller
         imaP1.setCache(true);
 
         imaP2.setImage(imageV);
@@ -102,15 +124,15 @@ public class magneticParticleReportListController extends AnchorPane {
         imaP5.setImage(imageV);
         imaP5.setCache(true);
         
-        ObservableList<String> items1 =FXCollections.observableArrayList (
+        ObservableList<String> items1 =FXCollections.observableArrayList (      //genel bilgiler
         "Müşteri", "Proje Adı", "Test Yeri", "Muayene Standardı", "Değerlen. Standardı","Muayene Prosedürü",
         "Muayene Kapsamı","Resim No","Yüzey Durumu","Muayene Aşaması","Sayfa No","Rapor No","Rapor Tarihi",
         "İş Emri No","Teklif No");
         
-        ObservableList<String> items2 =FXCollections.observableArrayList (
+        ObservableList<String> items2 =FXCollections.observableArrayList (      //cihaz bilgileri
         "Kutup Mesafesi","Cihaz","MP Taşıyıcı Ortam","Mıknatıslama Tekniği","UV Işık Şiddeti","Işık Mesafesi",
         "Muayene Bölgesi","Akım Tipi","Luxmetre/Işık Şiddeti","Muayene Ortamı","Mıknatıs Giderimi","Isıl İşlem",
-        "Yüzey Sıcaklığı","Muayene Bölgesindeki Alan Şiddeti","Yüzey","Işık Cihazı Tanımı","Kaldırma Testi Tarih/No");
+        "Yüzey Sıcaklığı","Muayene Bölg. Alan Şid.","Yüzey","Işık Cihazı Tanımı","Kaldırma Testi Tarih/No");
         
         pane1.setItems(items1);
         pane2.setItems(items2);

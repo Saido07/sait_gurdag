@@ -1,32 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import com.BIN.Config;
 import com.BIN.Strings;
 import com.database.database;
 import com.security.password_hash;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author sait_
- */
 public class ProfilController extends AnchorPane{
 
     @FXML
@@ -68,7 +55,7 @@ public class ProfilController extends AnchorPane{
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        username.setText(Strings.getDb_username2());
+        username.setText(Strings.getUsername());
         name.setText(Strings.getDb_name());
         surname.setText(Strings.getDb_surname());
     }

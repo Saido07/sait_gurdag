@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import com.BIN.Config;
@@ -42,10 +37,6 @@ public class CustomerAddController extends AnchorPane {
     private Button customerDelete;
     @FXML
     private Label resultTxt;
-
-    /**
-     * Initializes the controller class.
-     */
     
     public CustomerAddController(){
         Config.Loader(this, "/fxmlFiles/customerAdd.fxml");
@@ -63,7 +54,7 @@ public class CustomerAddController extends AnchorPane {
     
     
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         
     }  

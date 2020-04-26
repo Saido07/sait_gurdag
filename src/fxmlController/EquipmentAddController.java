@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import com.BIN.Config;
@@ -14,18 +9,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author sait_
- */
 public class EquipmentAddController extends AnchorPane {
 
     @FXML
@@ -67,7 +56,7 @@ public class EquipmentAddController extends AnchorPane {
     }
     
     @FXML
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         
     }    

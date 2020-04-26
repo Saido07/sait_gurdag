@@ -9,20 +9,19 @@ import java.util.Vector;
 
 
 public class Strings {
-    private static String username;
-    private static String option; //userOptions ekranında hangi tuşa tıklandığı için
+    private static String username;                       //O anda sistemi kullanan kişi
+    private static String option;                         //userOptions ekranında hangi tuşa tıklandığı için
     private static Vector users = new Vector();
     private static Vector test = new Vector();
     private static Vector equi = new Vector();
     private static Vector customers = new Vector();
     private static Vector surface = new Vector();
-    private static String db_id=null;
+    private static String db_id=null;                     //kullanıcı ekleme ekranında combobox'tan seçilen kişinin id si burada
     private static String db_surId=null;
     private static String db_customerId=null;
     private static String db_equiId=null;
     private static String db_testId=null;
-    private static String db_username = "";
-    private static String db_username2 = "";                        //profil ekranı için gerekenle kullanıcı ekleme ekranındaki usernameler karıştığı için
+    private static String db_username = "";               //combobox'ta seçilen kişinin kullanıcı adı
     private static String db_signature_expiry_date = "";
     private static String db_name = "";
     private static String db_surname = "";
@@ -33,7 +32,7 @@ public class Strings {
     private static String db_cus_job = "";
     private static String db_cus_offer = "";
     private static String db_test_name = "";
-    private static String db_User_id = "";
+    private static String db_User_id = "";                 //O anda kullanan kişinin id'si
 
     public static String getDb_User_id() {
         return db_User_id;
@@ -51,16 +50,6 @@ public class Strings {
 
     public static void setDb_test_name(String db_test_name) {
         Strings.db_test_name = db_test_name;
-    }
-    
-    
-
-    public static void setDb_username2(String db_username2) {
-        Strings.db_username2 = db_username2;
-    }
-
-    public static String getDb_username2() {
-        return db_username2;
     }
 
     public static void setDb_cus_job(String db_cus_job) {

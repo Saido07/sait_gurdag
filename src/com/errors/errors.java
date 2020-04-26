@@ -4,10 +4,6 @@ package com.errors;
 import javafx.scene.control.Alert;
 import javafx.stage.Window;
 
-/**
- *
- * @author sait_
- */
 public class errors {
 
     

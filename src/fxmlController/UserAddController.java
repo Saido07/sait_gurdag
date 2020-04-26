@@ -13,11 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author stgrdg
- */
 public class UserAddController extends AnchorPane {
 
     @FXML                               
@@ -46,7 +41,7 @@ public class UserAddController extends AnchorPane {
     public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
 
-        try {
+        try {                                                 //db'den kullanıcı bilg. çekme
             db.doInBackground("getusers");
         } catch (SQLException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +58,7 @@ public class UserAddController extends AnchorPane {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
         
         
-        SelectUser.setOnAction(a ->{
+        SelectUser.setOnAction(a ->{                          //combobox fonk.
             if(SelectUser.isShowing()==true){
                 Strings.setDb_id(SelectUser.getValue().toString().
                         substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
@@ -131,18 +126,18 @@ public class UserAddController extends AnchorPane {
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Hatalı İşlem");
             }else{
-            try {
-                db.doInBackground("userDelete", Strings.getDb_id());
-                String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
-                users = users.substring(users.indexOf(" "));
-                resultTxt.setStyle("-fx-text-fill: black;");
-                resultTxt.setText(users + " Adlı Kullanıcı Silindi");
-                refreshSelectUser();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    db.doInBackground("userDelete", Strings.getDb_id());
+                    String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
+                    users = users.substring(users.indexOf(" "));
+                    resultTxt.setStyle("-fx-text-fill: black;");
+                    resultTxt.setText(users + " Adlı Kullanıcı Silindi");
+                    refreshSelectUser();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         

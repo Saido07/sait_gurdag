@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import javafx.fxml.FXML;
@@ -33,9 +28,9 @@ public class userStartSceneController implements Initializable{
     }
     
     
-    Vector <Node> nodeRight = new Vector<Node>();
+    Vector <Node> nodeRight = new Vector<Node>();           //geri alma sırasının kayd. vectorler
     Vector <Node> nodeLeft = new Vector<Node>();
-    boolean controlBack=false;
+    boolean controlBack=false;                              //geri komutunun bozulmasını önlemek için
     
     leftSceneAdminLoginController la = new leftSceneAdminLoginController();
     leftSceneUserLoginController lu = new leftSceneUserLoginController();
@@ -73,24 +68,29 @@ public class userStartSceneController implements Initializable{
         
         //sağ taraftaki tuşlar
         
-        mag.getNext().setOnAction(a->{
+        mag.getNext().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
             backSave();
+            
             right.getChildren().clear();
-            right.getChildren().add(mag2); 
+            right.getChildren().add(mag2);
+            
+            list.getList().setExpandedPane(list.getTitle2());
         });
         
         //startOptions ekranındaki tuşlar
         
-        so.getMan().setOnAction(e -> {              //1. raporun butonuna tıklanması
+        so.getMan().setOnAction(e -> {              //1. rapor tuşu fonksiyonu
             backSave();
             right.getChildren().clear();
             right.getChildren().add(mag);
             
             left.getChildren().clear();
             left.getChildren().add(list);
+            
+            list.getList().setExpandedPane(list.getTitle1());
         });
 
-        so.getRad().setOnAction(e -> {
+        so.getRad().setOnAction(e -> {              //2. rapor tuşu fonksiyonu
            // backSave();
             System.out.println("2. Rapora tıklandı.");
             
@@ -112,45 +112,45 @@ public class userStartSceneController implements Initializable{
         });
         
                 
-        la.getBack().setOnAction(a->{
+        la.getBack().setOnAction(a->{               //geri tuşu fonksiyonu
             turnBack();
         });
         
-        la.getEquipmentAdd().setOnAction(a->{
+        la.getEquipmentAdd().setOnAction(a->{       //ekip. ekleme tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(equ);  
         });
   
-        la.getSurfaceAdd().setOnAction(a->{
+        la.getSurfaceAdd().setOnAction(a->{         //yüzey d. ekleme tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(sur);  
         });
         
-        la.getTestAdd().setOnAction(a->{
+        la.getTestAdd().setOnAction(a->{            //test ek. tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(test);  
         });  
         
-        la.getCustomerAdd().setOnAction(a->{
+        la.getCustomerAdd().setOnAction(a->{        //müşt. ekl. tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(cus);  
         });
         
-        la.getHome().setOnAction(a ->{
+        la.getHome().setOnAction(a ->{              //anasayfa tuşu fonk.
             home();
         });
         
-        la.getImage().setOnMouseClicked(a ->{
+        la.getImage().setOnMouseClicked(a ->{       //profil resmine tıkl. fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(pro); 
         });
         
-        la.getText().setOnMouseClicked(a ->{
+        la.getText().setOnMouseClicked(a ->{        //kullanıcı adının üzerine tıkl. fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(pro);
@@ -160,45 +160,45 @@ public class userStartSceneController implements Initializable{
         ////////////////////////////////////////////////////////////////////////
         //user ekranı tuşları
         
-        lu.getEquipmentAdd().setOnAction(a->{
+        lu.getEquipmentAdd().setOnAction(a->{       //ekip. ekleme tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(equ);  
         });
   
-        lu.getSurfaceAdd().setOnAction(a->{
+        lu.getSurfaceAdd().setOnAction(a->{         //yüzey d. ekl. tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(sur);  
         });
         
-        lu.getTestAdd().setOnAction(a->{
+        lu.getTestAdd().setOnAction(a->{            //test ekl. tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(test);  
         });  
         
-        lu.getCustomerAdd().setOnAction(a->{
+        lu.getCustomerAdd().setOnAction(a->{        //müşt. ekl. tuşu fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(cus);  
         });
              
-        lu.getBack().setOnAction(a->{
+        lu.getBack().setOnAction(a->{               //geri tuşu fonk.
             turnBack();
         });
         
-        lu.getHome().setOnAction(a ->{
+        lu.getHome().setOnAction(a ->{              //anasay. tuşu fonk.
             home();
         });
         
-        lu.getImage().setOnMouseClicked(a ->{
+        lu.getImage().setOnMouseClicked(a ->{       //profil resmi üzerine tıklama fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(pro); 
         });
         
-        lu.getUsername().setOnMouseClicked(a ->{
+        lu.getUsername().setOnMouseClicked(a ->{    //kullanıcı adının üzerine tıkl. fonk.
             backSave();
             right.getChildren().clear();
             right.getChildren().add(pro);
@@ -207,11 +207,11 @@ public class userStartSceneController implements Initializable{
         ////////////////////////////////////////////////////////////////////////
         //list ekranı tuşları
         
-        list.getBack().setOnAction(a->{
+        list.getBack().setOnAction(a->{             //liste ekranında geri fonk.
             turnBack();
         });
         
-        list.getHome().setOnAction(a ->{
+        list.getHome().setOnAction(a ->{            //liste ekra. anasay. fonk.
             home();
         });
   
@@ -220,7 +220,7 @@ public class userStartSceneController implements Initializable{
 
     int i=0;
     
-    public void backSave(){
+    public void backSave(){                         //geri alma sırasını kaydetme 1. aşama
         if(i==0){
            controlBack=false; 
         }else{
@@ -231,7 +231,7 @@ public class userStartSceneController implements Initializable{
         backSaveIn();
     }
 
-    public void backSaveIn(){
+    public void backSaveIn(){                       //geri alma sırasını kaydetme 2. aşama
             if(i==0 && controlBack==false){
                 nodeLeft.add(left.getChildren().get(0));
                 nodeRight.add(right.getChildren().get(0));
@@ -258,7 +258,7 @@ public class userStartSceneController implements Initializable{
 
     }
     
-    public void turnBack(){
+    public void turnBack(){                         //geri alma fonk.
             if(controlBack==true && i>0){
                 if(left.getChildren().get(0)==nodeLeft.get(i-1) && right.getChildren().get(0)==nodeRight.get(i-1)){
                     left.getChildren().clear();
@@ -284,7 +284,7 @@ public class userStartSceneController implements Initializable{
             }    
     }
     
-    public void home(){
+    public void home(){                             //home fonksiyonu
         backSave();
         left.getChildren().clear();
         right.getChildren().clear();
