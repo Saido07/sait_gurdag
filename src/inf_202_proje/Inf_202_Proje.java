@@ -18,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.log4j.BasicConfigurator;
 
         
 public class Inf_202_Proje extends Application {
@@ -36,7 +35,6 @@ public class Inf_202_Proje extends Application {
     }
    
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
-        BasicConfigurator.configure();
         
         database db = new database();
         String type = "firstTimeConnection";

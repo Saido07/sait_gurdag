@@ -1,7 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
-import com.BIN.Strings;
+import com.BIN.User;
 import com.database.database;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -48,7 +48,7 @@ public class UserAddController extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectUser.getItems().setAll(Strings.getUsers());    //tüm kullanıcıları combo boxta listeler
+        SelectUser.getItems().setAll(User.getUsers());    //tüm kullanıcıları combo boxta listeler
 
                 
     }
@@ -60,10 +60,10 @@ public class UserAddController extends AnchorPane {
         
         SelectUser.setOnAction(a ->{                          //combobox fonk.
             if(SelectUser.isShowing()==true){
-                Strings.setDb_id(SelectUser.getValue().toString().
+                User.setDb_id(SelectUser.getValue().toString().
                         substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
             } 
-            if(Strings.getDb_id().equals("Yeni")){
+            if(User.getDb_id().equals("Yeni")){
                 name.clear();
                 surname.clear();
                 userName.clear();
@@ -71,30 +71,30 @@ public class UserAddController extends AnchorPane {
                 signature_e_date.clear();
             }else{
                 try {
-                    db.doInBackground("finduser", Strings.getDb_id());
+                    db.doInBackground("finduser", User.getDb_id());
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                name.setText(Strings.getDb_name());
-                surname.setText(Strings.getDb_surname());
-                userName.setText(Strings.getDb_username());
-                level.setText(Strings.getDb_level());
-                signature_e_date.setText(Strings.getDb_signature_expiry_date());
+                name.setText(User.getDb_name());
+                surname.setText(User.getDb_surname());
+                userName.setText(User.getDb_username());
+                level.setText(User.getDb_level());
+                signature_e_date.setText(User.getDb_signature_expiry_date());
 
             }
         });
         
         
         save.setOnAction(b -> {
-            if(Strings.getDb_id()==null){
+            if(User.getDb_id()==null){
                 addUser();
             }else if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){                
                 addUser();
             }else{
-                if(Strings.getDb_id()!=null){
+                if(User.getDb_id()!=null){
                     try {
                         result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
                                 surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
@@ -118,16 +118,16 @@ public class UserAddController extends AnchorPane {
         });
         
         userDelete.setOnAction(n ->{
-            if(Strings.getDb_username().equals("admin")){
+            if(User.getDb_username().equals("admin")){
                 System.out.println("Bu kullanıcı silinemez");
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Admin Hesabı Silinemez!");
-            }else if(Strings.getDb_id().equals("Yeni")){
+            }else if(User.getDb_id().equals("Yeni")){
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Hatalı İşlem");
             }else{
                 try {
-                    db.doInBackground("userDelete", Strings.getDb_id());
+                    db.doInBackground("userDelete", User.getDb_id());
                     String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
                     users = users.substring(users.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
@@ -170,9 +170,11 @@ public class UserAddController extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectUser.getItems().setAll(Strings.getUsers());
+        SelectUser.getItems().setAll(User.getUsers());
         
     }
+    
+
 
     
 }

@@ -1,7 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
-import com.BIN.Strings;
+import com.BIN.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -76,7 +76,7 @@ public class leftSceneUserLoginController extends AnchorPane {
         image.setImage(imageV);
         image.setCache(true);
         
-        username.setText(Strings.getUsername());
+        username.setText(User.getUsername());
     }
     
     @FXML

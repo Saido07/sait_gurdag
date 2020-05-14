@@ -1,7 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
-import com.BIN.Strings;
+import com.BIN.User;
 import com.database.database;
 import com.security.password_hash;
 import java.sql.SQLException;
@@ -55,9 +55,9 @@ public class ProfilController extends AnchorPane{
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        username.setText(Strings.getUsername());
-        name.setText(Strings.getDb_name());
-        surname.setText(Strings.getDb_surname());
+        username.setText(User.getUsername());
+        name.setText(User.getDb_name());
+        surname.setText(User.getDb_surname());
     }
     
     @FXML
@@ -70,10 +70,10 @@ public class ProfilController extends AnchorPane{
                     resultTxt.setStyle("-fx-text-fill: red;");
                     resultTxt.setText("Değişiklik Yapabilmek İçin Şifrenizi Giriniz");
                 }else{
-                    if(db.doInBackground("login",Strings.getUsername() , p.password_hash((String) old_pass.getText().toString()))==true){
+                    if(db.doInBackground("login",User.getUsername() , p.password_hash((String) old_pass.getText().toString()))==true){
                         if(pass1.getText().trim().isEmpty()==false){
                             if(pass1.getText().toString().equals(pass2.getText().toString())){
-                                if(db.doInBackground("login",Strings.getUsername() , p.password_hash((String) pass1.getText().toString()))==true){
+                                if(db.doInBackground("login",User.getUsername() , p.password_hash((String) pass1.getText().toString()))==true){
                                     resultTxt.setStyle("-fx-text-fill: red;");
                                     resultTxt.setText("Girdiğiniz Şifre Öncekiyle Aynı");
                                     old_pass.clear();

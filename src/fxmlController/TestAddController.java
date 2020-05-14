@@ -1,7 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
-import com.BIN.Strings;
+import com.BIN.Test;
 import com.database.database;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public class TestAddController extends AnchorPane{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectTest.getItems().setAll(Strings.getTest());
+        SelectTest.getItems().setAll(Test.getTest());
     }
     
     @FXML

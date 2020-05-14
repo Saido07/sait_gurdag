@@ -1,8 +1,8 @@
 package fxmlController;
 
+import com.BIN.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import com.BIN.Strings;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -48,7 +48,7 @@ public class userStartSceneController implements Initializable{
 
     public void initialize(URL url, ResourceBundle rb) {
         
-        if(Strings.getUsername().equals("admin")){      //kullanıcı girişinde admin giriş yaparsa bu fonksiyon çalışacak
+        if(User.getUsername().equals("admin")){      //kullanıcı girişinde admin giriş yaparsa bu fonksiyon çalışacak
             left.getChildren().clear(); 
             left.getChildren().add(la);
             

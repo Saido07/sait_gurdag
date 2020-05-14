@@ -6,7 +6,7 @@
 package fxmlController;
 
 import com.BIN.Config;
-import com.BIN.Strings;
+import com.BIN.Surface;
 import com.database.database;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -41,11 +41,11 @@ public class SurfaceConAddController extends AnchorPane{
         try {                                               //database'den yüzey durumu bilg. çekme
             db.doInBackground("getSurface");
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectSurface.getItems().setAll(Strings.getSurface());
+        SelectSurface.getItems().setAll(Surface.getSurface());
     }
     
     @FXML
@@ -54,32 +54,32 @@ public class SurfaceConAddController extends AnchorPane{
         
         SelectSurface.setOnAction(a ->{                     //combo box a tıklama fonk.               
             if(SelectSurface.isShowing()==true){
-                Strings.setDb_surId(SelectSurface.getValue().toString().
+                Surface.setDb_surId(SelectSurface.getValue().toString().
                         substring(0, SelectSurface.getValue().toString().indexOf(" "))); // seçilen yüzeyin id'sini alıyor.
             } 
-            if(Strings.getDb_surId().equals("Yeni")){
+            if(Surface.getDb_surId().equals("Yeni")){
                 surface.clear();
             }else{
                 try {
-                    db.doInBackground("findSurface", Strings.getDb_surId());
+                    db.doInBackground("findSurface", Surface.getDb_surId());
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                surface.setText(Strings.getDb_surf_name());
+                surface.setText(Surface.getDb_surf_name());
                
             }
         });
         
         save.setOnAction(b -> {                              //kaydetme tuşu fonk.
-            if(Strings.getDb_surId()==null){
+            if(Surface.getDb_surId()==null){
                 addSurface();
             }else if(SelectSurface.getValue().toString().equals("Yeni Yüzey Durumu")){                
                 addSurface();
             }else{
-                if(Strings.getDb_surId()!=null){
+                if(Surface.getDb_surId()!=null){
                 try {
                     result=db.doInBackground("updateSurface", surface.getText().toString());
                     if(result==false){
@@ -100,22 +100,22 @@ public class SurfaceConAddController extends AnchorPane{
         });
         
         surfaceDelete.setOnAction(n ->{                         //silme tuşu fonk.
-            if(Strings.getDb_surId().equals("Yeni")){
+            if(Surface.getDb_surId().equals("Yeni")){
                 resultTxt.setStyle("-fx-text-fill: red;");
                 resultTxt.setText("Hatalı İşlem");
             }else{
-            try {
-                db.doInBackground("surfaceDelete", Strings.getDb_surId());
-                String surface = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
-                surface = surface.substring(surface.indexOf(" "));
-                resultTxt.setStyle("-fx-text-fill: black;");
-                resultTxt.setText(surface + " Adlı Kullanıcı Silindi");
-                refreshSelectSurface();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    db.doInBackground("surfaceDelete", Surface.getDb_surId());
+                    String surface = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
+                    surface = surface.substring(surface.indexOf(" "));
+                    resultTxt.setStyle("-fx-text-fill: black;");
+                    resultTxt.setText(surface + " Adlı Kullanıcı Silindi");
+                    refreshSelectSurface();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -148,7 +148,7 @@ public class SurfaceConAddController extends AnchorPane{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectSurface.getItems().setAll(Strings.getSurface());
+        SelectSurface.getItems().setAll(Surface.getSurface());
         
     }
 }

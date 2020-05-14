@@ -5,7 +5,11 @@
  */
 package com.database;
 
-import com.BIN.Strings;
+import com.BIN.Customer;
+import com.BIN.Equi;
+import com.BIN.Surface;
+import com.BIN.Test;
+import com.BIN.User;
 import com.security.password_hash;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,7 +42,7 @@ public class database {
             
                 System.out.println("Connecting database...");
                 Class.forName("org.hsqldb.jdbcDriver");
-                String url = "jdbc:hsqldb:res:/db_inf202/; shutdown=true";
+                String url = "jdbc:hsqldb:file:D:\\Uni\\TMS-II\\II. Dönem\\Inf-202\\Inf_202_Proje\\src\\db_inf202\\";
                 con = DriverManager.getConnection(url, "Sait" , "123");
                 System.out.println("Connection successful");
 
@@ -99,49 +103,49 @@ public class database {
               
                 return controller(pass, db_pass );  
             }else if(type=="getusers"){
-                Strings.getUsers().removeAllElements();
-                Strings.setUsers("Yeni Kullanıcı");
+                User.getUsers().removeAllElements();
+                User.setUsers("Yeni Kullanıcı");
                 resultSet = stmt.executeQuery("SELECT * FROM users");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                    User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
                             +  resultSet.getString("surname"));
                     i++;
                 }
             }else if(type=="getCustomer"){
-                Strings.getCustomers().removeAllElements();
-                Strings.setCustomers("Yeni Müşteri");
+                Customer.getCustomers().removeAllElements();
+                Customer.setCustomers("Yeni Müşteri");
                 resultSet = stmt.executeQuery("SELECT * FROM customer");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setCustomers((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Customer.setCustomers((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getTest"){
-                Strings.getTest().removeAllElements();
-                Strings.setTest("Yeni Test");
+                Test.getTest().removeAllElements();
+                Test.setTest("Yeni Test");
                 resultSet = stmt.executeQuery("SELECT * FROM project_names");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setTest((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Test.setTest((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getSurface"){
-                Strings.getSurface().removeAllElements();
-                Strings.setSurface("Yeni Yüzey Durumu");
+                Surface.getSurface().removeAllElements();
+                Surface.setSurface("Yeni Yüzey Durumu");
                 resultSet = stmt.executeQuery("SELECT * FROM surface_condition");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setSurface((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Surface.setSurface((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getEqui"){
-                Strings.getEqui().removeAllElements();
-                Strings.setEqui("Yeni Ekipman");
+                Equi.getEqui().removeAllElements();
+                Equi.setEqui("Yeni Ekipman");
                 resultSet = stmt.executeQuery("SELECT * FROM equipment");
                 while(resultSet.next()){
                     int i=0;
-                    Strings.setEqui((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Equi.setEqui((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 } 
             }else if(type=="addNewUser"){
@@ -154,8 +158,8 @@ public class database {
                     result = stmt.executeUpdate("INSERT INTO users(username, name, surname,"
                         + " level, signature_expiry_date, addition_date, pass ,  added_by) VALUES ('" + username + "','"
                         + ""+ name +"','"+surname+"','"+level+"','"+sign+"','"+modifiedDate+"','"+ p.password_hash(surname) +"',"
-                        + "'"+Strings.getUsername()+"')");
-                    System.out.println("Kullanıcı başarıyla eklendi");
+                        + "'"+User.getUsername()+"')");
+                    System.out.println("Kullanıcı başarıyla eklendi!!!!!");
                                             
                     //standart soyismi şifresi olarak geliyor sonra kullanıcı kendi ayarlayabilecek.
                     System.out.println(result);
@@ -176,11 +180,17 @@ public class database {
                 String jobOrderNo = params[3];
                 String offerNo = params[4];
                 try {
-                    result = stmt.executeUpdate("INSERT INTO users(name, place, job_order_no,"
+                    result = stmt.executeUpdate("INSERT INTO customer(name, place, job_order_no,"
                         + " offer_no, addition_date, added_by) VALUES ('" + cusName + "','"
-                        + ""+ place +"','"+jobOrderNo+"','"+offerNo+"','"+modifiedDate+"','"+Strings.getUsername()+"')");
+                        + ""+ place +"','"+jobOrderNo+"','"+offerNo+"','"+modifiedDate+"','"+User.getUsername()+"')");
                     System.out.println("Yeni müşteri başarıyla eklendi");
-                    return true;
+                    System.out.println(result);
+                    if(result==1){
+                        System.out.println("burda");
+                        return true;                       
+                    }else{
+                        return false;
+                    }
                 } catch (Exception ex){
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -192,7 +202,7 @@ public class database {
                 try {
                     result = stmt.executeUpdate("INSERT INTO project_names(name,"
                         + " addition_date, added_by) VALUES ('" + test + "',"
-                        + "'"+modifiedDate+"','"+Strings.getUsername()+"')");
+                        + "'"+modifiedDate+"','"+User.getUsername()+"')");
                     System.out.println("Yeni test başarıyla eklendi");
                     return true;
                 } catch (Exception ex){
@@ -204,7 +214,7 @@ public class database {
                 try {
                     result = stmt.executeUpdate("INSERT INTO surface_condition(name,"
                         + " addition_date, added_by) VALUES ('" + surface + "',"
-                        + "'"+modifiedDate+"','"+Strings.getUsername()+"')");
+                        + "'"+modifiedDate+"','"+User.getUsername()+"')");
                     System.out.println("Yeni yüzey durumu başarıyla eklendi");
                     return true;
                 } catch (Exception ex){
@@ -216,20 +226,20 @@ public class database {
                 resultSet = stmt.executeQuery("SELECT * FROM users WHERE id = "+ id +"");
                 
                 while(resultSet.next()){
-                    Strings.setDb_username((String) resultSet.getString("username"));
-                    Strings.setDb_name((String) resultSet.getString("name"));
-                    Strings.setDb_surname((String) resultSet.getString("surname"));
-                    Strings.setDb_level((String) resultSet.getString("level"));
-                    Strings.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
+                    User.setDb_username((String) resultSet.getString("username"));
+                    User.setDb_name((String) resultSet.getString("name"));
+                    User.setDb_surname((String) resultSet.getString("surname"));
+                    User.setDb_level((String) resultSet.getString("level"));
+                    User.setDb_signature_expiry_date((String) resultSet.getString("signature_expiry_date"));
                 }
                 return true;
             }else if(type=="finduser2"){        //profil ekranı için
-                resultSet = stmt.executeQuery("SELECT * FROM users WHERE username ='"+ Strings.getUsername() +"'");
+                resultSet = stmt.executeQuery("SELECT * FROM users WHERE username ='"+ User.getUsername() +"'");
                 
                 while(resultSet.next()){
-                    Strings.setDb_User_id((String) resultSet.getString("id"));
-                    Strings.setDb_name((String) resultSet.getString("name"));
-                    Strings.setDb_surname((String) resultSet.getString("surname"));
+                    User.setDb_User_id((String) resultSet.getString("id"));
+                    User.setDb_name((String) resultSet.getString("name"));
+                    User.setDb_surname((String) resultSet.getString("surname"));
                 }
                 return true;
             }else if(type=="findCustomer"){
@@ -238,10 +248,10 @@ public class database {
                 
                 while(resultSet.next()){
                     
-                    Strings.setDb_cus_name((String) resultSet.getString("name"));
-                    Strings.setDb_cus_place((String) resultSet.getString("place"));
-                    Strings.setDb_cus_job((String) resultSet.getString("job_order_no,"));
-                    Strings.setDb_cus_offer((String) resultSet.getString("offer_no"));
+                    Customer.setDb_cus_name((String) resultSet.getString("name"));
+                    Customer.setDb_cus_place((String) resultSet.getString("place"));
+                    Customer.setDb_cus_job((String) resultSet.getString("job_order_no"));
+                    Customer.setDb_cus_offer((String) resultSet.getString("offer_no"));
                 }
                 return true;
             }else if(type=="findSurface"){
@@ -249,7 +259,7 @@ public class database {
                 resultSet = stmt.executeQuery("SELECT * FROM surface_condition WHERE id = "+ id +"");
                 
                 while(resultSet.next()){
-                    Strings.setDb_surf_name((String) resultSet.getString("name"));
+                    Surface.setDb_surf_name((String) resultSet.getString("name"));
                 }
                 return true;
             }else if(type=="findEqui"){
@@ -259,7 +269,7 @@ public class database {
                 resultSet = stmt.executeQuery("SELECT * FROM project_names WHERE id = "+ id +"");
                 
                 while(resultSet.next()){
-                    Strings.setDb_test_name((String) resultSet.getString("name"));
+                    Test.setDb_test_name((String) resultSet.getString("name"));
                 }
                 return true;                              
             }else if(type=="updateUser"){
@@ -272,8 +282,8 @@ public class database {
                         result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
                                 + " name = '" + name + "' , surname = '"+surname+"' ,"
                                 + " pass = '"+pass+"', addition_date = '"+modifiedDate+"',"
-                                + " added_by = '"+Strings.getUsername()+"' "
-                                + "WHERE id = '"+Strings.getDb_User_id()+"'");
+                                + " added_by = '"+User.getUsername()+"' "
+                                + "WHERE id = '"+User.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
@@ -288,8 +298,8 @@ public class database {
                         result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
                                 + " name = '" + name + "' , surname = '"+surname+"' ,"
                                 + " addition_date = '"+modifiedDate+"',"
-                                + " added_by = '"+Strings.getUsername()+"' "
-                                + "WHERE id = '"+Strings.getDb_User_id()+"'");
+                                + " added_by = '"+User.getUsername()+"' "
+                                + "WHERE id = '"+User.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
@@ -306,7 +316,7 @@ public class database {
                         result = stmt.executeUpdate("UPDATE users SET username = '" + username + "',"
                                 + " name = '" + name + "' , surname = '"+surname+"' , level = '"+level+"',"
                                 + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"', "
-                                + " added_by ='"+Strings.getUsername()+"' WHERE id = '"+Strings.getDb_id()+"'");
+                                + " added_by ='"+User.getUsername()+"' WHERE id = '"+User.getDb_id()+"'");
                         System.out.println("Kullanıcı bilgileri güncellendi");
                         return true;                         
                     } catch (Exception ex) {
@@ -318,8 +328,8 @@ public class database {
                 String name = params[1];
                 try {
                     result = stmt.executeUpdate("UPDATE surface_condition SET name = '" + name + "'"
-                            + ", addition_date = '"+modifiedDate+"', added_by = '"+Strings.getUsername()+"'"
-                            + "WHERE id = '"+Strings.getDb_surId()+"'");
+                            + ", addition_date = '"+modifiedDate+"', added_by = '"+User.getUsername()+"'"
+                            + "WHERE id = '"+Surface.getDb_surId()+"'");
                     System.out.println("Yüzey durumu bilgileri güncellendi");
                     return true;                         
                 } catch (Exception ex) {
@@ -330,8 +340,8 @@ public class database {
                 String name = params[1];
                 try {
                     result = stmt.executeUpdate("UPDATE project_names SET name = '" + name + "'"
-                            + ", addition_date = '"+modifiedDate+"', added_by = '"+Strings.getUsername()+"'"
-                            + "WHERE id = '"+Strings.getDb_testId()+"'");
+                            + ", addition_date = '"+modifiedDate+"', added_by = '"+User.getUsername()+"'"
+                            + "WHERE id = '"+Test.getDb_testId()+"'");
                     System.out.println("Test bilgileri güncellendi");
                     return true;                         
                 } catch (Exception ex) {
@@ -339,17 +349,18 @@ public class database {
                         return false;
                 }
             }else if(type=="updateCustomer"){
-                String name = params[2];
-                String place = params[3];
-                String job = params[4];
-                String offer = params[5]; 
+                System.out.println("burrdadadsafadghgfhjh");
+                String name = params[1];
+                String place = params[2];
+                String job = params[3];
+                String offer = params[4]; 
                 try {
                     result = stmt.executeUpdate("UPDATE customer SET name = '" + name + "',"
                             + " place = '" + place + "' , job_order_no = '"+job+"' ,"
                             + " offer_no = '"+offer+"', addition_date = '"+modifiedDate+"',"
-                            + " added_by = '"+Strings.getUsername()+"' "
-                            + "WHERE id = '"+Strings.getDb_customerId()+"'");
-                    System.out.println("kullanıcı bilgileri güncellendi");
+                            + " added_by = '"+User.getUsername()+"' "
+                            + "WHERE id = '"+Customer.getDb_customerId()+"'");
+                    System.out.println("Müşteri bilgileri güncellendi");
                     return true;                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
@@ -391,16 +402,22 @@ public class database {
                     return false;
                 }
             }else if(type=="customerDelete"){
-/////////////////////                
+                String deletedId =params[1];
+                try {
+                    result = stmt.executeUpdate("DELETE FROM customer "
+                            + "WHERE id = '"+deletedId+"'");
+                    System.out.println("Müşteri Silindi");
+                    return true;                        
+                } catch (Exception ex) {
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;
+                }
             }else if(type=="equiDelete"){
 /////////////////////              
             }
             
-        
             con.close();
-            
-            
-            
+               
             } catch (ClassNotFoundException e) {
                 System.out.println("Database connection error:" + e);
             } catch (SQLException e) {

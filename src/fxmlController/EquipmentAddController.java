@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Equi;
 import com.BIN.Strings;
 import com.database.database;
 import java.net.URL;
@@ -52,7 +53,7 @@ public class EquipmentAddController extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SelectEqui.getItems().setAll(Strings.getEqui()); 
+        SelectEqui.getItems().setAll(Equi.getEqui()); 
     }
     
     @FXML

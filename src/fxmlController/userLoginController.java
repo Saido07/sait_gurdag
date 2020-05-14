@@ -1,6 +1,6 @@
 package fxmlController;
 
-import com.BIN.Strings;
+import com.BIN.User;
 import com.database.database;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,9 +38,9 @@ public class userLoginController implements Initializable {
         
         login_btn.setOnAction(a ->{
             boolean isTrue = false;
-            Strings.setUsername((String) this.user_name.getText().toString());
+            User.setUsername((String) this.user_name.getText().toString());
             try {
-                isTrue = db.doInBackground("login", Strings.getUsername(), p.password_hash((String) this.password.getText().toString()));
+                isTrue = db.doInBackground("login", User.getUsername(), p.password_hash((String) this.password.getText().toString()));
             } catch (Exception ex) {
                 Logger.getLogger(userLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
