@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.database;
 
 import com.BIN.Customer;
@@ -123,7 +118,7 @@ public class database {
                 }
             }else if(type=="getTest"){
                 Test.getTest().removeAllElements();
-                Test.setTest("Yeni Test");
+                Test.setTest("Yeni Test Türü");
                 resultSet = stmt.executeQuery("SELECT * FROM project_names");
                 while(resultSet.next()){
                     int i=0;
@@ -164,7 +159,6 @@ public class database {
                     //standart soyismi şifresi olarak geliyor sonra kullanıcı kendi ayarlayabilecek.
                     System.out.println(result);
                     if(result==1){
-                        System.out.println("burda");
                         return true;                       
                     }else{
                         return false;
@@ -196,7 +190,12 @@ public class database {
                     return false;
                 }
             }else if(type=="addNewEqui"){
-//doldurulacak///////                  
+//doldurulacak///////  
+                if(result==1){
+                    return true;                       
+                }else{
+                    return false;
+                }
             }else if(type=="addNewTest"){
                 String test = params[1];
                 try {
@@ -204,7 +203,11 @@ public class database {
                         + " addition_date, added_by) VALUES ('" + test + "',"
                         + "'"+modifiedDate+"','"+User.getUsername()+"')");
                     System.out.println("Yeni test başarıyla eklendi");
-                    return true;
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }
                 } catch (Exception ex){
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -216,7 +219,11 @@ public class database {
                         + " addition_date, added_by) VALUES ('" + surface + "',"
                         + "'"+modifiedDate+"','"+User.getUsername()+"')");
                     System.out.println("Yeni yüzey durumu başarıyla eklendi");
-                    return true;
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }
                 } catch (Exception ex){
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -285,7 +292,11 @@ public class database {
                                 + " added_by = '"+User.getUsername()+"' "
                                 + "WHERE id = '"+User.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
-                        return true;                         
+                        if(result==1){
+                            return true;                       
+                        }else{
+                            return false;
+                        }                        
                     } catch (Exception ex) {
                             Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                             return false;
@@ -301,10 +312,14 @@ public class database {
                                 + " added_by = '"+User.getUsername()+"' "
                                 + "WHERE id = '"+User.getDb_User_id()+"'");
                         System.out.println("kullanıcı bilgileri güncellendi");
-                        return true;                         
-                    } catch (Exception ex) {
-                            Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        if(result==1){
+                            return true;                       
+                        }else{
                             return false;
+                        }                         
+                    } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
                     }
                 }else{
                     String username = params[1];
@@ -318,7 +333,11 @@ public class database {
                                 + " signature_expiry_date = '"+sign+"', addition_date = '"+modifiedDate+"', "
                                 + " added_by ='"+User.getUsername()+"' WHERE id = '"+User.getDb_id()+"'");
                         System.out.println("Kullanıcı bilgileri güncellendi");
-                        return true;                         
+                        if(result==1){
+                            return true;                       
+                        }else{
+                            return false;
+                        }                       
                     } catch (Exception ex) {
                             Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                             return false;
@@ -331,7 +350,11 @@ public class database {
                             + ", addition_date = '"+modifiedDate+"', added_by = '"+User.getUsername()+"'"
                             + "WHERE id = '"+Surface.getDb_surId()+"'");
                     System.out.println("Yüzey durumu bilgileri güncellendi");
-                    return true;                         
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -343,13 +366,16 @@ public class database {
                             + ", addition_date = '"+modifiedDate+"', added_by = '"+User.getUsername()+"'"
                             + "WHERE id = '"+Test.getDb_testId()+"'");
                     System.out.println("Test bilgileri güncellendi");
-                    return true;                         
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                 }
             }else if(type=="updateCustomer"){
-                System.out.println("burrdadadsafadghgfhjh");
                 String name = params[1];
                 String place = params[2];
                 String job = params[3];
@@ -361,7 +387,11 @@ public class database {
                             + " added_by = '"+User.getUsername()+"' "
                             + "WHERE id = '"+Customer.getDb_customerId()+"'");
                     System.out.println("Müşteri bilgileri güncellendi");
-                    return true;                         
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                         
                 } catch (Exception ex) {
                         Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -374,7 +404,11 @@ public class database {
                     result = stmt.executeUpdate("DELETE FROM users "
                             + "WHERE id = '"+deletedId+"'");
                     System.out.println("Kullanıcı Silindi");
-                    return true;                        
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                        
                 } catch (Exception ex) {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -385,7 +419,11 @@ public class database {
                     result = stmt.executeUpdate("DELETE FROM surface_condition "
                             + "WHERE id = '"+deletedId+"'");
                     System.out.println("Yüzey Durumu Silindi");
-                    return true;                        
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                        
                 } catch (Exception ex) {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -396,7 +434,11 @@ public class database {
                     result = stmt.executeUpdate("DELETE FROM project_names "
                             + "WHERE id = '"+deletedId+"'");
                     System.out.println("Test Türü Silindi");
-                    return true;                        
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                        
                 } catch (Exception ex) {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
@@ -407,13 +449,22 @@ public class database {
                     result = stmt.executeUpdate("DELETE FROM customer "
                             + "WHERE id = '"+deletedId+"'");
                     System.out.println("Müşteri Silindi");
-                    return true;                        
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                      
                 } catch (Exception ex) {
                     Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
                 }
             }else if(type=="equiDelete"){
-/////////////////////              
+/////////////////////  
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }
             }
             
             con.close();

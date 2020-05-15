@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fxmlController;
 
 import com.BIN.Config;
@@ -63,9 +58,9 @@ public class SurfaceConAddController extends AnchorPane{
                 try {
                     db.doInBackground("findSurface", Surface.getDb_surId());
                 } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 surface.setText(Surface.getDb_surf_name());
@@ -91,9 +86,9 @@ public class SurfaceConAddController extends AnchorPane{
                         refreshSelectSurface();
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }
             }
@@ -109,12 +104,12 @@ public class SurfaceConAddController extends AnchorPane{
                     String surface = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
                     surface = surface.substring(surface.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(surface + " Adlı Kullanıcı Silindi");
+                    resultTxt.setText(surface + " Adlı Yüzüy Durumu Silindi");
                     refreshSelectSurface();
                 } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -125,9 +120,9 @@ public class SurfaceConAddController extends AnchorPane{
         try {
             result=db.doInBackground("addNewSurface", surface.getText().toString());
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(result==false){
             resultTxt.setStyle("-fx-text-fill: red;");
@@ -144,9 +139,9 @@ public class SurfaceConAddController extends AnchorPane{
         try {
             db.doInBackground("getSurface");
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         SelectSurface.getItems().setAll(Surface.getSurface());
         

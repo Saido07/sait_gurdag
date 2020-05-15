@@ -38,9 +38,9 @@ public class TestAddController extends AnchorPane{
         try {
             db.doInBackground("getTest");
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         SelectTest.getItems().setAll(Test.getTest());
     }
@@ -48,7 +48,104 @@ public class TestAddController extends AnchorPane{
     @FXML
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+        SelectTest.setOnAction(a ->{                     //combo box a tıklama fonk.               
+            if(SelectTest.isShowing()==true){
+                Test.setDb_testId(SelectTest.getValue().toString().
+                        substring(0, SelectTest.getValue().toString().indexOf(" "))); // seçilen testin id'sini alıyor.
+            } 
+            if(Test.getDb_testId().equals("Yeni")){
+                test.clear();
+            }else{
+                try {
+                    db.doInBackground("findTest", Test.getDb_testId());
+                } catch (SQLException ex) {
+                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                test.setText(Test.getDb_test_name());
+               
+            }
+        });
         
+        save.setOnAction(b -> {                              //kaydetme tuşu fonk.
+            if(Test.getDb_testId()==null){
+                addTest();
+            }else if(SelectTest.getValue().toString().equals("Yeni Test Türü")){                
+                addTest();
+            }else{
+                if(Test.getDb_testId()!=null){
+                try {
+                    result=db.doInBackground("updateTest", test.getText().toString());
+                    if(result==false){
+                        resultTxt.setStyle("-fx-text-fill: red;");
+                        resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                    }else{
+                        resultTxt.setStyle("-fx-text-fill: black;");
+                        resultTxt.setText("Test Türü Bilgileri Başarıyla Güncellendi");
+                        refreshSelectTest();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+            }
+        });
+        
+        testDelete.setOnAction(n ->{                         //silme tuşu fonk.
+            if(Test.getDb_testId().equals("Yeni")){
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Hatalı İşlem");
+            }else{
+                try {
+                    db.doInBackground("testDelete", Test.getDb_testId());
+                    String test = SelectTest.getValue().toString().substring(SelectTest.getValue().toString().indexOf("|"));
+                    test = test.substring(test.indexOf(" "));
+                    resultTxt.setStyle("-fx-text-fill: black;");
+                    resultTxt.setText(test + " Adlı Test Türü Silindi");
+                    refreshSelectTest();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }   
+    
+    public void addTest(){                                   //yeni ekleme fonk.
+        try {
+            result=db.doInBackground("addNewTest", test.getText().toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(result==false){
+            resultTxt.setStyle("-fx-text-fill: red;");
+            resultTxt.setText("Hatalı ya da Eksik Bilgi");
+        }else{
+            resultTxt.setStyle("-fx-text-fill: black;");
+            resultTxt.setText("Test Türü Başarıyla Eklendi");
+            refreshSelectTest();
+        }
+    }
+    
+    private void refreshSelectTest() {                       //yenileme fonk. combo box için
+        try {
+            db.doInBackground("getTest");
+        } catch (SQLException ex) {
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SelectTest.getItems().setAll(Test.getTest());
+        
+    }
+    
+    
     
 }
