@@ -37,8 +37,10 @@ public class database {
             
                 System.out.println("Connecting database...");
                 Class.forName("org.hsqldb.jdbcDriver");
-                String url = "jdbc:hsqldb:file:D:\\Uni\\TMS-II\\II. Dönem\\Inf-202\\Inf_202_Proje\\src\\db_inf202\\";
+                String url = "jdbc:hsqldb:file:" + System.getProperty("user.home") + "\\db_inf202\\;" ;   
+             // String url = "jdbc:hsqldb:res:/db_inf202/";
                 con = DriverManager.getConnection(url, "Sait" , "123");
+                
                 System.out.println("Connection successful");
 
                 Statement stmt = con.createStatement();
@@ -190,10 +192,25 @@ public class database {
                     return false;
                 }
             }else if(type=="addNewEqui"){
-//doldurulacak///////  
-                if(result==1){
-                    return true;                       
-                }else{
+                String name = params[1];
+                String poleDis = params[2];
+                String mag_tech = params[3];
+                String uv_light_intensity_w_m2 = params[4];
+                String distance_of_light  = params[5];
+                String mp_carrier_medium = params[6];
+                try {
+                    result = stmt.executeUpdate("INSERT INTO equipment(name, pole_distance_mm, mag_tech,"
+                        + " uv_light_intensity_w_m2, distance_of_light_mm, mp_carrier_medium, addition_date, added_by) VALUES ('" + name + "','"
+                        + ""+ poleDis +"','"+mag_tech+"','"+uv_light_intensity_w_m2+"','"+distance_of_light+"','"+mp_carrier_medium+"','"+modifiedDate+"','"+User.getUsername()+"')");
+                    System.out.println("Yeni ekipman başarıyla eklendi");
+                    System.out.println(result);
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }
+                } catch (Exception ex){
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
                     return false;
                 }
             }else if(type=="addNewTest"){
@@ -270,7 +287,18 @@ public class database {
                 }
                 return true;
             }else if(type=="findEqui"){
-/////////////////                               
+                String id = params[1];
+                resultSet = stmt.executeQuery("SELECT * FROM equipment WHERE id = "+ id +"");
+                
+                while(resultSet.next()){
+                    Equi.setDb_distanceOfLight((String) resultSet.getString("distance_of_light_mm"));
+                    Equi.setDb_equi_name((String) resultSet.getString("name"));
+                    Equi.setDb_magTech((String) resultSet.getString("mag_tech"));
+                    Equi.setDb_mpTasiyici((String) resultSet.getString("mp_carrier_medium"));
+                    Equi.setDb_poleDistance((String) resultSet.getString("pole_distance_mm"));
+                    Equi.setDb_uvLightInte((String) resultSet.getString("uv_light_intensity_w_m2"));   
+                }
+                return true;
             }else if(type=="findTest"){
                 String id = params[1];
                 resultSet = stmt.executeQuery("SELECT * FROM project_names WHERE id = "+ id +"");
@@ -397,7 +425,31 @@ public class database {
                         return false;
                 }
             }else if(type=="updateEqui"){
-/////////////////////               
+                String name = params[1];
+                String poleDis = params[2];
+                String mag_tech = params[3];
+                String uv_light_intensity_w_m2 = params[4];
+                String distance_of_light  = params[5];
+                String mp_carrier_medium = params[6];
+                try {
+                    result = stmt.executeUpdate("UPDATE equipment SET name = '" + name + "',"
+                            + " pole_distance_mm = '" + poleDis + "' , mag_tech = '"+mag_tech+"' ,"
+                            + " uv_light_intensity_w_m2 = '"+uv_light_intensity_w_m2+"',"
+                            + " distance_of_light_mm = '"+distance_of_light+"',"
+                            + " mp_carrier_medium = '"+mp_carrier_medium+"',"
+                            + " addition_date = '"+modifiedDate+"',"
+                            + " added_by = '"+User.getUsername()+"' "
+                            + "WHERE id = '"+Equi.getDb_equiId()+"'");
+                    System.out.println("Ekipman bilgileri güncellendi");
+                    if(result==1){
+                        return true;                       
+                    }else{
+                        return false;
+                    }                         
+                } catch (Exception ex) {
+                        Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                }
             }else if(type=="userDelete"){
                 String deletedId =params[1];
                 try {
@@ -459,12 +511,20 @@ public class database {
                     return false;
                 }
             }else if(type=="equiDelete"){
-/////////////////////  
+                String deletedId =params[1];
+                try {
+                    result = stmt.executeUpdate("DELETE FROM equipment "
+                            + "WHERE id = '"+deletedId+"'");
+                    System.out.println("Ekipman Silindi");
                     if(result==1){
                         return true;                       
                     }else{
                         return false;
-                    }
+                    }                      
+                } catch (Exception ex) {
+                    Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;
+                }
             }
             
             con.close();

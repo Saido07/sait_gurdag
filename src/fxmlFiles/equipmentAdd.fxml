@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="fonRight" stylesheets="@../com/BIN/Style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="fonRight" stylesheets="@../com/BIN/Style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="107.0" layoutY="132.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -50,7 +50,7 @@
             <TextField fx:id="magTech" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <TextField fx:id="uvLightInte" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <TextField fx:id="distanceOfLight" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <ComboBox fx:id="mpCarrierMedium" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="MP Taşıyıcı Ortamlar" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <TextField fx:id="mpTasiyici" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <Button fx:id="save" mnemonicParsing="false" prefWidth="140.0" text="Değişiklikleri Kaydet" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
             <Button fx:id="equiDelete" mnemonicParsing="false" prefWidth="140.0" text="Cihaz Sil" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <Label text="MP Taşıyıcı Ortam :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />

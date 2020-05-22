@@ -1,3 +1,4 @@
+
 package fxmlController;
 
 import com.BIN.Config;
@@ -20,7 +21,7 @@ public class CustomerAddController extends AnchorPane {
 
 
     @FXML
-    private ComboBox<?> SelectCustomer;
+    private ComboBox<String> SelectCustomer;
     @FXML
     private TextField customerName;
     @FXML
