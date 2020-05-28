@@ -44,6 +44,7 @@ public class userStartSceneController implements Initializable{
     SurfaceConAddController sur = new SurfaceConAddController();
     TestAddController test = new TestAddController();
     magneticParticleReportScene2Controller mag2 = new magneticParticleReportScene2Controller();
+    magneticParticleReportScene3Controller mag3 = new magneticParticleReportScene3Controller();
         
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,6 +76,15 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag2);
             
             list.getList().setExpandedPane(list.getTitle2());
+        });
+        
+        mag2.getNext2().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag3);
+            
+            list.getList().setExpandedPane(list.getTitle3());
         });
         
         //startOptions ekranındaki tuşlar

@@ -118,6 +118,14 @@ public class database {
                     Customer.setCustomers((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
+            }else if(type=="getCustomer2"){
+                Customer.getCustomers().removeAllElements();
+                resultSet = stmt.executeQuery("SELECT * FROM customer");
+                while(resultSet.next()){
+                    int i=0;
+                    Customer.setCustomers((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    i++;
+                }
             }else if(type=="getTest"){
                 Test.getTest().removeAllElements();
                 Test.setTest("Yeni Test Türü");
@@ -125,6 +133,14 @@ public class database {
                 while(resultSet.next()){
                     int i=0;
                     Test.setTest((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    i++;
+                }
+            }else if(type=="getTest2"){
+                Test.getTest().removeAllElements();
+                resultSet = stmt.executeQuery("SELECT * FROM project_names");
+                while(resultSet.next()){
+                    int i=0;
+                    Test.setTest((String)" " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getSurface"){
@@ -136,9 +152,25 @@ public class database {
                     Surface.setSurface((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
+            }else if(type=="getSurface2"){
+                Surface.getSurface().removeAllElements();
+                resultSet = stmt.executeQuery("SELECT * FROM surface_condition");
+                while(resultSet.next()){
+                    int i=0;
+                    Surface.setSurface((String)" " + resultSet.getString("name"));
+                    i++;
+                }
             }else if(type=="getEqui"){
                 Equi.getEqui().removeAllElements();
                 Equi.setEqui("Yeni Ekipman");
+                resultSet = stmt.executeQuery("SELECT * FROM equipment");
+                while(resultSet.next()){
+                    int i=0;
+                    Equi.setEqui((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    i++;
+                } 
+            }else if(type=="getEqui2"){
+                Equi.getEqui().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM equipment");
                 while(resultSet.next()){
                     int i=0;

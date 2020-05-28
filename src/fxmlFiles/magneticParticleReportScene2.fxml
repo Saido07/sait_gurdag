@@ -38,9 +38,9 @@
           <RowConstraints minHeight="40.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Kutup Mesafesi(mm)" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Cihaz" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Kutup Mesafesi(mm)" GridPane.columnIndex="1" GridPane.rowIndex="2">
             </Label>
-            <Label text="Cihaz" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="MP Taşıyıcı Ortam" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Mıknatıslama Tekniği" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="UV Işık Şiddeti(W/m2)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -66,10 +66,10 @@
                   <Label text="Tarih / No " />
                </children>
             </VBox>
-            <TextField fx:id="kutupMesafe" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="cihaz" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="mpTasiOrt" promptText="denemeYer" text="\@deneme" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextField fx:id="miklatisTek" text="sdad" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ComboBox fx:id="cihaz" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="kutupMesafe" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="mpTasiOrt" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="miklatisTek" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="uvIsikSid" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <TextField fx:id="IsikMesa" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <TextField fx:id="muaBol" GridPane.columnIndex="2" GridPane.rowIndex="7" />

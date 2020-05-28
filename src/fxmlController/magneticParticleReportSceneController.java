@@ -1,8 +1,17 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Customer;
+import com.BIN.Surface;
+import com.BIN.Test;
+import com.database.database;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,13 +19,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class magneticParticleReportSceneController extends AnchorPane {
+    
+    database db = new database();
+    boolean result;
+    
 
     @FXML
     private TextField testYeri;
     @FXML
-    private ComboBox<?> musteriler;
+    private ComboBox<String> musteriler;
     @FXML
-    private ComboBox<?> projeler;
+    private ComboBox<String> projeler;
     @FXML
     private TextField degerStand;
     @FXML
@@ -28,33 +41,93 @@ public class magneticParticleReportSceneController extends AnchorPane {
     @FXML
     private TextField sayfaNo;
     @FXML
+    private TextField muayeneStandart;
+    @FXML
     private Button next;
     @FXML
-    private ComboBox<?> yüzeyDurum;
+    private ComboBox<String> yuzeyDurum;
     @FXML
-    private ComboBox<?> MuaAsa;
+    private ComboBox<String> MuaAsa;
     @FXML
     private TextField raporNo;
     @FXML
     private TextField raporTarih;
     @FXML
-    private ComboBox<?> isEmriNo;
+    private TextField isEmriNo;
     @FXML
-    private ComboBox<?> teklifNo;
+    private TextField teklifNo;
 
     public Button getNext() {
         return next;
     }
-    
+
+    public ComboBox<String> getMusteriler() {
+        return musteriler;
+    }
 
     public magneticParticleReportSceneController(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene.fxml");
+        
+        Date today = new Date();
+        today.getTime();
+        String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(today);
+        
+
+        try {
+            db.doInBackground("getCustomer2");
+            db.doInBackground("getTest2");
+            db.doInBackground("getSurface2");
+        } catch (SQLException ex) {
+            Logger.getLogger(magneticParticleReportSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(magneticParticleReportSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        MuaAsa.getItems().setAll("Untreated");
+        yuzeyDurum.getItems().setAll(Surface.getSurface());
+        musteriler.getItems().setAll(Customer.getCustomers());  
+        projeler.getItems().setAll(Test.getTest());
+        muayeneStandart.setText("TS EN ISO 17638");
+        degerStand.setText("TS EN ISO 23278 Class B");
+        muaPro.setText("P-101-004");
+        muaKap.setText("%100");
+        resimNo.setText(" - ");
+        sayfaNo.setText("1");
+        raporTarih.setText(modifiedDate);
+        
+        
     }
     
     
     @FXML
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+        
+        musteriler.setOnAction(a ->{   
+            if(musteriler.isShowing()==true){
+                Customer.setDb_customerId(musteriler.getValue().toString().
+                        substring(0, musteriler.getValue().toString().indexOf(" "))); // seçilen müşterinin id'sini alıyor.
+            }
+            if(Customer.getDb_customerId().equals("Yeni")){
+                testYeri.clear();
+                isEmriNo.clear();
+                teklifNo.clear();
+            
+            }else{
+                try {
+                    db.doInBackground("findCustomer", Customer.getDb_customerId());
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                testYeri.setText(Customer.getDb_cus_place());
+                isEmriNo.setText(Customer.getDb_cus_job());
+                teklifNo.setText(Customer.getDb_cus_offer());
+            }
+        });
         
     }    
     

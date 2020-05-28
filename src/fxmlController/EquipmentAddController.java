@@ -3,26 +3,17 @@ package fxmlController;
 import com.BIN.Config;
 import com.BIN.Equi;
 import com.BIN.Equi;
-import com.BIN.Strings;
 import com.database.database;
-import java.awt.Color;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javax.swing.plaf.ColorUIResource;
 
 public class EquipmentAddController extends AnchorPane {
 
@@ -61,9 +52,9 @@ public class EquipmentAddController extends AnchorPane {
         try {
             db.doInBackground("getEqui");
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EquipmentAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EquipmentAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         SelectEqui.getItems().setAll(Equi.getEqui()); 
        
@@ -76,7 +67,7 @@ public class EquipmentAddController extends AnchorPane {
         SelectEqui.setOnAction(a ->{                          //combobox fonk.
             if(SelectEqui.isShowing()==true){
                 Equi.setDb_equiId(SelectEqui.getValue().toString().
-                        substring(0, SelectEqui.getValue().toString().indexOf(" "))); // seçilen müşterinin id'sini alıyor.
+                        substring(0, SelectEqui.getValue().toString().indexOf(" "))); // seçilen cihazın id'sini alıyor.
             }
         
         if(Equi.getDb_equiId().equals("Yeni")){
