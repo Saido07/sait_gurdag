@@ -71,6 +71,26 @@ public class magneticParticleReportListController extends AnchorPane {
     @FXML
     private Button back;
 
+    public ImageView getImaP1() {
+        return imaP1;
+    }
+
+    public ImageView getImaP2() {
+        return imaP2;
+    }
+
+    public ImageView getImaP3() {
+        return imaP3;
+    }
+
+    public ImageView getImaP4() {
+        return imaP4;
+    }
+
+    public ImageView getImaP5() {
+        return imaP5;
+    }
+    
     //butonların get fonksiyonları
     
     public Button getBack() {
@@ -134,8 +154,20 @@ public class magneticParticleReportListController extends AnchorPane {
         "Muayene Bölgesi","Akım Tipi","Luxmetre/Işık Şiddeti","Muayene Ortamı","Mıknatıs Giderimi","Isıl İşlem",
         "Yüzey Sıcaklığı","Muayene Bölg. Alan Şid.","Yüzey","Işık Cihazı Tanımı","Kaldırma Testi Tarih/No");
         
+        ObservableList<String> items3 =FXCollections.observableArrayList (      //muayene bilgileri
+        "Kaynak Yeri","Standarttan Sapmalar","Muayene Tarihleri","Açıklamalar ve Ekler");
+        
+        ObservableList<String> items4 =FXCollections.observableArrayList (      //muayene sonuçları
+        "Kaynak Tipi","Kaynak Yeri","Sonuç");
+        
+        ObservableList<String> items5 =FXCollections.observableArrayList (      //personel bilgileri
+        "Operatör","Değerlendiren","Onay","Müşteri");
+        
         pane1.setItems(items1);
         pane2.setItems(items2);
+        pane3.setItems(items3);
+        pane4.setItems(items4);
+        pane5.setItems(items5);
     }
     
     

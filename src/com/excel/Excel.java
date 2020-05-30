@@ -20,7 +20,7 @@ public class Excel {
     private static final String FILE_NAME = "FR_02_MT.xlsx";  //kullandığı dosya, bu dosya üzerinde değişiklik yapmıyor, değişiklik yapınca alttaki konuma kaydediyor.
     private static final String newFileName = System.getProperty("user.home") + "/Desktop/" + dosyaAdi + ".xlsx"; //yeni oluşturup kaydettiği dosya
     
-    public static void main(int satir, int sutun, String y) throws IOException {  // satir hangi satıra, sütün hangi sütuna ve y de ne yazacağını belirliyor.
+    public static void doInBackground(int satir, int sutun, String y) throws IOException {  // satir hangi satıra, sütün hangi sütuna ve y de ne yazacağını belirliyor.
         FileInputStream inputStream = new FileInputStream(new File(FILE_NAME));
         Workbook workbook = WorkbookFactory.create(inputStream);
         Sheet sheet = workbook.getSheetAt(0);

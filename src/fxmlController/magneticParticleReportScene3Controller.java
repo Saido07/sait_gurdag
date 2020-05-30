@@ -41,6 +41,26 @@ public class magneticParticleReportScene3Controller extends AnchorPane {
         return next;
     }
 
+    public TextField getAciklama() {
+        return Aciklama;
+    }
+
+    public CheckBox getC1() {
+        return c1;
+    }
+
+    public CheckBox getC2() {
+        return c2;
+    }
+
+    public TextField getMuaTarih() {
+        return muaTarih;
+    }
+
+    public TextField getStandart() {
+        return standart;
+    }
+    
     public magneticParticleReportScene3Controller(){
         Date today = new Date();
         today.getTime();

@@ -2,8 +2,10 @@ package fxmlController;
 
 import com.BIN.Config;
 import com.BIN.Customer;
+import com.BIN.Strings;
 import com.BIN.Surface;
 import com.BIN.Test;
+import com.BIN.User;
 import com.database.database;
 import java.net.URL;
 import java.sql.SQLException;
@@ -57,6 +59,63 @@ public class magneticParticleReportSceneController extends AnchorPane {
     @FXML
     private TextField teklifNo;
 
+    public ComboBox<String> getYuzeyDurum() {
+        return yuzeyDurum;
+    }
+
+    public TextField getIsEmriNo() {
+        return isEmriNo;
+    }
+
+    public TextField getTeklifNo() {
+        return teklifNo;
+    }
+
+    public TextField getTestYeri() {
+        return testYeri;
+    }
+
+    public TextField getRaporNo() {
+        return raporNo;
+    }
+
+    public TextField getRaporTarih() {
+        return raporTarih;
+    }
+
+    public TextField getResimNo() {
+        return resimNo;
+    }
+
+    public ComboBox<String> getMuaAsa() {
+        return MuaAsa;
+    }
+
+    public TextField getMuaKap() {
+        return muaKap;
+    }
+
+    public TextField getMuaPro() {
+        return muaPro;
+    }
+
+    public TextField getSayfaNo() {
+        return sayfaNo;
+    }
+
+    public ComboBox<String> getProjeler() {
+        return projeler;
+    }
+
+    public TextField getMuayeneStandart() {
+        return muayeneStandart;
+    }
+
+    public TextField getDegerStand() {
+        return degerStand;
+    }
+    
+    
     public Button getNext() {
         return next;
     }
@@ -101,9 +160,27 @@ public class magneticParticleReportSceneController extends AnchorPane {
     
     @FXML
     public void initialize() {
-        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);                                                          //çalışmıyorrrrrrrrrr
         
-        musteriler.setOnAction(a ->{   
+        
+//        if(MuaAsa.getValue().isEmpty() && yuzeyDurum.getValue().isEmpty() && 
+//        musteriler.getValue().isEmpty() && projeler.getValue().isEmpty() &&
+//            muayeneStandart.getText().isEmpty() && degerStand.getText().isEmpty() &&
+//                muaPro.getText().isEmpty() && muaKap.getText().isEmpty() && resimNo.getText().isEmpty() &&
+//                    sayfaNo.getText().isEmpty() && raporTarih.getText().isEmpty() && testYeri.getText().isEmpty() &&
+//                        raporNo.getText().isEmpty() && isEmriNo.getText().isEmpty() && teklifNo.getText().isEmpty()){
+//
+//            Strings.setOkey1(true);
+//            System.out.println("burada2");
+//
+//        }else{
+//            Strings.setOkey1(false);
+//            System.out.println("burada3");
+//        } 
+
+        
+        
+        musteriler.setOnAction(a ->{  
             if(musteriler.isShowing()==true){
                 Customer.setDb_customerId(musteriler.getValue().toString().
                         substring(0, musteriler.getValue().toString().indexOf(" "))); // seçilen müşterinin id'sini alıyor.
@@ -126,6 +203,7 @@ public class magneticParticleReportSceneController extends AnchorPane {
                 testYeri.setText(Customer.getDb_cus_place());
                 isEmriNo.setText(Customer.getDb_cus_job());
                 teklifNo.setText(Customer.getDb_cus_offer());
+                
             }
         });
         

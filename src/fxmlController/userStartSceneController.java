@@ -1,5 +1,6 @@
 package fxmlController;
 
+import com.BIN.Strings;
 import com.BIN.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -8,11 +9,12 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 
 
 public class userStartSceneController implements Initializable{
     
-
+    Image imageY = new Image("/images/icons/yCheck.png");
 
     @FXML
     private AnchorPane left;
@@ -45,6 +47,8 @@ public class userStartSceneController implements Initializable{
     TestAddController test = new TestAddController();
     magneticParticleReportScene2Controller mag2 = new magneticParticleReportScene2Controller();
     magneticParticleReportScene3Controller mag3 = new magneticParticleReportScene3Controller();
+    magneticParticleReportScene4Controller mag4 = new magneticParticleReportScene4Controller();
+    magneticParticleReportScene5Controller mag5 = new magneticParticleReportScene5Controller();
         
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +80,10 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag2);
             
             list.getList().setExpandedPane(list.getTitle2());
+            
+            if(Strings.getOkey1()){
+                list.getImaP1().setImage(imageY);
+            }
         });
         
         mag2.getNext2().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
@@ -85,6 +93,24 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag3);
             
             list.getList().setExpandedPane(list.getTitle3());
+        });
+        
+        mag3.getNext().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag4);
+            
+            list.getList().setExpandedPane(list.getTitle4());
+        });
+        
+        mag4.getNext().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag5);
+            
+            list.getList().setExpandedPane(list.getTitle5());
         });
         
         //startOptions ekranındaki tuşlar

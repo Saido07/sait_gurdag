@@ -57,12 +57,78 @@ public class magneticParticleReportScene2Controller extends AnchorPane {
     @FXML
     private Button next2;
 
+    public ComboBox<String> getAkimTip() {
+        return akimTip;
+    }
+
+    public ComboBox<String> getCihaz() {
+        return cihaz;
+    }
+
+    public TextField getIsikMesa() {
+        return IsikMesa;
+    }
+
+    public TextField getKutupMesafe() {
+        return kutupMesafe;
+    }
+
+    public TextField getIsilIslem() {
+        return isilIslem;
+    }
+
+    public TextField getMuaBol() {
+        return muaBol;
+    }
+
+    public TextField getMpTasiOrt() {
+        return mpTasiOrt;
+    }
+
+    public TextField getYuzeySicak() {
+        return YuzeySicak;
+    }
+
+    public TextField getYuzey() {
+        return yuzey;
+    }
+
+    public TextField getUvIsikSid() {
+        return uvIsikSid;
+    }
+
+    public TextField getMuaOrt() {
+        return muaOrt;
+    }
+
+    public TextField getIsikCihazTanim() {
+        return isikCihazTanim;
+    }
+
+    public TextField getKaldirmaTestTarihNo() {
+        return KaldirmaTestTarihNo;
+    }
+
+    public TextField getMiklatisTek() {
+        return miklatisTek;
+    }
+
+    public TextField getMuaBolAlanSid() {
+        return MuaBolAlanSid;
+    }
+
+    public TextField getMikGider() {
+        return mikGider;
+    }
+
+    public TextField getLuxIsikSid() {
+        return luxIsikSid;
+    }
+
     public Button getNext2() {
         return next2;
     }
-    
 
-    
     public magneticParticleReportScene2Controller(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene2.fxml");
         
