@@ -16,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
 public class UserAddController extends AnchorPane {
 
     @FXML                               
-    private ComboBox<?> SelectUser;
+    private ComboBox<String> SelectUser;
     @FXML
     private TextField userName;
     @FXML

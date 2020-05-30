@@ -9,7 +9,7 @@ import java.util.Vector;
 
 
 public class Strings {
-
+    private static String MusName="";
     private static String option;                         //userOptions ekranında hangi tuşa tıklandığı için
     private static boolean okey1=false;
     private static boolean okey2=false;
@@ -17,7 +17,14 @@ public class Strings {
     private static boolean okey4=false;
     private static boolean okey5=false;
 
+    public static String getMusName() {
+        return MusName;
+    }
 
+    public static void setMusName(String MusName) {
+        Strings.MusName = MusName;
+    }
+    
     public static void setOkey1(boolean okey1) {
         Strings.okey1 = okey1;
     }

@@ -109,6 +109,16 @@ public class database {
                             +  resultSet.getString("surname"));
                     i++;
                 }
+                
+            }else if(type=="getusers2"){
+                User.getUsers().removeAllElements();
+                resultSet = stmt.executeQuery("SELECT * FROM users");
+                while(resultSet.next()){
+                    int i=0;
+                    User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                            +  resultSet.getString("surname"));
+                    i++;
+                } 
             }else if(type=="getCustomer"){
                 Customer.getCustomers().removeAllElements();
                 Customer.setCustomers("Yeni Müşteri");

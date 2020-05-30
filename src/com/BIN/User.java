@@ -13,7 +13,34 @@ public class User {
     private static String db_surname = "";
     private static String db_level = "";
     private static String db_User_id = "";                 //O anda kullanan kişinin id'si
+    private static String db_Ope_id = "";
+    private static String db_Deger_id = "";
+    private static String db_Onay_id = "";
 
+    public static String getDb_Deger_id() {
+        return db_Deger_id;
+    }
+
+    public static String getDb_Ope_id() {
+        return db_Ope_id;
+    }
+
+    public static String getDb_Onay_id() {
+        return db_Onay_id;
+    }
+
+    public static void setDb_Ope_id(String db_Ope_id) {
+        User.db_Ope_id = db_Ope_id;
+    }
+
+    public static void setDb_Deger_id(String db_Deger_id) {
+        User.db_Deger_id = db_Deger_id;
+    }
+
+    public static void setDb_Onay_id(String db_Onay_id) {
+        User.db_Onay_id = db_Onay_id;
+    }
+    
     public static String getDb_User_id() {
         return db_User_id;
     }

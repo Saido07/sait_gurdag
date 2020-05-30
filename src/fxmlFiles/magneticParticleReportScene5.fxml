@@ -56,7 +56,7 @@
             <TextField fx:id="dTarih" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <TextField fx:id="oLevel" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <TextField fx:id="oTarih" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <TextField fx:id="Customer" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="musName" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <TextField fx:id="CusTarih" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button fx:id="saveExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Kaydet (Excel)" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
          </children>

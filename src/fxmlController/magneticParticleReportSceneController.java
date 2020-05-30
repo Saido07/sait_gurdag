@@ -199,7 +199,8 @@ public class magneticParticleReportSceneController extends AnchorPane {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            
+                Strings.setMusName(musteriler.getValue().toString().
+                        substring(musteriler.getValue().toString().indexOf("| ")).substring(musteriler.getValue().toString().indexOf(" ")));
                 testYeri.setText(Customer.getDb_cus_place());
                 isEmriNo.setText(Customer.getDb_cus_job());
                 teklifNo.setText(Customer.getDb_cus_offer());
