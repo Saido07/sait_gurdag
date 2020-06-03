@@ -5,15 +5,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
-//119 doldurulması gereken alan ve 2 tik atılalık alan var.
+import org.apache.poi.ss.usermodel.Workbook;
         
 public class Excel {
     private static Workbook workbook;
@@ -22,6 +23,7 @@ public class Excel {
     String a=(String) System.getProperty("user.name");
     private static final String FILE_NAME = "FR_02_MT.xlsx";  //kullandığı dosya, bu dosya üzerinde değişiklik yapmıyor, değişiklik yapınca alttaki konuma kaydediyor.
     private static final String newFileName = System.getProperty("user.home") + "/Desktop/" + dosyaAdi + ".xlsx"; //yeni oluşturup kaydettiği dosya
+    private static final String newFileNamePDF = System.getProperty("user.home") + "/Desktop/" + dosyaAdi + ".pdf";
     
     public static void doInBackground() throws IOException {  // satir hangi satıra, sütün hangi sütuna ve y de ne yazacağını belirliyor.
         FileInputStream inputStream = new FileInputStream(new File(FILE_NAME));
@@ -44,17 +46,42 @@ public class Excel {
         }
     }
     
+      public void finallyPDF(){
+        try { 
+            outputStream = new FileOutputStream(newFileName);
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+            System.out.println("Yeni PDF Dosyası Oluşturuldu");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void writeE(int satir, int sutun, String y){
+        
         Sheet sheet = workbook.getSheetAt(0);
         int rowNum=satir;
         int colNum=sutun;
+        CellStyle style = workbook.createCellStyle();
         Row row = sheet.getRow(rowNum);
+        Cell eski = row.getCell(colNum);
+        style.setBorderBottom(eski.getCellStyle().getBorderBottom());
+        style.setBorderLeft(eski.getCellStyle().getBorderLeft());
+        style.setBorderRight(eski.getCellStyle().getBorderRight());
+        style.setBorderTop(eski.getCellStyle().getBorderTop());
+        
         Cell cell = row.createCell(colNum);
+        Font font = workbook.createFont();  
+        font.setFontHeightInPoints((short)9);
+        style.setFont(font);
+        cell.setCellStyle(style);    
         cell.getCellStyle().setVerticalAlignment(VerticalAlignment.CENTER);
         cell.getCellStyle().setAlignment(HorizontalAlignment.CENTER);
         cell.setCellValue((String) y);
     }
-    
     
     
 }
