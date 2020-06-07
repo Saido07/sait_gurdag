@@ -5,7 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.poi.ss.usermodel.BorderStyle;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -46,18 +47,11 @@ public class Excel {
         }
     }
     
-      public void finallyPDF(){
-        try { 
-            outputStream = new FileOutputStream(newFileName);
-            workbook.write(outputStream);
-            workbook.close();
-            outputStream.close();
-            System.out.println("Yeni PDF Dosyası Oluşturuldu");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void finallyPDF(){
+      
+        finallyE();
+        toPDF t = new toPDF();
+        t.toPDF(newFileName, newFileNamePDF);
     }
     
     public void writeE(int satir, int sutun, String y){
@@ -83,5 +77,14 @@ public class Excel {
         cell.setCellValue((String) y);
     }
     
+    private static PrintService findPrintService(String printerName) {
+        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
+        for (PrintService printService : printServices) {
+            if (printService.getName().trim().equals(printerName)) {
+                return printService;
+            }
+        }
+        return null;
+    }
     
 }

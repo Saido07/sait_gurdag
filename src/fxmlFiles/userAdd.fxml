@@ -48,7 +48,7 @@
             <TextField fx:id="name" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="surname" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <TextField fx:id="level" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <TextField fx:id="signature_e_date" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField fx:id="signature_e_date" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="YYYY-AA-GG" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Button fx:id="save" mnemonicParsing="false" prefWidth="140.0" text="Değişiklikleri Kaydet" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
             <Button fx:id="userDelete" mnemonicParsing="false" prefWidth="140.0" text="Kullanıcıyı Sil" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label fx:id="resultTxt" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
