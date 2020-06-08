@@ -506,17 +506,17 @@ public class userStartSceneController implements Initializable{
     }
     
     public void home(){                             //home fonksiyonu
-        backSave();
         left.getChildren().clear();
         right.getChildren().clear();
         right.getChildren().add(nodeRight.get(0));
         left.getChildren().add(nodeLeft.get(0));
+        nodeLeft.clear();
+        nodeRight.clear();
+        i=0;
         la.getBack().setVisible(false);
         lu.getBack().setVisible(false);
         la.getHome().setVisible(false);
         lu.getHome().setVisible(false);
-        list.getHome().setVisible(false);
-        list.getBack().setVisible(false);
     }
     
     public void WriteFon(){
