@@ -23,6 +23,11 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
     
     database db = new database();
     boolean result;
+    int i=1;
+
+    public int getI() {
+        return i;
+    }
     
     @FXML
     private ComboBox<String> opeName;

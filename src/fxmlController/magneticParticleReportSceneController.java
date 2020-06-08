@@ -11,7 +11,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -25,7 +24,6 @@ public class magneticParticleReportSceneController extends AnchorPane {
     
     database db = new database();
     boolean result;
-    
 
     @FXML
     private TextField testYeri;
@@ -163,26 +161,8 @@ public class magneticParticleReportSceneController extends AnchorPane {
     
     @FXML
     public void initialize() {
-        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);                                                          //çalışmıyorrrrrrrrrr
-        
-        
-//        if(MuaAsa.getValue().isEmpty() && yuzeyDurum.getValue().isEmpty() && 
-//        musteriler.getValue().isEmpty() && projeler.getValue().isEmpty() &&
-//            muayeneStandart.getText().isEmpty() && degerStand.getText().isEmpty() &&
-//                muaPro.getText().isEmpty() && muaKap.getText().isEmpty() && resimNo.getText().isEmpty() &&
-//                    sayfaNo.getText().isEmpty() && raporTarih.getText().isEmpty() && testYeri.getText().isEmpty() &&
-//                        raporNo.getText().isEmpty() && isEmriNo.getText().isEmpty() && teklifNo.getText().isEmpty()){
-//
-//            Strings.setOkey1(true);
-//            System.out.println("burada2");
-//
-//        }else{
-//            Strings.setOkey1(false);
-//            System.out.println("burada3");
-//        } 
-
-        
-        
+        Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);                                                         
+              
         musteriler.setOnAction(a ->{  
             if(musteriler.isShowing()==true){
                 Customer.setDb_customerId(musteriler.getValue().toString().

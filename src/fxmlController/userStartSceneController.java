@@ -87,11 +87,12 @@ public class userStartSceneController implements Initializable{
             
             list.getList().setExpandedPane(list.getTitle2());
             
-            if(mag.getMusteriler().getValue().isEmpty()==false && mag.getProjeler().getValue().isEmpty()==false &&
+                
+            if(mag.getMusteriler().getValue() != null && mag.getProjeler().getValue() != null &&
                     mag.getTestYeri().getText().isEmpty()==false && mag.getMuayeneStandart().getText().isEmpty()==false &&
                     mag.getDegerStand().getText().isEmpty()==false && mag.getMuaPro().getText().isEmpty()==false &&
-                    mag.getMuaKap().getText().isEmpty()==false && mag.getYuzeyDurum().getValue().isEmpty()==false &&
-                    mag.getMuaAsa().getValue().isEmpty()==false && mag.getSayfaNo().getText().isEmpty()==false &&
+                    mag.getMuaKap().getText().isEmpty()==false && mag.getYuzeyDurum().getValue() != null &&
+                    mag.getMuaAsa().getValue() != null && mag.getSayfaNo().getText().isEmpty()==false &&
                     mag.getRaporNo().getText().isEmpty()==false && mag.getRaporTarih().getText().isEmpty()==false &&
                     mag.getIsEmriNo().getText().isEmpty()==false && mag.getTeklifNo().getText().isEmpty()==false){
                 list.getImaP1().setImage(imageY);
@@ -111,10 +112,10 @@ public class userStartSceneController implements Initializable{
             
             list.getList().setExpandedPane(list.getTitle3());
             
-            if(mag2.getCihaz().getValue().isEmpty()==false && mag2.getKutupMesafe().getText().isEmpty()==false && 
+            if(mag2.getCihaz().getValue() != null && mag2.getKutupMesafe().getText().isEmpty()==false && 
                     mag2.getMpTasiOrt().getText().isEmpty()==false && mag2.getMiklatisTek().getText().isEmpty()==false &&
                     mag2.getUvIsikSid().getText().isEmpty()==false && mag2.getIsikMesa().getText().isEmpty()==false &&
-                    mag2.getMuaBol().getText().isEmpty()==false && mag2.getAkimTip().getValue().isEmpty()==false &&
+                    mag2.getMuaBol().getText().isEmpty()==false && mag2.getAkimTip().getValue() != null &&
                     mag2.getLuxIsikSid().getText().isEmpty()==false && mag2.getYuzeySicak().getText().isEmpty()==false &&
                     mag2.getMuaBolAlanSid().getText().isEmpty()==false && mag2.getYuzey().getText().isEmpty()==false &&
                     mag2.getIsikCihazTanim().getText().isEmpty()==false && mag2.getKaldirmaTestTarihNo().getText().isEmpty()==false){
@@ -514,6 +515,8 @@ public class userStartSceneController implements Initializable{
         lu.getBack().setVisible(false);
         la.getHome().setVisible(false);
         lu.getHome().setVisible(false);
+        list.getHome().setVisible(false);
+        list.getBack().setVisible(false);
     }
     
     public void WriteFon(){
@@ -627,9 +630,9 @@ public class userStartSceneController implements Initializable{
     
     public boolean mag5Control(){
         if(mag5.getoTarih().getText().isEmpty()==false && mag5.getoLevel().getText().isEmpty()==false && mag5.getdTarih().getText().isEmpty()==false &&
-                mag5.getdLevel().getText().isEmpty()==false && mag5.getOpeName().getValue().isEmpty()==false && mag5.getCusTarih().getText().isEmpty()==false &&
-                mag5.getOpTarih().getText().isEmpty()==false && mag5.getOpLevel().getText().isEmpty()==false && mag5.getOnayName().getValue().isEmpty()==false &&
-                mag5.getDegerName().getValue().isEmpty()==false && mag5.getMusName().getText().isEmpty()==false){
+                mag5.getdLevel().getText().isEmpty()==false && mag5.getOpeName().getValue() != null && mag5.getCusTarih().getText().isEmpty()==false &&
+                mag5.getOpTarih().getText().isEmpty()==false && mag5.getOpLevel().getText().isEmpty()==false && mag5.getOnayName().getValue() != null &&
+                mag5.getDegerName().getValue() != null && mag5.getMusName().getText().isEmpty()==false){
             return true;
         }else{
             return false;
