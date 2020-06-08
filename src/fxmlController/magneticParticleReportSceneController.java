@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class magneticParticleReportSceneController extends AnchorPane {
     
+    
     database db = new database();
     boolean result;
     
@@ -126,6 +127,8 @@ public class magneticParticleReportSceneController extends AnchorPane {
 
     public magneticParticleReportSceneController(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene.fxml");
+        
+        Strings.setList(1);
         
         Date today = new Date();
         today.getTime();

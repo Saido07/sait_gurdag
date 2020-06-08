@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.fxml.FXML;
@@ -67,6 +68,8 @@ public class magneticParticleReportScene3Controller extends AnchorPane {
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(today);
         
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene3.fxml");
+        
+        Strings.setList(3);
         
         Image sekil = new Image("/images/sekil1.png");
         Image sekil2 = new Image("/images/sekil2.png");

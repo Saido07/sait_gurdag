@@ -2,6 +2,7 @@ package fxmlController;
 
 import com.BIN.Strings;
 import com.BIN.User;
+import com.aspose.cells.b.a.b.zk;
 import com.excel.Excel;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 public class userStartSceneController implements Initializable{
     
     Image imageY = new Image("/images/icons/yCheck.png");
+    Image imageN = new Image("/images/icons/gCheck.png");
 
     @FXML
     private AnchorPane left;
@@ -85,9 +87,20 @@ public class userStartSceneController implements Initializable{
             
             list.getList().setExpandedPane(list.getTitle2());
             
-            if(Strings.getOkey1()){
+            if(mag.getMusteriler().getValue().isEmpty()==false && mag.getProjeler().getValue().isEmpty()==false &&
+                    mag.getTestYeri().getText().isEmpty()==false && mag.getMuayeneStandart().getText().isEmpty()==false &&
+                    mag.getDegerStand().getText().isEmpty()==false && mag.getMuaPro().getText().isEmpty()==false &&
+                    mag.getMuaKap().getText().isEmpty()==false && mag.getYuzeyDurum().getValue().isEmpty()==false &&
+                    mag.getMuaAsa().getValue().isEmpty()==false && mag.getSayfaNo().getText().isEmpty()==false &&
+                    mag.getRaporNo().getText().isEmpty()==false && mag.getRaporTarih().getText().isEmpty()==false &&
+                    mag.getIsEmriNo().getText().isEmpty()==false && mag.getTeklifNo().getText().isEmpty()==false){
                 list.getImaP1().setImage(imageY);
+                Strings.setOkey1(true);
+            }else{
+                list.getImaP1().setImage(imageN);
+                Strings.setOkey1(false);
             }
+            
         });
         
         mag2.getNext2().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
@@ -97,6 +110,20 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag3);
             
             list.getList().setExpandedPane(list.getTitle3());
+            
+            if(mag2.getCihaz().getValue().isEmpty()==false && mag2.getKutupMesafe().getText().isEmpty()==false && 
+                    mag2.getMpTasiOrt().getText().isEmpty()==false && mag2.getMiklatisTek().getText().isEmpty()==false &&
+                    mag2.getUvIsikSid().getText().isEmpty()==false && mag2.getIsikMesa().getText().isEmpty()==false &&
+                    mag2.getMuaBol().getText().isEmpty()==false && mag2.getAkimTip().getValue().isEmpty()==false &&
+                    mag2.getLuxIsikSid().getText().isEmpty()==false && mag2.getYuzeySicak().getText().isEmpty()==false &&
+                    mag2.getMuaBolAlanSid().getText().isEmpty()==false && mag2.getYuzey().getText().isEmpty()==false &&
+                    mag2.getIsikCihazTanim().getText().isEmpty()==false && mag2.getKaldirmaTestTarihNo().getText().isEmpty()==false){
+                list.getImaP2().setImage(imageY);
+                Strings.setOkey2(true);
+            }else{
+                list.getImaP2().setImage(imageN);
+                Strings.setOkey2(false);
+            }
         });
         
         mag3.getNext().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
@@ -106,6 +133,15 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag4);
             
             list.getList().setExpandedPane(list.getTitle4());
+            
+            if((mag3.getC1().isSelected() || mag3.getC2().isSelected()) && mag3.getStandart().getText().isEmpty()==false && 
+                    mag3.getMuaTarih().getText().isEmpty()==false){
+                list.getImaP3().setImage(imageY);
+                Strings.setOkey3(true);
+            }else{
+                list.getImaP3().setImage(imageN);
+                Strings.setOkey3(false);
+            }
         });
         
         mag4.getNext().setOnAction(a->{              //mag. raporunda sonraki tuşu fonksiyonu
@@ -113,29 +149,141 @@ public class userStartSceneController implements Initializable{
             
             right.getChildren().clear();
             right.getChildren().add(mag5);
-            
             list.getList().setExpandedPane(list.getTitle5());
             mag5.getMusName().setText(Strings.getMusName());
+            mag5.getError().setVisible(false);
+            mag5.getError2().setVisible(false);
+            
+            boolean bi=false;
+            boolean ik=false;
+            boolean uc=false;
+            boolean dor=false;
+            boolean be=false;
+            
+            if(mag4.getI()>=2){
+                if(mag4.getKaynak1().getText().isEmpty()==false &&
+                mag4.getKontrolU1().getText().isEmpty()==false &&
+                mag4.getKaynakY1().getText().isEmpty()==false &&
+                mag4.getKalinlik1().getText().isEmpty()==false &&
+                mag4.getCap1().getText().isEmpty()==false &&
+                mag4.getSonuc1().getText().isEmpty()==false){
+                    bi=true;
+                }    
+            }
+            if(mag4.getI()>=3){
+                if(mag4.getKaynak2().getText().isEmpty()==false &&
+                mag4.getKontrolU2().getText().isEmpty()==false &&
+                mag4.getKaynakY2().getText().isEmpty()==false &&
+                mag4.getKalinlik2().getText().isEmpty()==false &&
+                mag4.getCap2().getText().isEmpty()==false &&
+                mag4.getSonuc2().getText().isEmpty()==false){
+                    
+                    ik=true;
+                }    
+            }
+            if(mag4.getI()>=4){
+                if(mag4.getKaynak3().getText().isEmpty()==false &&
+                mag4.getKontrolU3().getText().isEmpty()==false &&
+                mag4.getKaynakY3().getText().isEmpty()==false &&
+                mag4.getKalinlik3().getText().isEmpty()==false &&
+                mag4.getCap3().getText().isEmpty()==false &&
+                mag4.getSonuc3().getText().isEmpty()==false){
+                    
+                    uc=true;
+                }    
+            }
+            if(mag4.getI()>=5){
+                if(mag4.getKaynak4().getText().isEmpty()==false &&
+                mag4.getKontrolU4().getText().isEmpty()==false &&
+                mag4.getKaynakY4().getText().isEmpty()==false &&
+                mag4.getKalinlik4().getText().isEmpty()==false &&
+                mag4.getCap4().getText().isEmpty()==false &&
+                mag4.getSonuc4().getText().isEmpty()==false){
+                    
+                    dor=true;
+                    
+                }
+            }
+            if(mag4.getI()>=6){
+                if(mag4.getKaynak5().getText().isEmpty()==false &&
+                mag4.getKontrolU5().getText().isEmpty()==false &&
+                mag4.getKaynakY5().getText().isEmpty()==false &&
+                mag4.getKalinlik5().getText().isEmpty()==false &&
+                mag4.getCap5().getText().isEmpty()==false &&
+                mag4.getSonuc5().getText().isEmpty()==false){
+                    be=true;
+                    
+                }
+            }
+            
+            if(bi==true && mag4.getI()==2){
+                list.getImaP4().setImage(imageY);
+                Strings.setOkey4(true);
+            }else if(bi==true && ik==true && mag4.getI()==3){
+                list.getImaP4().setImage(imageY);
+                Strings.setOkey4(true);
+            }else if(bi==true && ik==true && uc==true && mag4.getI()==4){
+                list.getImaP4().setImage(imageY);
+                Strings.setOkey4(true);
+            }else if(bi==true && ik==true && uc==true && dor==true && mag4.getI()==5){
+                list.getImaP4().setImage(imageY);
+                Strings.setOkey4(true);
+            }else if(bi==true && ik==true && uc==true && dor==true && be==true && mag4.getI()==6){
+                list.getImaP4().setImage(imageY);
+                Strings.setOkey4(true);
+            }else{
+                list.getImaP4().setImage(imageN);
+                Strings.setOkey4(false);
+            }
         });
         
         mag5.getSaveExcel().setOnAction(a->{
-
-            try {
-                e.doInBackground();
-                WriteFon();
-                e.finallyE();
-            } catch (IOException ex) {
-                Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+            if(mag5Control()==true){
+                list.getImaP5().setImage(imageY);
+                Strings.setOkey5(true);
+            }else{
+                list.getImaP5().setImage(imageN);
+                Strings.setOkey5(false);
+            }
+                
+            if(Strings.getOkey1() && Strings.getOkey2() && Strings.getOkey3() && Strings.getOkey4() && Strings.getOkey5()){
+                mag5.getError().setVisible(false);
+                mag5.getError2().setVisible(false);
+                try {
+                    e.doInBackground();
+                    WriteFon();
+                    e.finallyE();
+                } catch (IOException ex) {
+                    Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                mag5.getError().setVisible(true);
+                mag5.getError2().setVisible(true);
             }
         });
         
         mag5.getSavePDF().setOnAction(a->{
-            try {   
-                e.doInBackground();
-                WriteFon();
-                e.finallyPDF();
-            } catch (IOException ex) {
-                Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+            if(mag5Control()==true){
+                list.getImaP5().setImage(imageY);
+                Strings.setOkey5(true);
+               
+            }else{
+                list.getImaP5().setImage(imageN);
+                Strings.setOkey5(false);
+            }
+            if(Strings.getOkey1() && Strings.getOkey2() && Strings.getOkey3() && Strings.getOkey4() && Strings.getOkey5()){
+                mag5.getError().setVisible(false);
+                mag5.getError2().setVisible(false);
+                try {   
+                    e.doInBackground();
+                    WriteFon();
+                    e.finallyPDF();
+                } catch (IOException ex) {
+                    Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                mag5.getError().setVisible(true);
+                mag5.getError2().setVisible(true);
             }
         });
         
@@ -332,6 +480,16 @@ public class userStartSceneController implements Initializable{
                     right.getChildren().clear();
                     left.getChildren().add(nodeLeft.get(i-1));
                     right.getChildren().add(nodeRight.get(i-1));
+                    Strings.setListBack(nodeRight.get(i-1).toString().substring(0, nodeRight.get(i-1).toString().indexOf("@")));
+                    if(Strings.getListBack().equals("magneticParticleReportSceneController")==true){
+                        list.getList().setExpandedPane(list.getTitle1());
+                    }else if(Strings.getListBack().equals("magneticParticleReportScene2Controller")==true){
+                        list.getList().setExpandedPane(list.getTitle2());    
+                    }else if(Strings.getListBack().equals("magneticParticleReportScene3Controller")==true){
+                        list.getList().setExpandedPane(list.getTitle3());
+                    }else if(Strings.getListBack().equals("magneticParticleReportScene4Controller")==true){
+                        list.getList().setExpandedPane(list.getTitle4());
+                    }
                 }
                 i--;
                 if(right.getChildren().get(0).equals(so) && (left.getChildren().get(0).equals(la) || left.getChildren().get(0).equals(lu))){
@@ -466,4 +624,17 @@ public class userStartSceneController implements Initializable{
                 e.writeE(34, 25, mag5.getMusName().getText().toString());
                 e.writeE(36, 25, mag5.getCusTarih().getText().toString());
     }
+    
+    public boolean mag5Control(){
+        if(mag5.getoTarih().getText().isEmpty()==false && mag5.getoLevel().getText().isEmpty()==false && mag5.getdTarih().getText().isEmpty()==false &&
+                mag5.getdLevel().getText().isEmpty()==false && mag5.getOpeName().getValue().isEmpty()==false && mag5.getCusTarih().getText().isEmpty()==false &&
+                mag5.getOpTarih().getText().isEmpty()==false && mag5.getOpLevel().getText().isEmpty()==false && mag5.getOnayName().getValue().isEmpty()==false &&
+                mag5.getDegerName().getValue().isEmpty()==false && mag5.getMusName().getText().isEmpty()==false){
+            return true;
+        }else{
+            return false;
+        }   
+        
+    }
+    
 }

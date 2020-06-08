@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -341,6 +342,8 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
     
     public magneticParticleReportScene4Controller(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene4.fxml");
+        
+        Strings.setList(4);
     }
     
     @FXML

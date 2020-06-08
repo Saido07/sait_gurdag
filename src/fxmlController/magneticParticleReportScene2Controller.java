@@ -2,6 +2,7 @@ package fxmlController;
 
 import com.BIN.Config;
 import com.BIN.Equi;
+import com.BIN.Strings;
 import com.database.database;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -131,6 +132,8 @@ public class magneticParticleReportScene2Controller extends AnchorPane {
 
     public magneticParticleReportScene2Controller(){
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene2.fxml");
+        
+        Strings.setList(2);
         
         try {
             db.doInBackground("getEqui2");

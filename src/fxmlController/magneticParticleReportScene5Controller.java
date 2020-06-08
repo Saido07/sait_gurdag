@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -42,6 +43,12 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
     private TextField opTarih;
 
     @FXML
+    private Label error;
+    
+    @FXML
+    private Label error2;
+    
+    @FXML
     private TextField dLevel;
 
     @FXML
@@ -61,6 +68,14 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
 
     @FXML
     private Button saveExcel;
+
+    public Label getError2() {
+        return error2;
+    }
+    
+    public Label getError() {
+        return error;
+    }
 
     public TextField getMusName() {
         return musName;
@@ -121,6 +136,8 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
         today.getTime();
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(today);
     
+        Strings.setList(5);
+        
         try {
             db.doInBackground("getusers2");
         } catch (SQLException ex) {

@@ -11,18 +11,20 @@ import java.util.Vector;
 public class Strings {
     private static String MusName="";
     private static String option;                         //userOptions ekranında hangi tuşa tıklandığı için
+    private static int List=0;
     private static boolean okey1=false;
     private static boolean okey2=false;
     private static boolean okey3=false;
     private static boolean okey4=false;
     private static boolean okey5=false;
+    private static String listBack="";                         //listede geri tuşunun çalışması için
 
-    public static String getMusName() {
-        return MusName;
+    public static String getListBack() {
+        return listBack;
     }
 
-    public static void setMusName(String MusName) {
-        Strings.MusName = MusName;
+    public static void setListBack(String listBack) {
+        Strings.listBack = listBack;
     }
     
     public static void setOkey1(boolean okey1) {
@@ -63,6 +65,22 @@ public class Strings {
     
     public static boolean getOkey5(){
         return okey5;
+    }
+
+    public static void setList(int List) {
+        Strings.List = List;
+    }
+
+    public static int getList() {
+        return List;
+    }
+    
+    public static String getMusName() {
+        return MusName;
+    }
+
+    public static void setMusName(String MusName) {
+        Strings.MusName = MusName;
     }
     
     public static void setOption(String option) {
