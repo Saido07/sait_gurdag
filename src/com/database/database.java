@@ -2,6 +2,7 @@ package com.database;
 
 import com.BIN.Customer;
 import com.BIN.Equi;
+import com.BIN.Strings;
 import com.BIN.Surface;
 import com.BIN.Test;
 import com.BIN.User;
@@ -100,16 +101,34 @@ public class database {
               
                 return controller(pass, db_pass );  
             }else if(type=="getusers"){
-                User.getUsers().removeAllElements();
-                User.setUsers("Yeni Kullanıcı");
-                resultSet = stmt.executeQuery("SELECT * FROM users");
-                while(resultSet.next()){
-                    int i=0;
-                    User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
-                            +  resultSet.getString("surname"));
-                    i++;
+                if(!Strings.isSearch()){
+                    User.getUsers().removeAllElements();
+                    User.setUsers("Ara");
+                    User.setUsers("Yeni Kullanıcı");
+                    resultSet = stmt.executeQuery("SELECT * FROM users");
+                    while(resultSet.next()){
+                        int i=0;
+                        User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                                +  resultSet.getString("surname"));
+                        i++;
+                    }
+                }else{
+                    User.getUsers().removeAllElements();
+                    User.setUsers("Ara");
+                    User.setUsers("Yeni Kullanıcı");
+                    System.out.println(Strings.getSearchedText());
+                    resultSet = stmt.executeQuery("SELECT * from users WHERE name LIKE '"+Strings.getSearchedText() +"%' "
+                            + "OR NAME LIKE '"+Strings.getSearched2Text() +"%';");
+         
+                    while(resultSet.next()){
+                        int i=0;
+                        System.out.println( resultSet.getString("name"));
+                        User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                                +  resultSet.getString("surname"));
+                        i++;
+                    }
+                    Strings.isSearch(false);
                 }
-                
             }else if(type=="getusers2"){
                 User.getUsers().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM users");

@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import com.BIN.User;
 import com.database.database;
 import java.sql.SQLException;
@@ -11,12 +12,15 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class UserAddController extends AnchorPane {
 
@@ -54,13 +58,26 @@ public class UserAddController extends AnchorPane {
     @FXML
     private Label tarihL;
     
+    @FXML
+    private TextField search;
+    
+    @FXML
+    private ImageView searchImage;
+    
     database db = new database();
 
     boolean result;
     
+    boolean ctrl=false;
+    
     public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
 
+        Image image = new Image("/images/icons/search_icon.png");
+        searchImage.setImage(image);
+        searchImage.setCache(true);
+        searchImage.setVisible(false);
+        
         try {                                                 //db'den kullanıcı bilg. çekme
             db.doInBackground("getusers");
         } catch (SQLException ex) {
@@ -77,34 +94,124 @@ public class UserAddController extends AnchorPane {
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0); 
         
-        
-        SelectUser.setOnAction(a ->{                          //combobox fonk.
-            if(SelectUser.isShowing()==true){
-                emptyLabels();
-                User.setDb_id(SelectUser.getValue().toString().
-                        substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
-            } 
-            if(User.getDb_id().equals("Yeni")){
+        searchImage.setOnMouseClicked(a->{
+            if(!search.getText().toString().equals("")){
+                Strings.isSearch(true);
+                Strings.setSearchedText(search.getText().toString());
+                refreshSelectUser();
+                SelectUser.setVisible(true);
+                search.setVisible(false);
+                searchImage.setVisible(false);
+                SelectUser.show();
+                name.clear();
+                surname.clear();
+                userName.clear();
+                level.clear();
+                signature_e_date.clear(); 
+            }else{
+                Strings.isSearch(false);
+                refreshSelectUser();
+                SelectUser.setVisible(true);
+                search.setVisible(false);
+                searchImage.setVisible(false);
+                SelectUser.show();
                 name.clear();
                 surname.clear();
                 userName.clear();
                 level.clear();
                 signature_e_date.clear();
-            }else{
-                try {
-                    db.doInBackground("finduser", User.getDb_id());
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        });
+        
+        
+        SelectUser.setOnAction(a ->{                          //combobox fonk.
+            
+            if(SelectUser.isShowing()){
+                emptyLabels();
+                if(SelectUser.getValue()!=null){  
+                    if(!SelectUser.getValue().toString().equals("Ara")){
+                    User.setDb_id(SelectUser.getValue().toString().
+                            substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
+                    if(!SelectUser.getValue().toString().substring(0, SelectUser.getValue().toString().indexOf(" ")).equals(User.getDb_id())){
+                        System.out.println("ppppppppppppppppppppp");
+                        } 
+                    }else{
+                        ctrl=true;
+                        Strings.isSearch(true);
+                        User.setDb_id("");
+                    }
                 }
+            } 
+            if((User.getDb_id().equals("") || User.getDb_id()==null) && Strings.isSearch()){
+                if(SelectUser.getValue().toString().equals("Ara") ){
+                    SelectUser.setVisible(false);
+                    search.setVisible(true);
+                    searchImage.setVisible(true);
+                    name.setEditable(false);
+                    surname.setEditable(false);
+                    userName.setEditable(false);
+                    level.setEditable(false);
+                    signature_e_date.setEditable(false);
+                    name.clear();
+                    surname.clear();
+                    userName.clear();
+                    level.clear();
+                    signature_e_date.clear();
+                }   
+            }else if(User.getDb_id().equals("Yeni")){
+                System.out.println("jjjjjjjjjjjjjjjjjj");
+                search.setVisible(false);
+                searchImage.setVisible(false);
+                name.clear();
+                surname.clear();
+                userName.clear();
+                level.clear();
+                signature_e_date.clear();
+                name.setEditable(true);
+                surname.setEditable(true);
+                userName.setEditable(true);
+                level.setEditable(true);
+                signature_e_date.setEditable(true);
+                SelectUser.setEditable(false);
+                SelectUser.setCursor(Cursor.DEFAULT);
+                if(ctrl){
+                    refreshSelectUser();
+                    System.out.println("66666666");
+                    ctrl=false;
+                }
+                
+            }else{
+                if(SelectUser.isVisible()==true && !search.isVisible()){
+                    System.out.println("zzzzzzzzzzzzzzzzz");
+                    search.setVisible(false);
+                    searchImage.setVisible(false);
+                    name.setEditable(true);
+                    surname.setEditable(true);
+                    userName.setEditable(true);
+                    level.setEditable(true);
+                    signature_e_date.setEditable(true);
+                    SelectUser.setEditable(false);
+                    SelectUser.setCursor(Cursor.DEFAULT);
+                    try {
+                        db.doInBackground("finduser", User.getDb_id());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-                name.setText(User.getDb_name());
-                surname.setText(User.getDb_surname());
-                userName.setText(User.getDb_username());
-                level.setText(User.getDb_level());
-                signature_e_date.setText(User.getDb_signature_expiry_date());
-
+                    name.setText(User.getDb_name());
+                    surname.setText(User.getDb_surname());
+                    userName.setText(User.getDb_username());
+                    level.setText(User.getDb_level());
+                    signature_e_date.setText(User.getDb_signature_expiry_date());
+                    if(ctrl){
+                        refreshSelectUser();
+                        System.out.println("9999999999");
+                        ctrl=false;
+                    }
+                } 
             }
         });
         
@@ -264,6 +371,7 @@ public class UserAddController extends AnchorPane {
     private void refreshSelectUser() {    
         try {
             db.doInBackground("getusers");
+            System.out.println("buradaaaaaaaaaaaaaaaaaaaaaaaa");
         } catch (SQLException ex) {
             Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

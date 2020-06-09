@@ -17,8 +17,32 @@ public class Strings {
     private static boolean okey3=false;
     private static boolean okey4=false;
     private static boolean okey5=false;
+    private static boolean isSearch=false;
     private static String listBack="";                         //listede geri tuşunun çalışması için
+    private static String searchedText="";
+    private static String searched2Text="";
 
+    public static String getSearched2Text() {
+        return searched2Text;
+    }
+    
+    public static String getSearchedText() {
+        return searchedText;
+    }
+    
+    public static void setSearchedText(String searchedText) {
+        Strings.searchedText = searchedText;
+        Strings.searched2Text = searchedText.substring(0,1).toUpperCase() + searchedText.substring(1);
+    }
+    
+    public static boolean isSearch() {
+        return isSearch;
+    }
+
+    public static void isSearch(boolean isSearch) {
+        Strings.isSearch = isSearch;
+    }
+    
     public static String getListBack() {
         return listBack;
     }

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,6 +40,8 @@
                   <Insets />
                </GridPane.margin>
             </ComboBox>
+            <TextField fx:id="search" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fx:id="searchImage" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
             <Label fx:id="usernameL" text="Kullanıcı Adı :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label fx:id="nameL" text="İsim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label fx:id="surnameL" text="Soyisim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
