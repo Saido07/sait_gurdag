@@ -39,11 +39,11 @@
                   <Insets />
                </GridPane.margin>
             </ComboBox>
-            <Label text="Kullanıcı Adı :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label text="İsim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Label text="Soyisim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label text="Seviye :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label text="Son İmza Geçerlilik Tarihi :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label fx:id="usernameL" text="Kullanıcı Adı :" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="nameL" text="İsim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label fx:id="surnameL" text="Soyisim :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label fx:id="levelL" text="Seviye :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label fx:id="tarihL" text="Son İmza Geçerlilik Tarihi :" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
             <TextField fx:id="userName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="name" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="surname" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
