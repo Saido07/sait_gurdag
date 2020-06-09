@@ -80,6 +80,7 @@ public class UserAddController extends AnchorPane {
         
         SelectUser.setOnAction(a ->{                          //combobox fonk.
             if(SelectUser.isShowing()==true){
+                emptyLabels();
                 User.setDb_id(SelectUser.getValue().toString().
                         substring(0, SelectUser.getValue().toString().indexOf(" "))); // seçilen kişinin id'sini alıyor.
             } 
@@ -114,67 +115,71 @@ public class UserAddController extends AnchorPane {
             boolean us=false;
             boolean ta=false;
             boolean le=false;
-            boolean ta2=false;
             
             if(name.getText().isEmpty()==true){
                 nameL.setStyle("-fx-text-fill: red;");
-                name.setStyle("-fx-border-color: red");
+                name.setStyle("-fx-border-color: red;");
                 na=false;
             }else{
                 nameL.setStyle("-fx-text-fill: black;");
-                name.setBorder(Border.EMPTY);
+                name.setStyle("-fx-border-style: none;");
                 na=true;
             }
             if(userName.getText().isEmpty()==true){
                 usernameL.setStyle("-fx-text-fill: red;");
-                userName.setStyle("-fx-border-color: red");
+                userName.setStyle("-fx-border-color: red;");
                 us=false;
             }else{
                 usernameL.setStyle("-fx-text-fill: black;");
-                userName.setBorder(Border.EMPTY);
+                userName.setStyle("-fx-border-style: none;");
                 us=true;
             }
             if(surname.getText().isEmpty()==true){
                 surnameL.setStyle("-fx-text-fill: red;");
-                surname.setStyle("-fx-border-color: red"); 
+                surname.setStyle("-fx-border-color: red;"); 
                 su=false;
             }else{
                 surnameL.setStyle("-fx-text-fill: black;");
-                surname.setBorder(Border.EMPTY);
+                surname.setStyle("-fx-border-style: none;");
                 su=true;
             }
             if(level.getText().isEmpty()==true){
                 levelL.setStyle("-fx-text-fill: red;");
-                level.setStyle("-fx-border-color: red"); 
+                level.setStyle("-fx-border-color: red;"); 
                 le=false;
             }else{
-                levelL.setStyle("-fx-text-fill: black;");
-                level.setBorder(Border.EMPTY);
-                le=true;
+                int a;
+                try{
+                    a = Integer.parseInt(level.getText().toString());
+                    levelL.setStyle("-fx-text-fill: black;");
+                    level.setStyle("-fx-border-style: none;");
+                    le=true;
+                }catch(Exception ex){
+                    levelL.setStyle("-fx-text-fill: red;");
+                    level.setStyle("-fx-border-color: red;"); 
+                    System.out.println("buradsaaaa");
+                    le=false;
+                }
             }
             if(signature_e_date.getText().isEmpty()==true){
-                signature_e_date.setStyle("-fx-border-color: red"); 
+                signature_e_date.setStyle("-fx-border-color: red;"); 
                 tarihL.setStyle("-fx-text-fill: red;");
                 ta=false;
             }else{
-                signature_e_date.setBorder(Border.EMPTY);
-                tarihL.setStyle("-fx-text-fill: black;");
-                ta=true;
+                Date date = null;
+                try {
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(signature_e_date.getText().toString());
+                    signature_e_date.setStyle("-fx-border-style: none;");
+                    tarihL.setStyle("-fx-text-fill: black;");
+                    ta=true;
+                } catch (Exception ex) {
+                    signature_e_date.setStyle("-fx-border-color: red;"); 
+                    tarihL.setStyle("-fx-text-fill: red;");
+                    ta=false;
+                }
             }
             
-            Date date = null;
-            try {
-                date = new SimpleDateFormat("yyyy-MM-dd").parse(signature_e_date.getText().toString());
-                ta2=true;
-                signature_e_date.setBorder(Border.EMPTY);
-                tarihL.setStyle("-fx-text-fill: black;");
-            } catch (Exception ex) {
-                ta2=false;
-                signature_e_date.setStyle("-fx-border-color: red"); 
-                tarihL.setStyle("-fx-text-fill: red;");
-            }
-            
-            if(na==true && su==true && us==true && le==true && ta==true && ta2==true){
+            if(na==true && su==true && us==true && le==true && ta==true){
                 if(User.getDb_id()==null){
                     addUser();
                 }else if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){                
@@ -221,6 +226,11 @@ public class UserAddController extends AnchorPane {
                     users = users.substring(users.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
                     resultTxt.setText(users + " Adlı Kullanıcı Silindi");
+                    name.clear();
+                    surname.clear();
+                    userName.clear();
+                    level.clear();
+                    signature_e_date.clear();
                     refreshSelectUser();
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
@@ -263,5 +273,20 @@ public class UserAddController extends AnchorPane {
         
     }
    
+    public void emptyLabels(){
+        levelL.setStyle("-fx-text-fill: black;");
+        level.setStyle("-fx-border-style: none;");
+        nameL.setStyle("-fx-text-fill: black;");
+        name.setStyle("-fx-border-style: none;");
+        usernameL.setStyle("-fx-text-fill: black;");
+        userName.setStyle("-fx-border-style: none;");
+        surnameL.setStyle("-fx-text-fill: black;");
+        surname.setStyle("-fx-border-style: none;");
+        signature_e_date.setStyle("-fx-border-style: none;");
+        tarihL.setStyle("-fx-text-fill: black;");
+        resultTxt.setStyle("-fx-text-fill: black;");
+        resultTxt.setText("");
+    }
+    
     
 }
