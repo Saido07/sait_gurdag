@@ -144,9 +144,9 @@ public class magneticParticleReportSceneController extends AnchorPane {
         }
         
         MuaAsa.getItems().setAll("Untreated");
-        yuzeyDurum.getItems().setAll(Surface.getSurface());
-        musteriler.getItems().setAll(Customer.getCustomers());  
-        projeler.getItems().setAll(Test.getTest());
+        yuzeyDurum.getItems().setAll(Surface.getSurface2());
+        musteriler.getItems().setAll(Customer.getCustomers2());  
+        projeler.getItems().setAll(Test.getTest2());
         muayeneStandart.setText("TS EN ISO 17638");
         degerStand.setText("TS EN ISO 23278 Class B");
         muaPro.setText("P-101-004");

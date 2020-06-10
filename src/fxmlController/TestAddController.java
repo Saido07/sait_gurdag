@@ -102,10 +102,11 @@ public class TestAddController extends AnchorPane{
             }else{
                 try {
                     db.doInBackground("testDelete", Test.getDb_testId());
-                    String test = SelectTest.getValue().toString().substring(SelectTest.getValue().toString().indexOf("|"));
-                    test = test.substring(test.indexOf(" "));
+                    String t = SelectTest.getValue().toString().substring(SelectTest.getValue().toString().indexOf("|"));
+                    t = t.substring(t.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(test + " Adlı Test Türü Silindi");
+                    resultTxt.setText(t + " Adlı Test Türü Silindi");
+                    test.clear();
                     refreshSelectTest();
                 } catch (SQLException ex) {
                     Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);

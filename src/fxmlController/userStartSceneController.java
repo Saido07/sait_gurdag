@@ -1,13 +1,19 @@
 package fxmlController;
 
+import com.BIN.Customer;
+import com.BIN.Equi;
 import com.BIN.Strings;
+import com.BIN.Surface;
+import com.BIN.Test;
 import com.BIN.User;
 import com.aspose.cells.b.a.b.zk;
+import com.database.database;
 import com.excel.Excel;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -18,6 +24,7 @@ import javafx.scene.image.Image;
 
 
 public class userStartSceneController implements Initializable{
+    database db = new database();
     
     Image imageY = new Image("/images/icons/yCheck.png");
     Image imageN = new Image("/images/icons/gCheck.png");
@@ -87,6 +94,15 @@ public class userStartSceneController implements Initializable{
             
             list.getList().setExpandedPane(list.getTitle2());
             
+            try {
+                db.doInBackground("getEqui2");
+            } catch (SQLException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            mag2.getCihaz().getItems().setAll(Equi.getEqui2()); 
                 
             if(mag.getMusteriler().getValue() != null && mag.getProjeler().getValue() != null &&
                     mag.getTestYeri().getText().isEmpty()==false && mag.getMuayeneStandart().getText().isEmpty()==false &&
@@ -154,6 +170,19 @@ public class userStartSceneController implements Initializable{
             mag5.getMusName().setText(Strings.getMusName());
             mag5.getError().setVisible(false);
             mag5.getError2().setVisible(false);
+            
+
+            try {
+                db.doInBackground("getusers2");
+            } catch (SQLException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            mag5.getOpeName().getItems().setAll(User.getUsers2());
+            mag5.getDegerName().getItems().setAll(User.getUsers2());
+            mag5.getOnayName().getItems().setAll(User.getUsers2());
             
             boolean bi=false;
             boolean ik=false;
@@ -299,6 +328,21 @@ public class userStartSceneController implements Initializable{
             left.getChildren().add(list);
             
             list.getList().setExpandedPane(list.getTitle1());
+            
+            try {
+                db.doInBackground("getCustomer2");
+                db.doInBackground("getTest2");
+                db.doInBackground("getSurface2");
+            } catch (SQLException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            mag.getYuzeyDurum().getItems().setAll(Surface.getSurface2());
+            mag.getMusteriler().getItems().setAll(Customer.getCustomers2());  
+            mag.getProjeler().getItems().setAll(Test.getTest2());
+            
         });
 
         so.getRad().setOnAction(e -> {              //2. rapor tuşu fonksiyonu

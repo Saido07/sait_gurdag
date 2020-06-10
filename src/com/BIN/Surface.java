@@ -6,6 +6,7 @@ public class Surface {
     private static Vector surface = new Vector();
     private static String db_surId=null;
     private static String db_surf_name = "";
+    private static Vector surface2 = new Vector();
     
     public static Vector getSurface() {
         return surface;
@@ -13,6 +14,14 @@ public class Surface {
     
     public static void setSurface(String surface) {
         Surface.surface.add(surface);
+    }
+    
+    public static Vector getSurface2() {
+        return surface2;
+    }
+    
+    public static void setSurface2(String surface) {
+        Surface.surface2.add(surface);
     }
     
     public static String getDb_surId() {

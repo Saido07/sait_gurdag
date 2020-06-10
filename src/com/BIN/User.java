@@ -5,6 +5,7 @@ import java.util.Vector;
 
 public class User {
     private static Vector users = new Vector();
+    private static Vector users2 = new Vector();
     private static String username;                       //O anda sistemi kullanan kişi
     private static String db_id=null;                     //kullanıcı ekleme ekranında combobox'tan seçilen kişinin id si burada
     private static String db_username = "";               //combobox'ta seçilen kişinin kullanıcı adı
@@ -56,6 +57,14 @@ public class User {
 
     public static Vector getUsers() {
         return users;
+    }
+    
+    public static void setUsers2(String users) {
+        User.users2.add(users);
+    }
+
+    public static Vector getUsers2() {
+        return users2;
     }
     
     public static void setDb_id(String db_id) {

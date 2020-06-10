@@ -5,6 +5,7 @@ import java.util.Vector;
 
 public class Equi {
     private static Vector equi = new Vector();
+    private static Vector equi2 = new Vector();
     private static String db_equiId=null;
     private static String db_equi_name = "";
     private static String db_poleDistance = "";
@@ -67,6 +68,14 @@ public class Equi {
     
     public static void setEqui(String equi) {
         Equi.equi.add(equi);
+    }
+    
+    public static void setEqui2(String equi) {
+        Equi.equi2.add(equi);
+    }
+    
+    public static Vector getEqui2() {
+        return equi2;
     }
     
     public static String getDb_equiId() {

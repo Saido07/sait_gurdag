@@ -150,9 +150,9 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(magneticParticleReportSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        opeName.getItems().setAll(User.getUsers());
-        OnayName.getItems().setAll(User.getUsers());
-        degerName.getItems().setAll(User.getUsers());
+        opeName.getItems().setAll(User.getUsers2());
+        OnayName.getItems().setAll(User.getUsers2());
+        degerName.getItems().setAll(User.getUsers2());
         oTarih.setText(modifiedDate);
         opTarih.setText(modifiedDate);
         dTarih.setText(modifiedDate);

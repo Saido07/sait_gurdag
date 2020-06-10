@@ -128,11 +128,11 @@ public class database {
                     Strings.isSearch(false);
                 }
             }else if(type=="getusers2"){
-                User.getUsers().removeAllElements();
+                User.getUsers2().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM users");
                 while(resultSet.next()){
                     int i=0;
-                    User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
+                    User.setUsers2((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
                             +  resultSet.getString("surname"));
                     i++;
                 } 
@@ -146,11 +146,11 @@ public class database {
                     i++;
                 }
             }else if(type=="getCustomer2"){
-                Customer.getCustomers().removeAllElements();
+                Customer.getCustomers2().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM customer");
                 while(resultSet.next()){
                     int i=0;
-                    Customer.setCustomers((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Customer.setCustomers2((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getTest"){
@@ -163,11 +163,11 @@ public class database {
                     i++;
                 }
             }else if(type=="getTest2"){
-                Test.getTest().removeAllElements();
+                Test.getTest2().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM project_names");
                 while(resultSet.next()){
                     int i=0;
-                    Test.setTest((String)" " + resultSet.getString("name"));
+                    Test.setTest2((String)" " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getSurface"){
@@ -180,11 +180,11 @@ public class database {
                     i++;
                 }
             }else if(type=="getSurface2"){
-                Surface.getSurface().removeAllElements();
+                Surface.getSurface2().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM surface_condition");
                 while(resultSet.next()){
                     int i=0;
-                    Surface.setSurface((String)" " + resultSet.getString("name"));
+                    Surface.setSurface2((String)" " + resultSet.getString("name"));
                     i++;
                 }
             }else if(type=="getEqui"){
@@ -197,11 +197,11 @@ public class database {
                     i++;
                 } 
             }else if(type=="getEqui2"){
-                Equi.getEqui().removeAllElements();
+                Equi.getEqui2().removeAllElements();
                 resultSet = stmt.executeQuery("SELECT * FROM equipment");
                 while(resultSet.next()){
                     int i=0;
-                    Equi.setEqui((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
+                    Equi.setEqui2((String)resultSet.getString("id")+ " | " + resultSet.getString("name"));
                     i++;
                 } 
             }else if(type=="addNewUser"){

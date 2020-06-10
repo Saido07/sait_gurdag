@@ -5,6 +5,7 @@ import java.util.Vector;
 
 public class Test {
     private static Vector test = new Vector();
+    private static Vector test2 = new Vector();
     private static String db_testId=null;
     private static String db_test_name = "";
     
@@ -23,6 +24,14 @@ public class Test {
 
     public static void setTest(String test) {
         Test.test.add(test);
+    }
+    
+    public static Vector getTest2() {
+        return test2;
+    }
+
+    public static void setTest2(String test) {
+        Test.test2.add(test);
     }
     
     public static String getDb_testId() {

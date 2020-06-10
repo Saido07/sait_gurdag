@@ -123,6 +123,10 @@ public class CustomerAddController extends AnchorPane {
                     customer = customer.substring(customer.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
                     resultTxt.setText(customer + " Adlı Müşteri Silindi");
+                    customerName.clear();
+                    place.clear();
+                    jobOrderNo.clear();
+                    offerNo.clear();
                     refreshSelectCustomer();
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);

@@ -135,6 +135,12 @@ public class EquipmentAddController extends AnchorPane {
                     equi = equi.substring(equi.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
                     resultTxt.setText(equi + " Adlı Ekipman Silindi");
+                    equiName.clear();
+                    poleDistance.clear();
+                    magTech.clear();
+                    uvLightInte.clear();
+                    distanceOfLight.clear();
+                    mpTasiyici.clear();
                     refreshSelectEqui();
                 } catch (SQLException ex) {
                     Logger.getLogger(EquipmentAddController.class.getName()).log(Level.SEVERE, null, ex);

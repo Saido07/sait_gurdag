@@ -142,7 +142,7 @@ public class magneticParticleReportScene2Controller extends AnchorPane {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(magneticParticleReportScene2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cihaz.getItems().setAll(Equi.getEqui()); 
+        cihaz.getItems().setAll(Equi.getEqui2()); 
         muaBol.setText("KAYNAK+HAZ");
         ObservableList<String> v =FXCollections.observableArrayList (" AC" , " DC");
         akimTip.getItems().setAll(v);

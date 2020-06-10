@@ -101,11 +101,12 @@ public class SurfaceConAddController extends AnchorPane{
             }else{
                 try {
                     db.doInBackground("surfaceDelete", Surface.getDb_surId());
-                    String surface = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
-                    surface = surface.substring(surface.indexOf(" "));
+                    String sur = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
+                    sur = sur.substring(sur.indexOf(" "));
                     resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(surface + " Adlı Yüzüy Durumu Silindi");
+                    resultTxt.setText(sur + " Adlı Yüzüy Durumu Silindi");
                     refreshSelectSurface();
+                    surface.clear();
                 } catch (SQLException ex) {
                     Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
