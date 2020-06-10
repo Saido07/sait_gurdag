@@ -116,13 +116,11 @@ public class database {
                     User.getUsers().removeAllElements();
                     User.setUsers("Ara");
                     User.setUsers("Yeni Kullanıcı");
-                    System.out.println(Strings.getSearchedText());
                     resultSet = stmt.executeQuery("SELECT * from users WHERE name LIKE '"+Strings.getSearchedText() +"%' "
                             + "OR NAME LIKE '"+Strings.getSearched2Text() +"%';");
          
                     while(resultSet.next()){
                         int i=0;
-                        System.out.println( resultSet.getString("name"));
                         User.setUsers((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
                                 +  resultSet.getString("surname"));
                         i++;
