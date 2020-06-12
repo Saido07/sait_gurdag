@@ -344,6 +344,7 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
         Config.Loader(this, "/fxmlFiles/magneticParticleReportScene4.fxml");
         
         Strings.setList(4);
+        sira1.setText("1");
     }
     
     @FXML
@@ -352,6 +353,7 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
         newS.setOnAction(a->{
             if(i==2){
                 sira2.setVisible(true);
+                sira2.setText("2");
                 kaynak2.setVisible(true);
                 kontrolU2.setVisible(true);
                 kaynakY2.setVisible(true);
@@ -362,6 +364,7 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
                 Sonuc2.setVisible(true);
             }else if(i==3){
                 sira3.setVisible(true);
+                sira3.setText("3");
                 kaynak3.setVisible(true);
                 kontrolU3.setVisible(true);
                 kaynakY3.setVisible(true);
@@ -372,6 +375,7 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
                 Sonuc3.setVisible(true);
             }else if(i==4){
                 sira4.setVisible(true);
+                sira4.setText("4");
                 kaynak4.setVisible(true);
                 kontrolU4.setVisible(true);
                 kaynakY4.setVisible(true);
@@ -382,6 +386,7 @@ public class magneticParticleReportScene4Controller extends AnchorPane {
                 Sonuc4.setVisible(true);
             }else{
                 sira5.setVisible(true);
+                sira5.setText("5");
                 kaynak5.setVisible(true);
                 kontrolU5.setVisible(true);
                 kaynakY5.setVisible(true);

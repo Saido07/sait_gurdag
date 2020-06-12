@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import com.BIN.Test;
 import com.database.database;
 import java.net.URL;
@@ -32,6 +33,8 @@ public class TestAddController extends AnchorPane{
 
     boolean result;
     
+    boolean problem=false;
+    
     public TestAddController(){
         Config.Loader(this, "/fxmlFiles/testAdd.fxml");
         
@@ -49,6 +52,11 @@ public class TestAddController extends AnchorPane{
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         SelectTest.setOnAction(a ->{                     //combo box a tıklama fonk.               
+            if(problem){
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("");
+                problem=false;
+            }
             if(SelectTest.isShowing()==true){
                 Test.setDb_testId(SelectTest.getValue().toString().
                         substring(0, SelectTest.getValue().toString().indexOf(" "))); // seçilen testin id'sini alıyor.
@@ -70,68 +78,85 @@ public class TestAddController extends AnchorPane{
         });
         
         save.setOnAction(b -> {                              //kaydetme tuşu fonk.
-            if(Test.getDb_testId()==null){
-                addTest();
-            }else if(SelectTest.getValue().toString().equals("Yeni Test Türü")){                
-                addTest();
-            }else{
-                if(Test.getDb_testId()!=null){
-                try {
-                    result=db.doInBackground("updateTest", test.getText().toString());
-                    if(result==false){
-                        resultTxt.setStyle("-fx-text-fill: red;");
-                        resultTxt.setText("Hatalı ya da Eksik Bilgi");
-                    }else{
-                        resultTxt.setStyle("-fx-text-fill: black;");
-                        resultTxt.setText("Test Türü Bilgileri Başarıyla Güncellendi");
-                        refreshSelectTest();
+            if(SelectTest.getValue()!=null || Test.getDb_testId()==null){
+                if(Test.getDb_testId()==null){
+                    addTest();
+                }else if(SelectTest.getValue().toString().equals("Yeni Test Türü")){                
+                    addTest();
+                }else{
+                    if(Test.getDb_testId()!=null){
+                    try {
+                        result=db.doInBackground("updateTest", test.getText().toString());
+                        if(result==false){
+                            resultTxt.setStyle("-fx-text-fill: red;");
+                            resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                        }else{
+                            resultTxt.setStyle("-fx-text-fill: black;");
+                            resultTxt.setText("Test Türü Bilgileri Başarıyla Güncellendi");
+                            refreshSelectTest();
+                            Strings.setOp(true);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                }
-            }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
+            } 
         });
         
         testDelete.setOnAction(n ->{                         //silme tuşu fonk.
-            if(Test.getDb_testId().equals("Yeni")){
-                resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Hatalı İşlem");
-            }else{
-                try {
-                    db.doInBackground("testDelete", Test.getDb_testId());
-                    String t = SelectTest.getValue().toString().substring(SelectTest.getValue().toString().indexOf("|"));
-                    t = t.substring(t.indexOf(" "));
-                    resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(t + " Adlı Test Türü Silindi");
-                    test.clear();
-                    refreshSelectTest();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+            if(SelectTest.getValue()!=null && (!test.getText().toString().equals("") || Test.getDb_testId().equals("Yeni"))){
+                if(Test.getDb_testId().equals("Yeni")){
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı İşlem");
+                }else{
+                    try {
+                        db.doInBackground("testDelete", Test.getDb_testId());
+                        String t = SelectTest.getValue().toString().substring(SelectTest.getValue().toString().indexOf("|"));
+                        t = t.substring(t.indexOf(" "));
+                        resultTxt.setStyle("-fx-text-fill: black;");
+                        resultTxt.setText(t + " Adlı Test Türü Silindi");
+                        test.clear();
+                        refreshSelectTest();
+                        Strings.setOp(true);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
             }
         });
     }   
     
     public void addTest(){                                   //yeni ekleme fonk.
-        try {
-            result=db.doInBackground("addNewTest", test.getText().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(result==false){
-            resultTxt.setStyle("-fx-text-fill: red;");
-            resultTxt.setText("Hatalı ya da Eksik Bilgi");
-        }else{
-            resultTxt.setStyle("-fx-text-fill: black;");
-            resultTxt.setText("Test Türü Başarıyla Eklendi");
-            refreshSelectTest();
+        if(!test.getText().toString().equals("")){
+            try {
+                result=db.doInBackground("addNewTest", test.getText().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(result==false){
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Hatalı ya da Eksik Bilgi");
+            }else{
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("Test Türü Başarıyla Eklendi");
+                refreshSelectTest();
+                Strings.setOp(true);
+            }
         }
     }
     
@@ -143,6 +168,7 @@ public class TestAddController extends AnchorPane{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TestAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        test.clear();
         SelectTest.getItems().setAll(Test.getTest());
         
     }

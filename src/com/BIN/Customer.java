@@ -6,10 +6,19 @@ public class Customer {
     private static Vector customers = new Vector();
     private static Vector customers2 = new Vector();
     private static String db_customerId=null;
+    private static String db_customer2Id=null;
     private static String db_cus_name = "";
     private static String db_cus_place = "";
     private static String db_cus_job = "";
     private static String db_cus_offer = "";
+
+    public static String getDb_customer2Id() {
+        return db_customer2Id;
+    }
+
+    public static void setDb_customer2Id(String db_customer2Id) {
+        Customer.db_customer2Id = db_customer2Id;
+    }
     
     public static void setDb_cus_job(String db_cus_job) {
         Customer.db_cus_job = db_cus_job;

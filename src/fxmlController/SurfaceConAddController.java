@@ -1,6 +1,7 @@
 package fxmlController;
 
 import com.BIN.Config;
+import com.BIN.Strings;
 import com.BIN.Surface;
 import com.database.database;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class SurfaceConAddController extends AnchorPane{
     database db = new database();
 
     boolean result;
+    boolean problem=false;
    
     public SurfaceConAddController(){
         Config.Loader(this, "/fxmlFiles/surfaceConAdd.fxml");
@@ -48,6 +50,11 @@ public class SurfaceConAddController extends AnchorPane{
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         
         SelectSurface.setOnAction(a ->{                     //combo box a tıklama fonk.               
+            if(problem){
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("");
+                problem=false;
+            }
             if(SelectSurface.isShowing()==true){
                 Surface.setDb_surId(SelectSurface.getValue().toString().
                         substring(0, SelectSurface.getValue().toString().indexOf(" "))); // seçilen yüzeyin id'sini alıyor.
@@ -69,69 +76,86 @@ public class SurfaceConAddController extends AnchorPane{
         });
         
         save.setOnAction(b -> {                              //kaydetme tuşu fonk.
-            if(Surface.getDb_surId()==null){
-                addSurface();
-            }else if(SelectSurface.getValue().toString().equals("Yeni Yüzey Durumu")){                
-                addSurface();
-            }else{
-                if(Surface.getDb_surId()!=null){
-                try {
-                    result=db.doInBackground("updateSurface", surface.getText().toString());
-                    if(result==false){
-                        resultTxt.setStyle("-fx-text-fill: red;");
-                        resultTxt.setText("Hatalı ya da Eksik Bilgi");
-                    }else{
-                        resultTxt.setStyle("-fx-text-fill: black;");
-                        resultTxt.setText("Yüzey Durumu Bilgileri Başarıyla Güncellendi");
-                        refreshSelectSurface();
+            if((SelectSurface.getValue()!=null || Surface.getDb_surId()==null)){
+                if(Surface.getDb_surId()==null){
+                    addSurface();
+                }else if(SelectSurface.getValue().toString().equals("Yeni Yüzey Durumu")){                
+                    addSurface();
+                }else{
+                    if(Surface.getDb_surId()!=null){
+                    try {
+                        result=db.doInBackground("updateSurface", surface.getText().toString());
+                        if(result==false){
+                            resultTxt.setStyle("-fx-text-fill: red;");
+                            resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                        }else{
+                            resultTxt.setStyle("-fx-text-fill: black;");
+                            resultTxt.setText("Yüzey Durumu Bilgileri Başarıyla Güncellendi");
+                            refreshSelectSurface();
+                            Strings.setOy(true);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                }
-            }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
+            } 
         });
         
         surfaceDelete.setOnAction(n ->{                         //silme tuşu fonk.
-            if(Surface.getDb_surId().equals("Yeni")){
-                resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Hatalı İşlem");
-            }else{
-                try {
-                    db.doInBackground("surfaceDelete", Surface.getDb_surId());
-                    String sur = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
-                    sur = sur.substring(sur.indexOf(" "));
-                    resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(sur + " Adlı Yüzüy Durumu Silindi");
-                    refreshSelectSurface();
-                    surface.clear();
-                } catch (SQLException ex) {
-                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+            if(SelectSurface.getValue()!=null && (!surface.getText().toString().equals("") || Surface.getDb_surId().equals("Yeni"))){
+                if(Surface.getDb_surId().equals("Yeni")){
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı İşlem");
+                }else{
+                    try {
+                        db.doInBackground("surfaceDelete", Surface.getDb_surId());
+                        String sur = SelectSurface.getValue().toString().substring(SelectSurface.getValue().toString().indexOf("|"));
+                        sur = sur.substring(sur.indexOf(" "));
+                        resultTxt.setStyle("-fx-text-fill: black;");
+                        resultTxt.setText(sur + " Adlı Yüzüy Durumu Silindi");
+                        refreshSelectSurface();
+                        Strings.setOy(true);
+                        surface.clear();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
             }
         });
         
     }    
     
     public void addSurface(){                                   //yeni ekleme fonk.
-        try {
-            result=db.doInBackground("addNewSurface", surface.getText().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(result==false){
-            resultTxt.setStyle("-fx-text-fill: red;");
-            resultTxt.setText("Hatalı ya da Eksik Bilgi");
-        }else{
-            resultTxt.setStyle("-fx-text-fill: black;");
-            resultTxt.setText("Yüzey Durumu Başarıyla Eklendi");
-            refreshSelectSurface();
+        if(!surface.getText().toString().equals("")){
+            try {
+                result=db.doInBackground("addNewSurface", surface.getText().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SurfaceConAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(result==false){
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Hatalı ya da Eksik Bilgi");
+            }else{
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("Yüzey Durumu Başarıyla Eklendi");
+                refreshSelectSurface();
+                Strings.setOy(true);
+            }
         }
     }
                 

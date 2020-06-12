@@ -69,6 +69,7 @@ public class UserAddController extends AnchorPane {
     boolean result;
     
     boolean ctrl=false;
+    boolean problem=false;
     
     public UserAddController() {
         Config.Loader(this,"/fxmlFiles/userAdd.fxml");
@@ -128,6 +129,11 @@ public class UserAddController extends AnchorPane {
         SelectUser.setOnAction(a ->{                          //combobox fonk.
             
             if(SelectUser.isShowing()){
+                if(problem){
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("");
+                problem=false;
+                }
                 emptyLabels();
                 if(SelectUser.getValue()!=null){
                     Strings.isSearch(false);
@@ -211,132 +217,150 @@ public class UserAddController extends AnchorPane {
         
         
         save.setOnAction(b -> {
-            boolean na=false;
-            boolean su=false;
-            boolean us=false;
-            boolean ta=false;
-            boolean le=false;
+            if(SelectUser.getValue()!=null || User.getDb_id()==null){
             
-            if(name.getText().isEmpty()==true){
-                nameL.setStyle("-fx-text-fill: red;");
-                name.setStyle("-fx-border-color: red;");
-                na=false;
-            }else{
-                nameL.setStyle("-fx-text-fill: black;");
-                name.setStyle("-fx-border-style: none;");
-                na=true;
-            }
-            if(userName.getText().isEmpty()==true){
-                usernameL.setStyle("-fx-text-fill: red;");
-                userName.setStyle("-fx-border-color: red;");
-                us=false;
-            }else{
-                usernameL.setStyle("-fx-text-fill: black;");
-                userName.setStyle("-fx-border-style: none;");
-                us=true;
-            }
-            if(surname.getText().isEmpty()==true){
-                surnameL.setStyle("-fx-text-fill: red;");
-                surname.setStyle("-fx-border-color: red;"); 
-                su=false;
-            }else{
-                surnameL.setStyle("-fx-text-fill: black;");
-                surname.setStyle("-fx-border-style: none;");
-                su=true;
-            }
-            if(level.getText().isEmpty()==true){
-                levelL.setStyle("-fx-text-fill: red;");
-                level.setStyle("-fx-border-color: red;"); 
-                le=false;
-            }else{
-                int a;
-                try{
-                    a = Integer.parseInt(level.getText().toString());
-                    levelL.setStyle("-fx-text-fill: black;");
-                    level.setStyle("-fx-border-style: none;");
-                    le=true;
-                }catch(Exception ex){
+                boolean na=false;
+                boolean su=false;
+                boolean us=false;
+                boolean ta=false;
+                boolean le=false;
+
+                if(name.getText().isEmpty()==true){
+                    nameL.setStyle("-fx-text-fill: red;");
+                    name.setStyle("-fx-border-color: red;");
+                    na=false;
+                }else{
+                    nameL.setStyle("-fx-text-fill: black;");
+                    name.setStyle("-fx-border-style: none;");
+                    na=true;
+                }
+                if(userName.getText().isEmpty()==true){
+                    usernameL.setStyle("-fx-text-fill: red;");
+                    userName.setStyle("-fx-border-color: red;");
+                    us=false;
+                }else{
+                    usernameL.setStyle("-fx-text-fill: black;");
+                    userName.setStyle("-fx-border-style: none;");
+                    us=true;
+                }
+                if(surname.getText().isEmpty()==true){
+                    surnameL.setStyle("-fx-text-fill: red;");
+                    surname.setStyle("-fx-border-color: red;"); 
+                    su=false;
+                }else{
+                    surnameL.setStyle("-fx-text-fill: black;");
+                    surname.setStyle("-fx-border-style: none;");
+                    su=true;
+                }
+                if(level.getText().isEmpty()==true){
                     levelL.setStyle("-fx-text-fill: red;");
                     level.setStyle("-fx-border-color: red;"); 
                     le=false;
+                }else{
+                    int a;
+                    try{
+                        a = Integer.parseInt(level.getText().toString());
+                        levelL.setStyle("-fx-text-fill: black;");
+                        level.setStyle("-fx-border-style: none;");
+                        le=true;
+                    }catch(Exception ex){
+                        levelL.setStyle("-fx-text-fill: red;");
+                        level.setStyle("-fx-border-color: red;"); 
+                        le=false;
+                    }
                 }
-            }
-            if(signature_e_date.getText().isEmpty()==true){
-                signature_e_date.setStyle("-fx-border-color: red;"); 
-                tarihL.setStyle("-fx-text-fill: red;");
-                ta=false;
-            }else{
-                Date date = null;
-                try {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(signature_e_date.getText().toString());
-                    signature_e_date.setStyle("-fx-border-style: none;");
-                    tarihL.setStyle("-fx-text-fill: black;");
-                    ta=true;
-                } catch (Exception ex) {
+                if(signature_e_date.getText().isEmpty()==true){
                     signature_e_date.setStyle("-fx-border-color: red;"); 
                     tarihL.setStyle("-fx-text-fill: red;");
                     ta=false;
-                }
-            }
-            
-            if(na==true && su==true && us==true && le==true && ta==true){
-                if(User.getDb_id()==null){
-                    addUser();
-                }else if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){                
-                    addUser();
                 }else{
-                    if(User.getDb_id()!=null){
-                        try {
-                            result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
-                                    surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
-                            if(result==false){
-                                resultTxt.setStyle("-fx-text-fill: red;");
-                                resultTxt.setText("Hatalı ya da Eksik Bilgi");
-                            }else{
-                                resultTxt.setStyle("-fx-text-fill: black;");
-                                resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
-                                refreshSelectUser();
+                    Date date = null;
+                    try {
+                        date = new SimpleDateFormat("yyyy-MM-dd").parse(signature_e_date.getText().toString());
+                        signature_e_date.setStyle("-fx-border-style: none;");
+                        tarihL.setStyle("-fx-text-fill: black;");
+                        ta=true;
+                    } catch (Exception ex) {
+                        signature_e_date.setStyle("-fx-border-color: red;"); 
+                        tarihL.setStyle("-fx-text-fill: red;");
+                        ta=false;
+                    }
+                }
+
+                if(na==true && su==true && us==true && le==true && ta==true){
+                    if(User.getDb_id()==null){
+                        addUser();
+                    }else if(SelectUser.getValue().toString().equals("Yeni Kullanıcı")){                
+                        addUser();
+                    }else{
+                        if(User.getDb_id()!=null){
+                            try {
+                                result=db.doInBackground("updateUser", userName.getText().toString() , name.getText().toString(),
+                                        surname.getText().toString(), level.getText().toString(), signature_e_date.getText().toString());
+                                if(result==false){
+                                    resultTxt.setStyle("-fx-text-fill: red;");
+                                    resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                                }else{
+                                    resultTxt.setStyle("-fx-text-fill: black;");
+                                    resultTxt.setText("Kullanıcı Bilgileri Başarıyla Güncellendi");
+                                    refreshSelectUser();
+                                    Strings.setOku(true);
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
+                }else{
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı ya da Eksik Bilgi");
                 }
             }else{
                 resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
             }
             
         });
         
         userDelete.setOnAction(n ->{
-            if(User.getDb_username().equals("admin")){
-                System.out.println("Bu kullanıcı silinemez");
-                resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Admin Hesabı Silinemez!");
-            }else if(User.getDb_id().equals("Yeni")){
-                resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Hatalı İşlem");
-            }else{
-                try {
-                    db.doInBackground("userDelete", User.getDb_id());
-                    String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
-                    users = users.substring(users.indexOf(" "));
-                    resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(users + " Adlı Kullanıcı Silindi");
-                    name.clear();
-                    surname.clear();
-                    userName.clear();
-                    level.clear();
-                    signature_e_date.clear();
-                    refreshSelectUser();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            if(SelectUser.getValue()!=null && (!userName.getText().toString().equals("") || User.getDb_id().equals("Yeni") || SelectUser.getValue().toString().equals("Ara"))){
+                if(User.getDb_username().equals("admin")){
+                    System.out.println("Bu kullanıcı silinemez");
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Admin Hesabı Silinemez!");
+                }else if(User.getDb_id().equals("Yeni")){
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı İşlem");
+                }else if(SelectUser.getValue().toString().equals("Ara")){
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı İşlem");
+                }else{
+                    try {
+                        db.doInBackground("userDelete", User.getDb_id());
+                        String users = SelectUser.getValue().toString().substring(SelectUser.getValue().toString().indexOf("|"));
+                        users = users.substring(users.indexOf(" "));
+                        resultTxt.setStyle("-fx-text-fill: black;");
+                        resultTxt.setText(users + " Adlı Kullanıcı Silindi");
+                        name.clear();
+                        surname.clear();
+                        userName.clear();
+                        level.clear();
+                        signature_e_date.clear();
+                        refreshSelectUser();
+                        Strings.setOku(true);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
             }
         });
         
@@ -358,6 +382,7 @@ public class UserAddController extends AnchorPane {
             resultTxt.setStyle("-fx-text-fill: black;");
             resultTxt.setText("Kullanıcı Başarıyla Eklendi");
             refreshSelectUser();
+            Strings.setOku(true);
         }
     }
 

@@ -3,6 +3,7 @@ package fxmlController;
 
 import com.BIN.Config;
 import com.BIN.Customer;
+import com.BIN.Strings;
 import com.database.database;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ public class CustomerAddController extends AnchorPane {
     
     database db = new database();
     boolean result;
+    boolean problem=false;
 
 
     @FXML
@@ -56,6 +58,11 @@ public class CustomerAddController extends AnchorPane {
     public void initialize() {
         Config.AnchorPaneConst(this, 0.0, 0.0, 0.0, 0.0);
         SelectCustomer.setOnAction(a ->{                          //combobox fonk.
+            if(problem){
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("");
+                problem=false;
+            }
             if(SelectCustomer.isShowing()==true){
                 Customer.setDb_customerId(SelectCustomer.getValue().toString().
                         substring(0, SelectCustomer.getValue().toString().indexOf(" "))); // seçilen müşterinin id'sini alıyor.
@@ -84,75 +91,90 @@ public class CustomerAddController extends AnchorPane {
         
         
         save.setOnAction(b -> {
-            if(Customer.getDb_customerId()==null){
-                addCustomer();
-            }else if(SelectCustomer.getValue().toString().equals("Yeni Müşteri")){                
-                addCustomer();
-            }else{
-                if(Customer.getDb_customerId()!=null){
-                    try {
-                        result=db.doInBackground("updateCustomer", customerName.getText().toString() , place.getText().toString(),
-                                jobOrderNo.getText().toString(), offerNo.getText().toString());
-                        if(result==false){
-                            resultTxt.setStyle("-fx-text-fill: red;");
-                            resultTxt.setText("Hatalı ya da Eksik Bilgi");
-                        }else{
-                            resultTxt.setStyle("-fx-text-fill: black;");
-                            resultTxt.setText("Müşteri Bilgileri Başarıyla Güncellendi");
-                            refreshSelectCustomer();
+            if(SelectCustomer.getValue()!=null || Customer.getDb_customerId()==null){
+                if(Customer.getDb_customerId()==null){
+                    addCustomer();
+                }else if(SelectCustomer.getValue().toString().equals("Yeni Müşteri")){                
+                    addCustomer();
+                }else{
+                    if(Customer.getDb_customerId()!=null){
+                        try {
+                            result=db.doInBackground("updateCustomer", customerName.getText().toString() , place.getText().toString(),
+                                    jobOrderNo.getText().toString(), offerNo.getText().toString());
+                            if(result==false){
+                                resultTxt.setStyle("-fx-text-fill: red;");
+                                resultTxt.setText("Hatalı ya da Eksik Bilgi");
+                            }else{
+                                resultTxt.setStyle("-fx-text-fill: black;");
+                                resultTxt.setText("Müşteri Bilgileri Başarıyla Güncellendi");
+                                refreshSelectCustomer();
+                                Strings.setOm(true);
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    }
+                }
+            }else{
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
+            }
+        });
+        
+        customerDelete.setOnAction(n ->{                         //silme tuşu fonk.
+            if(SelectCustomer.getValue()!=null && (!customerName.getText().toString().equals("") || Customer.getDb_customerId().equals("Yeni"))){
+                if(Customer.getDb_customerId().equals("Yeni")){
+                    resultTxt.setStyle("-fx-text-fill: red;");
+                    resultTxt.setText("Hatalı İşlem");
+                }else{
+                    try {
+                        db.doInBackground("customerDelete", Customer.getDb_customerId());
+                        String customer = SelectCustomer.getValue().toString().substring(SelectCustomer.getValue().toString().indexOf("|"));
+                        customer = customer.substring(customer.indexOf(" "));
+                        resultTxt.setStyle("-fx-text-fill: black;");
+                        resultTxt.setText(customer + " Adlı Müşteri Silindi");
+                        Strings.setOm(true);
+                        customerName.clear();
+                        place.clear();
+                        jobOrderNo.clear();
+                        offerNo.clear();
+                        refreshSelectCustomer();
                     } catch (SQLException ex) {
                         Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            }
-            
-            
-        });
-        
-        customerDelete.setOnAction(n ->{                         //silme tuşu fonk.
-            if(Customer.getDb_customerId().equals("Yeni")){
-                resultTxt.setStyle("-fx-text-fill: red;");
-                resultTxt.setText("Hatalı İşlem");
             }else{
-                try {
-                    db.doInBackground("customerDelete", Customer.getDb_customerId());
-                    String customer = SelectCustomer.getValue().toString().substring(SelectCustomer.getValue().toString().indexOf("|"));
-                    customer = customer.substring(customer.indexOf(" "));
-                    resultTxt.setStyle("-fx-text-fill: black;");
-                    resultTxt.setText(customer + " Adlı Müşteri Silindi");
-                    customerName.clear();
-                    place.clear();
-                    jobOrderNo.clear();
-                    offerNo.clear();
-                    refreshSelectCustomer();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Lütfen Listeden seçim yaptığınızdan emin olun");
+                problem=true;
             }
         });
     }
     
      public void addCustomer(){
-        try {
-            result=db.doInBackground("addNewCustomer", customerName.getText().toString() , place.getText().toString(),
-                    jobOrderNo.getText().toString(), offerNo.getText().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(result==false){
-            resultTxt.setStyle("-fx-text-fill: red;");
-            resultTxt.setText("Hatalı ya da Eksik Bilgi");
-        }else{
-            resultTxt.setStyle("-fx-text-fill: black;");
-            resultTxt.setText("Müşteri Başarıyla Eklendi");
-            refreshSelectCustomer();
+        if(!customerName.getText().toString().equals("")){
+            try {
+                result=db.doInBackground("addNewCustomer", customerName.getText().toString() , place.getText().toString(),
+                        jobOrderNo.getText().toString(), offerNo.getText().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(result==false){
+                resultTxt.setStyle("-fx-text-fill: red;");
+                resultTxt.setText("Hatalı ya da Eksik Bilgi");
+            }else{
+                resultTxt.setStyle("-fx-text-fill: black;");
+                resultTxt.setText("Müşteri Başarıyla Eklendi");
+                refreshSelectCustomer();
+                Strings.setOm(true);
+            }
         }
     }
 

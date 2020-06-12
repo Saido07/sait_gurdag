@@ -165,18 +165,14 @@ public class magneticParticleReportSceneController extends AnchorPane {
               
         musteriler.setOnAction(a ->{  
             if(musteriler.isShowing()==true){
-                Customer.setDb_customerId(musteriler.getValue().toString().
+                Customer.setDb_customer2Id(musteriler.getValue().toString().
                         substring(0, musteriler.getValue().toString().indexOf(" "))); // seçilen müşterinin id'sini alıyor.
             }
-            if(Customer.getDb_customerId().equals("Yeni")){
-                testYeri.clear();
-                isEmriNo.clear();
-                teklifNo.clear();
-            
-            }else{
-                try {
-                    db.doInBackground("findCustomer", Customer.getDb_customerId());
-                    
+
+            if(musteriler.getValue()!=null){
+               try {
+                db.doInBackground("findCustomer", Customer.getDb_customer2Id());
+
                 } catch (SQLException ex) {
                     Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -186,8 +182,7 @@ public class magneticParticleReportSceneController extends AnchorPane {
                         substring(musteriler.getValue().toString().indexOf("| ")).substring(musteriler.getValue().toString().indexOf(" ")));
                 testYeri.setText(Customer.getDb_cus_place());
                 isEmriNo.setText(Customer.getDb_cus_job());
-                teklifNo.setText(Customer.getDb_cus_offer());
-                
+                teklifNo.setText(Customer.getDb_cus_offer()); 
             }
         });
         

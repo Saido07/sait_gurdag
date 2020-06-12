@@ -143,6 +143,15 @@ public class magneticParticleReportScene5Controller extends AnchorPane {
     
         Strings.setList(5);
         
+        musName.setEditable(false);
+        opTarih.setEditable(false);
+        opLevel.setEditable(false);
+        oLevel.setEditable(false);
+        oTarih.setEditable(false);
+        dLevel.setEditable(false);
+        dTarih.setEditable(false);
+        CusTarih.setEditable(false);
+        
         try {
             db.doInBackground("getusers2");
         } catch (SQLException ex) {

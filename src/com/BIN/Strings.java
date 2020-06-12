@@ -21,7 +21,52 @@ public class Strings {
     private static String listBack="";                         //listede geri tuşunun çalışması için
     private static String searchedText="";
     private static String searched2Text="";
+    private static boolean om=false;                            //müşteri db de değişiklik yapıldı mı kontrol için
+    private static boolean oy=false;                            //surface db de değişiklik yapıldı mı kontrol için
+    private static boolean op=false;                            //test db de değişiklik yapıldı mı kontrol için
+    private static boolean oc=false;                            //cihaz db de değişiklik yapıldı mı kontrol için
+    private static boolean oku=false;                           //kullanıcı db de değişiklik yapıldı mı kontrol için
 
+    public static void setOku(boolean oku) {
+        Strings.oku = oku;
+    }
+    
+    public static boolean getOku(){
+        return oku;
+    }
+    
+    public static void setOc(boolean oc) {
+        Strings.oc = oc;
+    }
+    
+    public static boolean getOc(){
+        return oc;
+    }
+
+    public static void setOm(boolean om) {
+        Strings.om = om;
+    }
+
+    public static void setOp(boolean op) {
+        Strings.op = op;
+    }
+
+    public static void setOy(boolean oy) {
+        Strings.oy = oy;
+    }
+    
+    public static boolean getOm(){
+        return om;
+    }
+    
+    public static boolean getOp(){
+        return op;
+    }
+    
+    public static boolean getOy(){
+        return oy;
+    }
+    
     public static String getSearched2Text() {
         return searched2Text;
     }

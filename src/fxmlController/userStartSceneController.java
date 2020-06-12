@@ -102,7 +102,10 @@ public class userStartSceneController implements Initializable{
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            mag2.getCihaz().getItems().setAll(Equi.getEqui2()); 
+            if(Strings.getOc()){
+                mag2.getCihaz().getItems().setAll(Equi.getEqui2());
+                Strings.setOc(false);
+            }
                 
             if(mag.getMusteriler().getValue() != null && mag.getProjeler().getValue() != null &&
                     mag.getTestYeri().getText().isEmpty()==false && mag.getMuayeneStandart().getText().isEmpty()==false &&
@@ -180,9 +183,15 @@ public class userStartSceneController implements Initializable{
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            mag5.getOpeName().getItems().setAll(User.getUsers2());
-            mag5.getDegerName().getItems().setAll(User.getUsers2());
-            mag5.getOnayName().getItems().setAll(User.getUsers2());
+            if(Strings.getOku()){
+                mag5.getOpeName().getItems().setAll(User.getUsers2());
+                mag5.getDegerName().getItems().setAll(User.getUsers2());
+                mag5.getOnayName().getItems().setAll(User.getUsers2());
+                mag5.getOpLevel().clear();
+                mag5.getoLevel().clear();
+                mag5.getdLevel().clear();
+                Strings.setOku(false);
+            }
             
             boolean bi=false;
             boolean ik=false;
@@ -338,10 +347,18 @@ public class userStartSceneController implements Initializable{
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            mag.getYuzeyDurum().getItems().setAll(Surface.getSurface2());
-            mag.getMusteriler().getItems().setAll(Customer.getCustomers2());  
-            mag.getProjeler().getItems().setAll(Test.getTest2());
+            if(Strings.getOy()){
+                mag.getYuzeyDurum().getItems().setAll(Surface.getSurface2());
+                Strings.setOy(false);
+            }
+            if(Strings.getOm()){
+                mag.getMusteriler().getItems().setAll(Customer.getCustomers2());
+                Strings.setOm(false);
+            }
+            if(Strings.getOp()){
+                mag.getProjeler().getItems().setAll(Test.getTest2());
+                Strings.setOp(false);
+            }
             
         });
 

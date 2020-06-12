@@ -129,7 +129,7 @@ public class database {
                 }
             }else if(type=="getusers2"){
                 User.getUsers2().removeAllElements();
-                resultSet = stmt.executeQuery("SELECT * FROM users");
+                resultSet = stmt.executeQuery("SELECT * FROM users WHERE level>5");
                 while(resultSet.next()){
                     int i=0;
                     User.setUsers2((String)resultSet.getString("id")+ " | " + resultSet.getString("name") + " " 
