@@ -182,9 +182,9 @@ public class CustomerAddController extends AnchorPane {
         try {
             db.doInBackground("getCustomer");
         } catch (SQLException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerAddController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
         SelectCustomer.getItems().setAll(Customer.getCustomers());
         

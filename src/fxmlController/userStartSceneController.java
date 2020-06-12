@@ -93,19 +93,6 @@ public class userStartSceneController implements Initializable{
             right.getChildren().add(mag2);
             
             list.getList().setExpandedPane(list.getTitle2());
-            
-            try {
-                db.doInBackground("getEqui2");
-            } catch (SQLException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if(Strings.getOc()){
-                mag2.getCihaz().getItems().setAll(Equi.getEqui2());
-                Strings.setOc(false);
-            }
                 
             if(mag.getMusteriler().getValue() != null && mag.getProjeler().getValue() != null &&
                     mag.getTestYeri().getText().isEmpty()==false && mag.getMuayeneStandart().getText().isEmpty()==false &&
@@ -173,26 +160,7 @@ public class userStartSceneController implements Initializable{
             mag5.getMusName().setText(Strings.getMusName());
             mag5.getError().setVisible(false);
             mag5.getError2().setVisible(false);
-            
-
-            try {
-                db.doInBackground("getusers2");
-            } catch (SQLException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if(Strings.getOku()){
-                mag5.getOpeName().getItems().setAll(User.getUsers2());
-                mag5.getDegerName().getItems().setAll(User.getUsers2());
-                mag5.getOnayName().getItems().setAll(User.getUsers2());
-                mag5.getOpLevel().clear();
-                mag5.getoLevel().clear();
-                mag5.getdLevel().clear();
-                Strings.setOku(false);
-            }
-            
+                        
             boolean bi=false;
             boolean ik=false;
             boolean uc=false;
@@ -338,27 +306,7 @@ public class userStartSceneController implements Initializable{
             
             list.getList().setExpandedPane(list.getTitle1());
             
-            try {
-                db.doInBackground("getCustomer2");
-                db.doInBackground("getTest2");
-                db.doInBackground("getSurface2");
-            } catch (SQLException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UserAddController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(Strings.getOy()){
-                mag.getYuzeyDurum().getItems().setAll(Surface.getSurface2());
-                Strings.setOy(false);
-            }
-            if(Strings.getOm()){
-                mag.getMusteriler().getItems().setAll(Customer.getCustomers2());
-                Strings.setOm(false);
-            }
-            if(Strings.getOp()){
-                mag.getProjeler().getItems().setAll(Test.getTest2());
-                Strings.setOp(false);
-            }
+            refresh();
             
         });
 
@@ -486,7 +434,41 @@ public class userStartSceneController implements Initializable{
         list.getHome().setOnAction(a ->{            //liste ekra. anasay. fonk.
             home();
         });
+        
+        list.getTitle1().setOnMouseClicked(a ->{
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag);
+        });
+        
+        list.getTitle2().setOnMouseClicked(a ->{
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag2);
+        });
+        
+        list.getTitle3().setOnMouseClicked(a ->{
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag3);
+        });
+        
+        list.getTitle4().setOnMouseClicked(a ->{
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag4);
+        });
   
+        list.getTitle5().setOnMouseClicked(a ->{
+            backSave();
+            
+            right.getChildren().clear();
+            right.getChildren().add(mag5);
+        });
         
     }
 
@@ -551,6 +533,8 @@ public class userStartSceneController implements Initializable{
                         list.getList().setExpandedPane(list.getTitle3());
                     }else if(Strings.getListBack().equals("magneticParticleReportScene4Controller")==true){
                         list.getList().setExpandedPane(list.getTitle4());
+                    }else if(Strings.getListBack().equals("magneticParticleReportScene5Controller")==true){
+                        list.getList().setExpandedPane(list.getTitle5());
                     }
                 }
                 i--;
@@ -699,6 +683,50 @@ public class userStartSceneController implements Initializable{
             return false;
         }   
         
+    }
+    
+    public void refresh(){
+        try {
+                db.doInBackground("getCustomer2");
+                db.doInBackground("getTest2");
+                db.doInBackground("getSurface2");
+                db.doInBackground("getusers2");
+                db.doInBackground("getEqui2");
+        } catch (SQLException ex) {
+            Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userStartSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(Strings.getOy()){
+            System.out.println("55");
+            mag.getYuzeyDurum().getItems().setAll(Surface.getSurface2());
+            Strings.setOy(false);
+        }
+        if(Strings.getOm()){
+            System.out.println("66");
+            mag.getMusteriler().getItems().setAll(Customer.getCustomers2());
+            Strings.setOm(false);
+        }
+        if(Strings.getOp()){
+            System.out.println("77");
+            mag.getProjeler().getItems().setAll(Test.getTest2());
+            Strings.setOp(false);
+        }    
+        if(Strings.getOku()){
+            System.out.println("88");
+            mag5.getOpeName().getItems().setAll(User.getUsers2());
+            mag5.getDegerName().getItems().setAll(User.getUsers2());
+            mag5.getOnayName().getItems().setAll(User.getUsers2());
+            mag5.getOpLevel().clear();
+            mag5.getoLevel().clear();
+            mag5.getdLevel().clear();
+            Strings.setOku(false);
+        }    
+        if(Strings.getOc()){
+            System.out.println("99");
+            mag2.getCihaz().getItems().setAll(Equi.getEqui2());
+            Strings.setOc(false);
+        }
     }
     
 }

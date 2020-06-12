@@ -38,10 +38,6 @@ public class EquipmentAddController extends AnchorPane {
     private Button equiDelete;
     @FXML
     private Label resultTxt;
-    @FXML
-    private TextField addMP;
-    @FXML
-    private ImageView add;
 
     database db = new database();
 
