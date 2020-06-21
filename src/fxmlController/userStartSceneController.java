@@ -1,5 +1,7 @@
 package fxmlController;
 
+/////////////////////Sait Gürdağ-160501132
+
 import com.BIN.Customer;
 import com.BIN.Equi;
 import com.BIN.Strings;
